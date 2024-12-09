@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="main">
+        <app-sidenav class="sidenav desktop"
+            [activePage]="'profile'"
+            (home)="onHome($event)"
+            (profile)="onProfile($event)"
+            (settings)="onSettings($event)"
+            (editProfile)="onEditProfile()"
+            (addOffers)="onAddOffers($event)"
+            (addSport)="onAddSport($event)"
+            (referFriend)="onReferFriend($event)"
+            (contactUs)="onContactUs($event)">
+        </app-sidenav>
+        <div class="athletic-information">
+            <header>
+                <img (click)="onBack()" class="back-arrow mobile" src="/assets/images/icons/back-arrow.png"
+                    alt="" />
+                <img (click)="onBack()" class="back-arrow desktop" src="/assets/images/icons/back-arrow.png" alt="" />
+                <p class="title">MEDIA</p>
+                <p class="sub-title">Showcase your talents</p>
+                <!-- <img class="info" src="assets/images/media/Info-button.png" alt="" /> -->
+            </header>
+            <div class="embed">
+                <app-video-image [flow]="flow"></app-video-image>
+            </div>
+            <div class="bottom mobile">
+            </div>
+        </div>
+        <div
+            class="saved-container"
+            *ngIf="saved$ | async"
+            (click)="saved$.next(false)"
+            >
+            <div class="saved">
+                Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div
+      class="prospect-sheet"
+      [ngClass]="{ own: own }"
+      *ngIf="user && !loading"
+    >
+      <div class="loading" *ngIf="loadingPdf$ | async">
+        <img src="/assets/images/icons/loading.svg" alt="" />
+      </div>
+      <header *ngIf="!own">
+        <img
+          class="circleX"
+          (click)="onBack()"
+          src="./assets/images/icons/circleX-black.png"
+        />
+
+        <p class="title">PROSPECT SHEET</p>
+      </header>
+
+      <header *ngIf="own">
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow-black.png"
+          alt=""
+        />
+
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+
+        <p class="title">PROSPECT SHEET</p>
+
+        <div class="icons mobile">
+          <div
+            class="trial-message"
+            *ngIf="user.lastActivatedPlan === PLANS.TRIAL && showTrialMessage"
+            (clickOutside)="closeTrialTooltip()"
+          >
+            Upgrade plan to share & download prospect sheet
+          </div>
+          <img
+            class="share"
+            (click)="onShare()"
+            src="/assets/images/icons/share-grey.png"
+            alt=""
+          />
+          <img
+            class="edit"
+            (click)="onEditProfile()"
+            src="/assets/images/colleges-library/pen.png"
+            alt=""
+          />
+        </div>
+
+        <div class="icons desktop">
+          <img
+            class="edit"
+            (click)="onEditProfile()"
+            src="/assets/images/icons/edit_green.png"
+            alt=""
+          />
+          <div class="download-container">
+            <img
+              class="download"
+              [ngClass]="{
+                active: pdfDoc,
+                trial: user.lastActivatedPlan === PLANS.TRIAL
+              }"
+              (click)="onDownload()"
+              src="/assets/images/icons/download_green.png"
+              alt=""
+            />
+            <div
+              class="trial-message"
+              *ngIf="user.lastActivatedPlan === PLANS.TRIAL && showTrialMessage"
+              (clickOutside)="closeTrialTooltip()"
+            >
+              Upgrade plan to share & download prospect sheet
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <app-prospect-sheet-info
+          *ngIf="user"
+          [user]="user"
+        ></app-prospect-sheet-info>
+      </div>
+
+      <app-main-footer *ngIf="own"></app-main-footer>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!user && !loading">
+  <p>User not Found!</p>
+</div>
+
+<div class="prospect-sheet-container">
+  <header>
+    <img
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="user"
+      [user]="user"
+      [forPDF]="true"
+      [view]="true"
+    ></app-prospect-sheet-info>
+  </div>
+</div>
+
+<div #pdfContainer style="position: absolute; left: -9999px"></div>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1108.872" height="911.48" viewBox="0 0 1108.872 911.48">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0"/>
+      <stop offset="0.118" stop-color="#202020"/>
+      <stop offset="0.453" stop-color="#323232"/>
+      <stop offset="0.601" stop-color="#343434"/>
+      <stop offset="0.695" stop-color="#353535"/>
+      <stop offset="1"/>
+      <stop offset="1" stop-color="#333"/>
+      <stop offset="1" stop-color="#bfbfbf"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" y1="1" y2="0" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="HOME_BG" data-name="HOME BG" transform="translate(354.199 -6.611)">
+    <g id="Rectangle_288" data-name="Rectangle 288" transform="matrix(0.719, -0.695, 0.695, 0.719, -316.793, 200.42)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient)">
+      <rect width="279" height="500" stroke="none"/>
+      <rect x="0.5" y="0.5" width="278" height="499" fill="none"/>
+    </g>
+    <g id="Rectangle_303" data-name="Rectangle 303" transform="matrix(0.719, 0.695, -0.695, 0.719, -6.87, 329.878)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient-2)">
+      <rect width="329" height="500" stroke="none"/>
+      <rect x="0.5" y="0.5" width="328" height="499" fill="none"/>
+    </g>
+    <g id="Rectangle_301" data-name="Rectangle 301" transform="matrix(-0.719, -0.695, 0.695, -0.719, 363.464, 560.09)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient-2)">
+      <rect width="279" height="500" stroke="none"/>
+      <rect x="0.5" y="0.5" width="278" height="499" fill="none"/>
+    </g>
+    <g id="Rectangle_302" data-name="Rectangle 302" transform="matrix(-0.719, 0.695, -0.695, -0.719, 754.673, 683.296)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient)">
+      <rect width="338" height="500" stroke="none"/>
+      <rect x="0.5" y="0.5" width="337" height="499" fill="none"/>
+    </g>
+  </g>
+</svg>

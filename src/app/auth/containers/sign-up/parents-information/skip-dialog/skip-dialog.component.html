@@ -1,0 +1,17 @@
+<div class="skip-dialog">
+  <div class="content">
+    <div class="logo"><img src="./assets/images/logo/lighting_bolt_small.png" /></div>
+    <header>Do you want to add your parents information?</header>
+
+    <ul>
+      <li>1. Autofills recruiting questionnaires. <img src="./assets/images/icons/circle_arrow.png" /></li>
+      <li>2. Saves time filling out information. <img src="./assets/images/icons/circle_arrow.png" /></li>
+    </ul>
+
+    <div class="tooltip">Add or edit in the profile later.</div>
+  </div>
+  <div class="buttons">
+    <div class="yes-btn" (click)="dialogRef.close(true)">Yes</div>
+    <div class="skip-btn" (click)="dialogRef.close(false)">Skip</div>
+  </div>
+</div>

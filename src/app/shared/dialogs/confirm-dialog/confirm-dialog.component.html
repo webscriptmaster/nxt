@@ -1,0 +1,21 @@
+<div class="send-email-dialog">
+  <div class="content">
+    <header>
+      <img *ngIf="isShowLogo" src="./assets/images/logo/logo.png" />
+      <div class="title" [style]="{color: titleColor}">{{title}}</div>
+    </header>
+    <hr *ngIf="title && message" />
+    <main>
+      <div class="html-content" #htmlContentContainer *ngIf="htmlContent" [innerHTML]="htmlContent"></div>
+      <div *ngIf="!htmlContent">{{message}}</div>
+    </main>
+    <div class="info">{{info}}</div>
+  </div>
+  <div class="buttons" *ngIf="isShowButton">
+    <div class="review" [style]="{color: firstButtonColor, border: firstButtonBorder}" (click)="dialogRef.close(true)">
+      {{firstButtonText}}</div>
+    <div class="send" [style]="{color: secondButtonColor, border: secondButtonBorder}" (click)="dialogRef.close(false)">
+      {{secondButtonText}}</div>
+  </div>
+</div>
+

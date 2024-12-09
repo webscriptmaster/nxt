@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="nxt1-center">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Guidance Hub</p>
+      </header>
+
+      <div class="content" *ngIf="nxt1Center">
+        <div class="video-section" *ngIf="videos.length">
+          <div class="video-box">
+            <video
+              *ngIf="videos[activeVideoIndex]"
+              controls
+              muted
+              [src]="videos[activeVideoIndex].url"
+              [poster]="videos[activeVideoIndex].thumbnail"
+            ></video>
+          </div>
+
+          <div class="video-selector">
+            <div class="label" *ngIf="videos[activeVideoIndex]">
+              {{ videos[activeVideoIndex].title }}
+            </div>
+            <div class="dots">
+              <div
+                *ngFor="let video of videos; let i = index"
+                class="dot"
+                [class.active]="i === activeVideoIndex"
+                (click)="activeVideoIndex = i"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-block" *ngFor="let section of nxt1Center">
+          <div class="info-block-title">{{ section.sectionName }}</div>
+          <ul class="menu">
+            <ng-container *ngFor="let item of section.links">
+              <li (click)="openLink(item.link)">
+                <img class="logo" [src]="item.iconUrl" />
+                <span>{{ item.title }}</span>
+                <img
+                  src="/assets/images/nxt1-center/icons/right-64x64.svg"
+                  class="arrow mobile"
+                />
+                <img
+                  src="/assets/images/nxt1-center/icons/right-64x64.svg"
+                  class="arrow desktop"
+                />
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <!-- <app-main-footer *ngIf="user$ | async"></app-main-footer> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+/* Avenir-Next */
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("./Avenir-Next/AvenirNext-It.eot");
+  src: local("Avenir Next Lt"),
+    url("./Avenir-Next/AvenirNext-It.eot?#iefix") format("embedded-opentype"),
+    url("./Avenir-Next/AvenirNext-It.woff2") format("woff2"),
+    url("./Avenir-Next/AvenirNext-It.woff") format("woff"),
+    url("./Avenir-Next/AvenirNext-It.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("./Avenir-Next/AvenirNext-Regular.eot");
+  src: local("Avenir Next Regular"),
+    url("./Avenir-Next/AvenirNext-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./Avenir-Next/AvenirNext-Regular.woff2") format("woff2"),
+    url("./Avenir-Next/AvenirNext-Regular.woff") format("woff"),
+    url("./Avenir-Next/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("./Avenir-Next/AvenirNext-DemiBold.eot");
+  src: local("Avenir Next DemiBold"),
+    url("./Avenir-Next/AvenirNext-DemiBold.eot?#iefix") format("embedded-opentype"),
+    url("./Avenir-Next/AvenirNext-DemiBold.woff2") format("woff2"),
+    url("./Avenir-Next/AvenirNext-DemiBold.woff") format("woff"),
+    url("./Avenir-Next/AvenirNext-DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("./Avenir-Next/AvenirNext-Bold.eot");
+  src: local("Avenir Next Bold"),
+    url("./Avenir-Next/AvenirNext-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./Avenir-Next/AvenirNext-Bold.woff2") format("woff2"),
+    url("./Avenir-Next/AvenirNext-Bold.woff") format("woff"),
+    url("./Avenir-Next/AvenirNext-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+ /* OPEN SANS */
+@font-face {
+  font-family: "Open Sans";
+  src: url("./OpenSans/OpenSans-Bold.eot");
+  src: local("Open Sans Bold"),
+    url("./OpenSans/OpenSans-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./OpenSans/OpenSans-Bold.woff2") format("woff2"),
+    url("./OpenSans/OpenSans-Bold.woff") format("woff"),
+    url("./OpenSans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  font-weight: 600;
+  src: url("./Rajdhani/Rajdhani-SemiBold.ttf");
+  src: local("Rajdhani Semi Bold"),
+    url("./Rajdhani/Rajdhani-SemiBold.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  font-weight: 700;
+  src: url("./Rajdhani/Rajdhani-Bold.ttf");
+  src: local("Rajdhani Bold"),
+    url("./Rajdhani/Rajdhani-Bold.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  font-weight: 500;
+  src: url("./Rajdhani/Rajdhani-Medium.ttf");
+  src: local("Rajdhani Medium"),
+    url("./Rajdhani/Rajdhani-Medium.ttf") format("truetype");
+  font-style: normal;
+}

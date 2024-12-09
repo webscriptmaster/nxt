@@ -1,0 +1,327 @@
+<div class="container">
+  <div class="main" [class]="type === 'automate' ? type : ''">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="college-library">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">College Library</div>
+
+        <div class="drafts">
+          <div class="count" *ngIf="drafts.length">{{ drafts.length }}</div>
+          <img
+            src="/assets/images/colleges-library/drafts.png"
+            (click)="onDrafts()"
+          />
+        </div>
+      </header>
+
+      <div class="desktop-card">
+        <div class="filters">
+          <div class="header">
+            <div class="title">FILTERS</div>
+            <div class="clear" (click)="onClearFilters()">Clear Filter</div>
+            <div class="result desktop">
+              {{ colleges ? colleges.length : 0 }} Results
+            </div>
+            <div
+              class="credits desktop"
+              *ngIf="
+                user?.lastActivatedPlan !== PLANS.SUBSCRIPTION &&
+                user?.lastActivePlan !== PLANS.SUBSCRIPTION
+              "
+              (click)="onCredits(user?.credits)"
+            >
+              <div *ngIf="showColleges">
+                College Credits: <span class="total">{{ user?.credits }}</span>
+              </div>
+              <div *ngIf="showUpgradeButton" class="upgrade">
+                <span>Get More Credits</span>
+                <!-- <img width="9px" src="/assets/images/icons/right.svg" />
+                <img width="9px" src="/assets/images/icons/right.svg" /> -->
+              </div>
+            </div>
+            <div class="drafts">
+              <div class="count" *ngIf="drafts.length">{{ drafts.length }}</div>
+              <img
+                src="/assets/images/colleges-library/drafts.png"
+                (click)="onDrafts()"
+              />
+            </div>
+          </div>
+          <div class="row first">
+            <div class="form-control name">
+              <div class="label">Search by Name</div>
+              <div class="input-container">
+                <input
+                  [(ngModel)]="nameFilter"
+                  (keyup)="onSearchByName($event)"
+                  type="text"
+                  placeholder="Wisconsin, Big Ten.."
+                />
+                <div class="search" (click)="onFilter()">
+                  <img src="/assets/images/colleges-library/search.png" />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="tagged mobile"
+              [ngClass]="{ active: taggedFilter }"
+              (click)="onTagFilter()"
+            >
+              Tagged Colleges
+            </div>
+          </div>
+          <div class="row second">
+            <div class="form-control state scrollable-box-1">
+              <div class="label">State</div>
+              <ng-select
+                class="filter-select"
+                [searchable]="false"
+                [clearable]="false"
+                appendTo=".scrollable-box-1"
+                [(ngModel)]="stateFilter"
+                (ngModelChange)="
+                  nameFilter = null; taggedFilter = false; onFilter()
+                "
+              >
+                <ng-option *ngFor="let state of states" [value]="state.name">{{
+                  state.abbreviation
+                }}</ng-option>
+              </ng-select>
+            </div>
+            <div class="form-control division scrollable-box-2">
+              <div class="label">Division</div>
+              <ng-select
+                class="filter-select"
+                [searchable]="false"
+                [clearable]="false"
+                appendTo=".scrollable-box-2"
+                [(ngModel)]="divisionFilter"
+                (ngModelChange)="
+                  nameFilter = null; taggedFilter = false; onFilter()
+                "
+              >
+                <ng-option
+                  *ngFor="let division of divisions"
+                  [value]="division"
+                  >{{ division }}</ng-option
+                >
+              </ng-select>
+            </div>
+            <div class="form-control conference scrollable-box-3">
+              <div class="label">Conference</div>
+              <!-- <input
+              [(ngModel)]="conferenceFilter"
+              (ngModelChange)="onFilter()"
+              type="text"
+              placeholder="Big 10, Pac 12"
+            /> -->
+              <ng-select
+                class="filter-select"
+                [searchable]="false"
+                [clearable]="false"
+                appendTo=".scrollable-box-3"
+                [(ngModel)]="conferenceFilter"
+                (ngModelChange)="
+                  nameFilter = null; taggedFilter = false; onFilter()
+                "
+              >
+                <ng-option
+                  *ngFor="let conference of conferences"
+                  [value]="conference"
+                  >{{ conference }}</ng-option
+                >
+              </ng-select>
+            </div>
+            <div
+              class="tagged desktop"
+              [ngClass]="{ active: taggedFilter }"
+              (click)="onTagFilter()"
+            >
+              Tagged Colleges
+            </div>
+          </div>
+
+          <div class="result mobile">
+            {{ colleges ? colleges.length : 0 }} Results
+          </div>
+          <div
+            class="credits mobile"
+            *ngIf="
+              user?.lastActivatedPlan !== PLANS.SUBSCRIPTION &&
+              user?.lastActivePlan !== PLANS.SUBSCRIPTION
+            "
+            (click)="onCredits(user?.credits)"
+          >
+            <div *ngIf="showColleges">
+              Colleges credits: <span class="total">{{ user?.credits }}</span>
+            </div>
+            <div *ngIf="showUpgradeButton" class="upgrade">
+              <span>Get More Credits</span>
+              <!-- <img width="9px" src="/assets/images/icons/right.svg" />
+              <img width="9px" src="/assets/images/icons/right.svg" /> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="loading" *ngIf="loading$ | async">
+            <img src="/assets/images/icons/loading.svg" alt="" />
+          </div>
+
+          <div
+            class="colleges-container"
+            *ngIf="colleges && colleges.length && !(loading$ | async)"
+          >
+            <div class="alphabet-wrapper">
+              <div class="alphabet">
+                <div
+                  class="letter"
+                  *ngFor="let letter of alphabet"
+                  (click)="onLetter(letter)"
+                >
+                  {{ letter }}
+                </div>
+              </div>
+            </div>
+
+            <div class="colleges mobile">
+              <app-college-card
+                *ngFor="let college of colleges; trackBy: identify"
+                [college]="college"
+                [collegeSport]="collegeSport"
+                [isTagged]="taggedColleges && taggedColleges[college.id]"
+                [selectedContacts]="selectedContacts"
+                [user]="user!"
+                [type]="type"
+                (toggleTag)="onTag($event)"
+                (toggleContact)="onToggleContact($event)"
+                (openContactsTab)="onOpenContactsTab($event)"
+                (closeContactsTab)="onCloseContactsTab($event)"
+              ></app-college-card>
+
+              <div
+                class="create-email-btn"
+                *ngIf="
+                  ObjectKeys(selectedContacts).length &&
+                  this.user &&
+                  (this.user.connectedGmailToken ||
+                    this.user.connectedMicrosoftToken)
+                "
+                (click)="onCreateEmail()"
+              >
+                <span>+ Create Email </span>
+                <img src="/assets/images/colleges-library/Send Email.png" />
+              </div>
+            </div>
+
+            <div class="colleges desktop">
+              <div class="left">
+                <app-college-card
+                  *ngFor="let college of collegesLeft; trackBy: identify"
+                  [college]="college"
+                  [collegeSport]="collegeSport"
+                  [isTagged]="taggedColleges && taggedColleges[college.id]"
+                  [selectedContacts]="selectedContacts"
+                  [user]="user!"
+                  [type]="type"
+                  (toggleTag)="onTag($event)"
+                  (toggleContact)="onToggleContact($event)"
+                  (openContactsTab)="onOpenContactsTab($event)"
+                  (closeContactsTab)="onCloseContactsTab($event)"
+                ></app-college-card>
+              </div>
+              <div class="right">
+                <app-college-card
+                  *ngFor="let college of collegesRight; trackBy: identify"
+                  [college]="college"
+                  [collegeSport]="collegeSport"
+                  [isTagged]="taggedColleges && taggedColleges[college.id]"
+                  [selectedContacts]="selectedContacts"
+                  [user]="user!"
+                  (toggleTag)="onTag($event)"
+                  (toggleContact)="onToggleContact($event)"
+                  (openContactsTab)="onOpenContactsTab($event)"
+                  (closeContactsTab)="onCloseContactsTab($event)"
+                ></app-college-card>
+              </div>
+              <div
+                class="create-email-btn"
+                *ngIf="
+                  ObjectKeys(selectedContacts).length &&
+                  this.user &&
+                  (this.user.connectedGmailToken ||
+                    this.user.connectedMicrosoftToken)
+                "
+                (click)="onCreateEmail()"
+              >
+                <span>+ Create Email </span>
+                <img src="/assets/images/colleges-library/Send Email.png" />
+              </div>
+            </div>
+            <button
+              *ngIf="type == 'automate'"
+              class="auto-email"
+              (click)="createEmailForAutomate()"
+            >
+              Create Email ({{ totalSelectedCoach }})
+              <img src="assets/images/icons/right_black.svg" alt="" />
+            </button>
+          </div>
+
+          <div
+            class="not-found"
+            *ngIf="
+              colleges &&
+              colleges.length === 0 &&
+              !(loading$ | async) &&
+              !clearedFilters
+            "
+          >
+            <div class="text">No Results Found!</div>
+            <img src="/assets/images/colleges-library/not-found.png" />
+            <a
+              style="position: absolute; z-index: -1; opacity: 0"
+              href="https://storyset.com/people"
+              >People illustrations by Storyset</a
+            >
+          </div>
+
+          <div class="filter-to-find" *ngIf="clearedFilters">
+            <div class="img">
+              <ng-lottie [options]="options"></ng-lottie>
+            </div>
+            <div class="text">Filter To Find Colleges!</div>
+          </div>
+        </div>
+      </div>
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>
+
+<div
+  class="send-email"
+  *ngIf="createEmail"
+  [ngClass]="{ show: showCreateEmail }"
+>
+  <app-create-email (close)="onClose()" [isOverlay]="true"></app-create-email>
+</div>

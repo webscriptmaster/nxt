@@ -1,0 +1,81 @@
+<div class="plans">
+  <div class="loading" *ngIf="loading$ | async">
+    <img src="/assets/images/icons/loading.svg" alt="" />
+  </div>
+  <div class="plan">
+    <div class="plan-price">$65</div>
+    <div class="plan-period">Per year</div>
+    <img class="plan-arrow" src="./assets/images/icons/go-to.png" alt="arrow" />
+    <div class="plan-description">
+      Unlimited Access To <span>All</span> Colleges & Coaches
+    </div>
+    <ul class="plan-list">
+      <li>
+        &#60;1500 Colleges
+        <br />85k+ Coaches <br /><span>Based on sport</span>
+      </li>
+
+      <li>All Recruiting Information</li>
+
+      <li>Downloadable Prospect Sheet</li>
+
+      <li>Two Sport Profiles</li>
+
+      <li class="video">
+        Highlight Video
+        <br />
+        <a [href]="exampleHighlightUrl" target="_blank">Example here</a>
+      </li>
+
+      <li>Unlock $35 Referrals</li>
+      <li class="best-value">Best Value</li>
+    </ul>
+    <button
+      class="plan-button subscription"
+      type="button"
+      (click)="onPay(PLANS.SUBSCRIPTION)"
+    >
+      Pay Now
+    </button>
+  </div>
+  <div class="plan">
+    <div class="plan-price">$40</div>
+    <div class="plan-period">1 Time Payment</div>
+    <img class="plan-arrow" src="./assets/images/icons/go-to.png" alt="arrow" />
+    <div class="plan-description">
+      Full Access To <br />
+      <span>150</span> Colleges & Their Coaches
+    </div>
+    <ul class="plan-list">
+      <li>All Recruiting Information</li>
+
+      <li>Downloadable Prospect Sheet</li>
+
+      <li>
+        Two Sport Profiles
+      </li>
+    </ul>
+
+    <button class="plan-button" type="button" (click)="onPay(PLANS.MAX)">
+      Pay Now
+    </button>
+  </div>
+  <div class="plan">
+    <div class="plan-price">$20</div>
+    <div class="plan-period">1 Time Payment</div>
+    <img class="plan-arrow" src="./assets/images/icons/go-to.png" alt="arrow" />
+    <div class="plan-description">
+      Full Access To <br />
+      <span>40</span> Colleges & Their Coaches
+    </div>
+    <ul class="plan-list">
+      <li>All Recruiting Information</li>
+
+      <li>Downloadable Prospect Sheet</li>
+    </ul>
+
+    <button class="plan-button" type="button" (click)="onPay(PLANS.MIN)">
+      Pay Now
+    </button>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs()"
+    ></app-sidenav>
+
+    <div class="congrats">
+      <header class="desktop">
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">Add offer</div>
+      </header>
+      <img class="logo" src="./assets/images/logo/logo_600.png" />
+
+      <div class="content">
+        <div class="img">
+          <ng-lottie [options]="options"></ng-lottie>
+        </div>
+
+        <p class="title">CONGRATULATIONS!</p>
+        <p class="description share" *ngIf="share">
+          Great Job receiving an offer. Your offer has been added to your
+          prospect profile, and pushed out to inspire others.
+        </p>
+        <p class="description" *ngIf="!share">
+          Great Job receiving an offer. Your offer has been added to your
+          prospect profile.
+        </p>
+      </div>
+
+      <div class="bottom">
+        <button (click)="onContinue()" type="button">Get More Offers</button>
+      </div>
+    </div>
+  </div>
+</div>

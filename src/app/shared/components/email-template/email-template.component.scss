@@ -1,0 +1,363 @@
+.save-btn {
+  font-family: "Avenir Next";
+  color: #bfed05;
+  font-weight: 700;
+  font-size: 18px;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+.email-template {
+  .to {
+    font-weight: 700;
+    color: #bfbfbf;
+    font-size: 16px;
+    padding: 10px 0;
+    border-bottom: 0.75px solid #707070;
+  }
+
+  .subject {
+    font-weight: 600;
+    color: #000;
+    font-size: 16px;
+    padding: 10px 0;
+    border-bottom: 0.75px solid #707070;
+    text-transform: capitalize;
+
+    &.own {
+      color: #bfbfbf;
+
+      input {
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+        font-family: "Rajdhani";
+        font-weight: 600;
+        background-color: #000;
+        width: 100%;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .message {
+    padding: 10px 0;
+
+    a {
+      word-break: break-word;
+    }
+  }
+
+  .own_placeholder {
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Rajdhani";
+    font-weight: 600;
+    padding: 10px 0;
+  }
+
+  quill-editor {
+    width: 100%;
+  }
+
+  ::ng-deep .ql-editor {
+    min-height: 250px;
+    background-color: #000;
+    font-family: "Rajdhani";
+    font-weight: 600;
+  }
+
+  .prospect-sheet {
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #000;
+    border: 1px solid #707070;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+
+    img {
+      width: 22px;
+      height: 20px;
+      margin-left: 10px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    a {
+      color: #2cbeff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  .view {
+    border: 1px solid #fff;
+    border-radius: 6px;
+    min-height: 300px;
+    // padding: 15px 25px;
+    overflow-y: auto;
+    word-break: break-word;
+
+    &-content {
+      padding: 15px 25px;
+      font-family: "Rajdhani";
+      font-weight: 600;
+
+      ::ng-deep a.tracking {
+        display: block !important;
+        color: rgb(44, 190, 255) !important;
+      }
+    }
+
+    button {
+      height: 46px;
+      width: 100%;
+      color: #bfed05;
+      font-weight: 600;
+      font-family: "Avenir Next";
+      background-color: #000;
+      height: 46px;
+      font-size: 16px;
+      background: #000;
+      border: 1px solid #fff;
+      border-radius: 6px;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+  }
+
+  .reset {
+    height: 46px;
+    width: 100%;
+    color: #bfed05;
+    font-weight: 600;
+    font-family: "Avenir Next";
+    background-color: #000;
+    height: 46px;
+    font-size: 21px;
+    background: #000;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    border: none;
+    font-family: "Rajdhani";
+    font-weight: 700;
+    margin-top: 15px;
+  }
+}
+
+.prospect-sheet-container {
+  position: fixed;
+  top: 100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #fff;
+  z-index: 10;
+
+  transition: all ease-in 200ms;
+
+  &.show {
+    top: 0;
+  }
+
+  display: grid;
+  grid-template-rows: 45px minmax(0, 1fr);
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.5px solid #000000;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+
+    background-color: #efefef;
+    box-shadow: 0 1px 3px #0000004d;
+    position: relative;
+    z-index: 1;
+
+    .title {
+      font-family: "Avenir Next";
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #000;
+      font-weight: 700;
+      position: relative;
+      top: 2px;
+    }
+
+    .icons {
+      position: absolute;
+      right: 14px;
+
+      .edit {
+        width: 21px;
+        position: relative;
+        top: 1px;
+      }
+
+      .share {
+        width: 18px;
+        margin-right: 23px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  .prospect-sheet-content {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+::ng-deep .custom-quill {
+  .ql-toolbar {
+    // display: none;
+  }
+
+  .ql-container {
+    border-bottom: none;
+  }
+
+  .ql-editor {
+    padding-top: 32px !important;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .own_placeholder {
+    &.custom-quill {
+      position: relative;
+
+      .coach-name {
+        position: absolute;
+        top: 85px;
+        left: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .prospect-sheet-container {
+    background-color: #70707080;
+    opacity: 0;
+    transition: top ease-in 1ms;
+    grid-template-rows: minmax(0, 1fr);
+    padding: 22px 0;
+
+    header {
+      display: none;
+    }
+
+    &.show {
+      top: 0;
+      opacity: 1;
+    }
+
+    .prospect-sheet-content {
+      width: 640px;
+      background-color: #fff;
+      margin: 0 auto;
+
+      ::ng-deep .general {
+        .profile-img {
+          width: 112px;
+          height: 112px;
+        }
+
+        .info {
+          height: unset;
+
+          .name {
+            font-size: 25px;
+            margin-bottom: 8px;
+          }
+
+          .position {
+            font-size: 20px;
+            margin-bottom: 8px;
+          }
+
+          .college {
+            font-size: 20px;
+          }
+        }
+
+        .team-logo {
+          width: 78px;
+        }
+      }
+
+      ::ng-deep .highlights {
+        &-title {
+          font-size: 16px;
+        }
+
+        &-content {
+          .video {
+            height: 203px;
+            width: 354px;
+          }
+
+          .info {
+            grid-row-gap: 43px;
+
+            &-cell {
+              &__label {
+                font-size: 17px;
+              }
+
+              &__value {
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
+
+      ::ng-deep .info-block {
+        &__title {
+          font-size: 21px;
+        }
+
+        &__row {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .custom-quill {
+    position: relative;
+
+    .coach-name {
+      position: absolute;
+      top: 60px;
+      left: 16px;
+    }
+
+    .ql-editor {
+      padding-top: 30px !important;
+    }
+  }
+}

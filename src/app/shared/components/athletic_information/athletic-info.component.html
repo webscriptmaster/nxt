@@ -1,0 +1,59 @@
+<form
+  *ngIf="sport && ATHLETIC_INFO && form"
+  [formGroup]="form"
+  [ngClass]="{edit}"
+>
+  <div
+    class="form-control {{ field.field }}"
+    *ngFor="let field of ATHLETIC_INFO[sport]"
+  >
+    <div *ngIf="field.required; then require; else not_require"></div>
+    <ng-template #require
+      ><label>{{ field.label }}</label></ng-template
+    >
+    <ng-template #not_require
+      ><label>{{ field.label }}</label></ng-template
+    >
+
+    <ng-container *ngIf="field.field != 'height'">
+      <input
+        [type]="field.type ? field.type : 'number'"
+        [formControlName]="field.field"
+      />
+    </ng-container>
+    <ng-container *ngIf="field.field === 'height'">
+      <!-- <div class="height-input-container">
+        <input class="feet" type="number" [formControl]="feetControl" />
+        <span class="symbol">"</span>
+        <input class="inches" type="number" [formControl]="inchesControl" />
+        <span></span>
+      </div> -->
+
+      <ng-select
+        class="sign-up-select"
+        [searchable]="false"
+        [clearable]="false"
+        [formControl]="heightControl"
+        (change)="selectHeight($event)"
+        [(ngModel)]="selectedHeight"
+        appendTo=".scrollable-box-1"
+        [items]="listHeight"
+      >
+      </ng-select>
+    </ng-container>
+    <ng-container>
+      <div
+        *ngIf="
+          field.field === 'highlight_link' &&
+          form.controls[field.field].errors?.['pattern'] && form.controls[field.field].touched
+        "
+        class="error"
+      >
+        Link must be YouTube or Hudl.
+      </div>
+    </ng-container>
+    <ng-container *ngIf="field.field === 'weight'">
+      <span class="sufix">lbs</span>
+    </ng-container>
+  </div>
+</form>

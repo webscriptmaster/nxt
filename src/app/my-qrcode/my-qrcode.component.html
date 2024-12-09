@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'settings'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs()"
+    ></app-sidenav>
+
+    <div class="settings">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">MY QR CODE</div>
+      </header>
+
+      <div class="content">
+        <div class="img-wrapper">
+          <qr-code
+            class="qr-code"
+            [value]="qrCodeOption?.value"
+            [errorCorrectionLevel]="qrCodeOption?.errorCorrectionLevel"
+            [centerImageSrc]="qrCodeOption?.centerImageSrc"
+            [centerImageSize]="qrCodeOption?.centerImageSize"
+            [size]="qrCodeOption?.size"
+            [margin]="2"
+          />
+        </div>
+        <div class="share" (click)="socialShare()">
+          <span class="label">Share</span>
+          <span>
+            <img src="assets/images/prospect/share-green.png" alt="" />
+          </span>
+        </div>
+      </div>
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>

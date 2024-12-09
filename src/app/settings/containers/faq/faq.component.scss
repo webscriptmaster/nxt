@@ -1,0 +1,231 @@
+.container {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(32, 32, 32, 1) 30%,
+    rgba(50, 50, 50, 1) 50%,
+    rgba(32, 32, 32, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  .desktop {
+    display: none;
+  }
+}
+
+.main {
+  height: 100%;
+  overflow: auto;
+}
+
+.faq {
+  height: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 45px minmax(0, 1fr) 90px;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+header {
+  border-bottom: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: none;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+}
+
+.content {
+  margin: 0 auto;
+  padding: 20px 10px 0;
+  font-weight: 600;
+  overflow: auto;
+  &.desktop {
+    display: none;
+  }
+  .question-block {
+    background-color: #7070703d;
+    color: #fff;
+    font-size: 17px;
+    width: 100%;
+    border-radius: 3px;
+    margin-bottom: 18px;
+
+    .question {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px 0 12px;
+      span {
+        max-width: 85%;
+      }
+
+      .mat-icon {
+        color: #ccff00;
+      }
+    }
+    .answer {
+      padding: 0 12px;
+      height: 0;
+      overflow: hidden;
+      p {
+        margin-bottom: 15px;
+      }
+    }
+    &.active {
+      .question {
+        border-bottom: 1px solid #fff;
+        .mat-icon {
+          transform: rotate(45deg);
+        }
+      }
+      .answer {
+        padding: 12px 12px;
+        height: fit-content;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    app-main-footer {
+      display: none;
+    }
+    app-sidenav {
+      &.mobile {
+        display: none;
+      }
+      &.desktop {
+        display: block;
+      }
+    }
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr);
+    max-width: unset;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("/assets/images/home/HOME-BG-2.0.svg");
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+
+  .main {
+    position: relative;
+    z-index: 1;
+    width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
+    background-color: #171717;
+    border-right: 1px solid #ffffff;
+    .sidenav {
+      grid-row: 1/3;
+      grid-column: 1;
+    }
+  }
+
+  .faq {
+    position: relative;
+    max-width: unset;
+    width: 100%;
+    z-index: 5;
+    grid-column: 2;
+    display: block;
+    overflow: auto;
+    padding: 30px 65px 0;
+  }
+
+  header {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: none;
+    position: unset;
+    padding-left: 35px;
+    .title {
+      font-size: 28px;
+      text-align: left;
+      top: 2px;
+      padding-left: 29px;
+    }
+    .back-arrow {
+      width: 41px;
+      height: 41px;
+      left: 64px;
+    }
+    .help-btn {
+      display: none;
+    }
+  }
+
+  .content {
+    height: unset;
+    padding: 50px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 35px;
+    align-items: flex-start;
+    &.mobile {
+      display: none;
+    }
+    &.desktop {
+      display: grid !important;
+    }
+    .question-block {
+      margin-bottom: 35px;
+      font-size: 18px;
+
+      .question {
+        height: 85px;
+        cursor: pointer;
+
+        img {
+          width: 21px;
+          height: 21px;
+          transition: all ease-in 150ms;
+        }
+        .mat-icon {
+          width: 30px;
+          height: 30px;
+          font-size: 30px;
+          cursor: pointer;
+        }
+      }
+
+      .answer {
+        font-size: 17px;
+        ::ng-deep p {
+          margin-bottom: 10px;
+        }
+      }
+
+      &.active {
+        .question {
+          img {
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+}

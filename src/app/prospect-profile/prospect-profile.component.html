@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="prospect-profile">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">NXT 1 Media Pro</div>
+
+        <img
+          (click)="onHelp(guideLink)"
+          class="desktop"
+          src="./assets/images/icons/help_white.png"
+        />
+      </header>
+
+      <div class="content">
+        <div class="banner">THE FUTURE OF SPORTS RECRUITING IS HERE.</div>
+        <div class="tabs-wrapper">
+          <div class="tabs">
+            <div
+              class="tab"
+              *ngIf="(user$ |async)?.['isRecruit']"
+              [ngClass]="{ active: activeTab === '0' }"
+              (click)="changeTab('0')"
+            >
+              <div class="tab-image-wrapper">
+                <img
+                  class="image"
+                  src="./assets/images/home/icons/Profiles-pro.png"
+                  alt=""
+                />
+              </div>
+              <div class="tab-name">Profiles Pro</div>
+            </div>
+            <div
+              class="tab"
+              [ngClass]="{ active: activeTab === '2' }"
+              (click)="changeTab('2')"
+            >
+              <div class="tab-image-wrapper">
+                <img
+                  class="image"
+                  src="./assets/images/home/icons/Graphics-Pro.png"
+                  alt=""
+                />
+              </div>
+              <div class="tab-name">Graphics Pro</div>
+            </div>
+            <div
+              class="tab"
+              [ngClass]="{ active: activeTab === '1' }"
+              (mouseenter)="showComingSoon = true"
+              (mouseleave)="showComingSoon = false"
+            >
+              <div class="tab-image-wrapper mixtapes">
+                <img
+                  class="image"
+                  src="./assets/images/home/icons/Highlights-Pro.png"
+                  alt=""
+                />
+              </div>
+              <div class="tab-name">
+                {{ showComingSoon ? "Coming soon" : "Mixtapes Pro" }}
+              </div>
+            </div>
+            <div
+              class="tab"
+              [ngClass]="{ active: activeTab === '3' }"
+              (click)="changeTab('3')"
+            >
+              <div class="tab-image-wrapper">
+                <img
+                  class="image"
+                  src="./assets/images/home/icons/My-Media-2.png"
+                  alt=""
+                />
+              </div>
+              <div class="tab-name">My Media</div>
+            </div>
+          </div>
+          <div
+            class="right"
+            [style]="{ display: activeTab === '3' ? 'none' : '' }"
+          >
+            <div class="credit">
+              <span class="key">Media Credits: </span>
+              <span class="total">{{ this.user["featureCredits"] || 0 }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="main-content">
+          <app-prospect
+            [activeTab]="this.activeTab"
+            (dataChange)="onDataChange($event)"
+          ></app-prospect>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

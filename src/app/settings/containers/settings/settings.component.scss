@@ -1,0 +1,325 @@
+.container {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(32, 32, 32, 1) 30%,
+    rgba(50, 50, 50, 1) 50%,
+    rgba(32, 32, 32, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  .desktop {
+    display: none;
+  }
+}
+
+.main {
+  height: 100%;
+  overflow: auto;
+}
+
+.settings {
+  height: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 45px minmax(0, 1fr) 90px;
+  max-width: 600px;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+header {
+  border-bottom: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+}
+
+.content {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  padding: 30px 10px 15px;
+  .video-box {
+    width: 370px;
+    min-height: 211px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    video {
+      height: 211px;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  .video-selector {
+    min-height: 43px;
+    margin: 10px auto 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .label {
+      color: #707070;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .dots {
+      width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 1px solid #bfbfbf;
+      background-color: transparent;
+      transition: all ease-in 300ms;
+      cursor: pointer;
+      &.active {
+        background-color: #707070;
+      }
+    }
+  }
+
+  .menu {
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #ccff00;
+    list-style: none;
+    padding: 0 10px;
+    margin-bottom: 35px;
+    &.desktop {
+      display: none;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    li {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #bfbfbf;
+      padding: 0 15px 0 5px;
+      &:last-child {
+        border-bottom: none;
+      }
+      span {
+        margin: 0 auto 0 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #000;
+      }
+      .icon {
+        width: 37px;
+        height: 37px;
+        &.refferals {
+          width: 31px;
+          height: auto;
+          margin: 0 3px;
+        }
+        &.tracking {
+          width: 31px;
+          height: auto;
+          margin: 0 3px;
+        }
+      }
+      .arrow {
+        width: 9px;
+      }
+    }
+  }
+
+  .version {
+    color: #fff;
+    text-align: center;
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    app-main-footer {
+      display: none;
+    }
+    app-sidenav {
+      &.mobile {
+        display: none;
+      }
+      &.desktop {
+        display: block;
+      }
+    }
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr);
+    max-width: unset;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("/assets/images/home/HOME-BG-2.0.svg");
+      background-position: center center;
+      background-size: cover;
+    }
+  }
+
+  .main {
+    position: relative;
+    z-index: 1;
+    width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
+    background-color: #171717;
+    border-right: 1px solid #ffffff;
+    .sidenav {
+      grid-row: 1/3;
+      grid-column: 1;
+    }
+  }
+
+  .settings {
+    position: relative;
+    max-width: unset;
+    width: 100%;
+    z-index: 5;
+    grid-column: 2;
+    display: block;
+    overflow: auto;
+    padding: 30px 100px 0;
+  }
+
+  header {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: none;
+    position: unset;
+    .title {
+      font-size: 28px;
+      text-align: left;
+      top: 2px;
+      padding-left: 29px;
+    }
+    .back-arrow {
+      width: 41px;
+      height: 41px;
+      left: 64px;
+    }
+    .help-btn {
+      display: none;
+    }
+  }
+
+  .content {
+    height: unset;
+    padding: 40px 0 0;
+    .video-box {
+      width: 386px;
+      min-height: 215px;
+      video {
+        height: 215px;
+      }
+    }
+    .video-selector {
+      min-height: 58px;
+      .label {
+        font-size: 20px;
+      }
+      .dots {
+        width: 163px;
+      }
+      .dot {
+        width: 21px;
+        height: 21px;
+      }
+    }
+
+    .menu {
+      margin-top: 50px;
+      &.mobile {
+        display: none;
+      }
+      &.desktop {
+        display: grid;
+      }
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 15px;
+      margin-bottom: 0;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      li {
+        height: 89px;
+        border-radius: 4px;
+        border-bottom: unset;
+        background-color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        &.account {
+          grid-column: 1;
+          grid: 1;
+        }
+        &.info {
+          grid-column: 2;
+          grid-row: 1;
+        }
+        &.tracking {
+          grid-column: 1;
+          grid-row: 2;
+        }
+        &.ref {
+          grid-column: 2;
+          grid-row: 2;
+        }
+        &.faq {
+          grid-column: 2;
+          grid-row: 3;
+        }
+        &.recruiting {
+          grid-column: 1;
+          grid-row: 3;
+        }
+        &.contact {
+          grid-column: 1;
+          grid-row: 4;
+        }
+        &.connect {
+          grid-column: 2;
+          grid-row: 4;
+        }
+      }
+    }
+
+    .version {
+      margin-top: 15px;
+    }
+  }
+}

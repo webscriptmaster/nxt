@@ -1,0 +1,39 @@
+<div class="container" [ngStyle]="{ backgroundImage: backgroundImage }">
+  <div
+    class="login"
+    *ngIf="showResetPasswordMessage"
+    (click)="showResetPasswordMessage = false"
+  >
+    Login
+  </div>
+  <a *ngIf="showForm" (click)="showEmaiForm()" class="back mobile">Back</a>
+  <img class="logo" src="./assets/images/logo/logo_600.png" />
+
+  <div class="form-wrapper">
+    <app-sign-in-form
+      [ngClass]="{ hide: showResetPasswordMessage }"
+      (signUp)="onSignUp()"
+      (signIn)="onSignIn($event)"
+      (loginHelp)="onLoginHelp()"
+      (showForm)="onShowForm($event)"
+      [showSignInForm]="showForm"
+      [errors]="errors"
+    >
+    </app-sign-in-form>
+
+    <div class="team">
+      <span class="question">Joining With a Team or Organization?</span>
+      <a routerLink="/auth/code" class="start">start here.</a>
+    </div>
+  </div>
+
+  <div *ngIf="showResetPasswordMessage" class="reset-msg">
+    <span class="mobile">Reset successful, check your email.</span>
+    <div class="desktop">
+      <h2>Check Your Email</h2>
+      <p>Click the link in the email to reset your password.</p>
+      <br />
+      <p>If you don’t see the email, check your Junk or spam folders.</p>
+    </div>
+  </div>
+</div>

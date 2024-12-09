@@ -1,0 +1,210 @@
+<div class="info">
+  <div class="link_row">
+    <div class="left">
+      <div class="first_row">College Home Page</div>
+      <div
+        *ngIf="college.landingUrl"
+        class="second_row"
+        (click)="openLink(college.landingUrl)"
+      >
+        College Home Link
+      </div>
+      <div *ngIf="!college.landingUrl" class="second_row grey">
+        No Info Available
+      </div>
+    </div>
+
+    <div class="right" *ngIf="college.landingUrl">
+      <div
+        class="share"
+        (click)="
+          onShare($event, college.landingUrl); shareLanding = true; shareMajor = false
+        "
+      >
+        <img src="/assets/images/icons/share.png" />
+      </div>
+      <div class="go-to" (click)="openLink(college.landingUrl)">Go to link</div>
+    </div>
+  </div>
+
+  <div class="link_row">
+    <div class="left">
+      <div class="first_row">Majors Offered</div>
+      <div
+        *ngIf="college.majorsOffered"
+        class="second_row"
+        (click)="openLink(college.majorsOffered)"
+      >
+        Majors Offered Link
+      </div>
+      <div *ngIf="!college.majorsOffered" class="second_row grey">
+        No Info Available
+      </div>
+    </div>
+
+    <div class="right" *ngIf="college.majorsOffered">
+      <div
+        class="share"
+        (click)="
+          onShare($event, college.majorsOffered);
+          shareLanding = false;
+          shareMajor = true
+        "
+      >
+        <img src="/assets/images/icons/share.png" />
+      </div>
+      <div class="go-to" (click)="openLink(college.majorsOffered)">
+        Go to link
+      </div>
+    </div>
+  </div>
+
+  <div class="enrollment">Enrollment</div>
+  <app-college-card-undergraduate-students-bar
+    [undergradsNo]="college.undergradsNo"
+  ></app-college-card-undergraduate-students-bar>
+
+  <div class="info_row">
+    <div class="label">Private or Public:</div>
+    <div class="value">{{ college.public ? "Public" : "Private" }}</div>
+  </div>
+  <div class="info_row">
+    <div class="label">HBCU:</div>
+    <div class="value">{{ college.hbcu ? "Yes" : "No" }}</div>
+  </div>
+  <div class="info_row">
+    <div class="label">Religious Affiliation:</div>
+    <div class="value">
+      {{ college.religious_affiliation ? college.religious_affiliation : "-" }}
+    </div>
+  </div>
+
+  <app-college-card-gender-bar
+    [male]="college.male"
+    [female]="college.female"
+  ></app-college-card-gender-bar>
+
+  <div class="admissions">Admissions</div>
+
+  <div class="acceptance">
+    <img
+      *ngIf="+college.acceptanceRate <= 30"
+      src="/assets/images/colleges-library/rate-1.png"
+    />
+    <img
+      *ngIf="+college.acceptanceRate > 30 && +college.acceptanceRate <= 60"
+      src="/assets/images/colleges-library/rate-2.png"
+    />
+    <img
+      *ngIf="+college.acceptanceRate > 60"
+      src="/assets/images/colleges-library/rate-3.png"
+    />
+    <div class="label">Acceptance Rate:</div>
+    <div
+      class="value"
+      *ngIf="
+        college.acceptanceRate !== 'Not available' &&
+        college.acceptanceRate !== 'Not applicable'
+      "
+    >
+      Up to {{ (+college.acceptanceRate).toFixed(0) }}%
+    </div>
+    <div
+      class="value"
+      *ngIf="
+        college.acceptanceRate == 'Not available' ||
+        college.acceptanceRate == 'Not applicable'
+      "
+    >
+      {{ college.acceptanceRate }}
+    </div>
+  </div>
+
+  <div class="average">
+    <div class="cell">
+      <div class="label">Average GPA:</div>
+      <div class="value">{{ college.averageGPA }}</div>
+    </div>
+    <div class="cell">
+      <div class="label">Average ACT:</div>
+      <div class="value">{{ college.compositeACT }}</div>
+    </div>
+  </div>
+
+  <div class="average sat">
+    <div class="cell">
+      <div class="label">Average SAT Math:</div>
+      <div class="value">{{ college.mathSAT }}</div>
+    </div>
+    <div class="cell">
+      <div class="label">Average SAT Reading:</div>
+      <div class="value">{{ college.readingSAT }}</div>
+    </div>
+  </div>
+
+  <div class="cost">Total Yearly Cost</div>
+  <div class="cost-values">
+    <div class="value">{{college.totalCost?.includes('$') ? '' : '$'}}{{ college.totalCost | numberWithComa }}</div>
+  </div>
+</div>
+
+<div
+  class="shareMenu"
+  [ngClass]="{ show: showShare }"
+  (clickOutside)="showShare = false; shareLanding = false; shareMajor = false"
+>
+  <div class="shareMenu__title">Share Your Link</div>
+  <div class="shareMenu__buttons">
+    <div class="button-block">
+      <button (click)="copy(shareLanding ? college.landingUrl : college.majorsOffered); showShare = false; shareLanding = false; shareMajor = false">
+        <img src="/assets/images/icons/copy_2.png" />
+      </button>
+      <div class="label">Copy</div>
+    </div>
+    <!-- <div class="button-block">
+      <button
+        shareButton="sms"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/messages.png" />
+      </button>
+      <div class="label">Messages</div>
+    </div> -->
+    <div class="button-block">
+      <button shareButton="email" [url]="shareLanding ? college.landingUrl : college.majorsOffered">
+        <img src="/assets/images/icons/mail.png" />
+      </button>
+      <div class="label">Email</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="twitter" [url]="shareLanding ? college.landingUrl : college.majorsOffered">
+        <img src="/assets/images/icons/x-icon.png" />
+      </button>
+      <div class="label">Twitter</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="facebook" [url]="shareLanding ? college.landingUrl : college.majorsOffered">
+        <img src="/assets/images/icons/facebook_2.png" />
+      </button>
+      <div class="label">Facebook</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="whatsapp" [url]="shareLanding ? college.landingUrl : college.majorsOffered">
+        <img src="/assets/images/icons/whatsapp.png" />
+      </button>
+      <div class="label">WhatsApp</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="telegram" [url]="shareLanding ? college.landingUrl : college.majorsOffered">
+        <img src="/assets/images/icons/telegram.png" />
+      </button>
+      <div class="label">Telegram</div>
+    </div>
+  </div>
+  <div class="shareMenu__close" (click)="showShare = false; shareLanding = false; shareMajor = false">Close</div>
+</div>

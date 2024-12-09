@@ -1,0 +1,157 @@
+<div class="college" *ngIf="college" #card [id]="college.name">
+  <div
+    class="card"
+    [class.selected]="
+      selectedCollege.includes(college._id) && type === 'automate'
+    "
+    *ngIf="needToShow$ | async"
+  >
+    <div class="tagged" (click)="onTag()">
+      <img
+        [ngClass]="{ show: !isTagged }"
+        src="/assets/images/colleges-library/star.png"
+      />
+      <img
+        [ngClass]="{ show: isTagged }"
+        src="/assets/images/colleges-library/star_fill.png"
+      />
+    </div>
+    <div
+      class="top"
+      (click)="type === 'automate' ? chooseCollege(college) : ''"
+    >
+      <div
+        class="logo"
+        (click)="
+          openLink(college['sportInfo'][collegeSport]['sportLandingUrl'])
+        "
+      >
+        <img
+          #img
+          [src]="college.logoUrl | collegeLogo"
+          (error)="text.style.display = 'block'; img.style.display = 'none'"
+        />
+        <span #text style="display: none">College logo</span>
+      </div>
+      <div class="info">
+        <div class="name">{{ college.name }}</div>
+        <div class="location">
+          <span>{{ college.city }}, {{ college.state }}</span>
+          <span *ngIf="type === 'automate'" class="add">
+            {{
+              selectedCollege.includes(college._id)
+                ? "Added To Email"
+                : "Tap To Add To Email"
+            }}
+            <img src="/assets/images/icons/check.svg" />
+          </span>
+        </div>
+        <div class="div-conf">
+          <div class="division">
+            {{ college["sportInfo"][collegeSport].division | collegeDivision }}
+          </div>
+          <div class="conference">
+            <span #confText style="display: none">
+              {{ college["sportInfo"][collegeSport].conference }}</span
+            >
+            <img
+              #confImage
+              [src]="college['sportInfo'][collegeSport] | conferenceLogo"
+              (error)="
+                confText.style.display = 'block';
+                confImage.style.display = 'none'
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div
+        class="badge"
+        [ngClass]="{ active: detailsMode === COLLEGE_DETAILS_TYPE.CONTACTS }"
+        (click)="setMode(COLLEGE_DETAILS_TYPE.CONTACTS); scrollCardTop()"
+      >
+        Contacts
+      </div>
+      <div
+        class="badge"
+        [ngClass]="{ active: detailsMode === COLLEGE_DETAILS_TYPE.SOCIALS }"
+        (click)="setMode(COLLEGE_DETAILS_TYPE.SOCIALS); scrollCardTop()"
+      >
+        Socials
+      </div>
+      <div
+        class="badge"
+        [ngClass]="{
+          active: detailsMode === COLLEGE_DETAILS_TYPE.QUESTIONNAIRE
+        }"
+        (click)="setMode(COLLEGE_DETAILS_TYPE.QUESTIONNAIRE); scrollCardTop()"
+      >
+        Questionnaire
+      </div>
+      <div
+        class="badge"
+        [ngClass]="{ active: detailsMode === COLLEGE_DETAILS_TYPE.CAMPS }"
+        (click)="setMode(COLLEGE_DETAILS_TYPE.CAMPS); scrollCardTop()"
+      >
+        Camps
+      </div>
+      <div
+        class="badge"
+        [ngClass]="{ active: detailsMode === COLLEGE_DETAILS_TYPE.INFO }"
+        (click)="setMode(COLLEGE_DETAILS_TYPE.INFO); scrollCardTop()"
+      >
+        <img
+          class="university black"
+          src="/assets/images/icons/university-white.png"
+        />
+        <img
+          class="university white"
+          src="/assets/images/icons/university-white.png"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="details" *ngIf="detailsMode">
+    <ng-container [ngSwitch]="detailsMode">
+      <app-college-card-contacts
+        *ngSwitchCase="COLLEGE_DETAILS_TYPE.CONTACTS"
+        [contacts]="college.contacts"
+        [selectedContacts]="selectedContacts"
+        (toggleContact)="onToggleContact($event)"
+        [college]="college"
+        [collegeSport]="collegeSport"
+      ></app-college-card-contacts>
+      <app-college-card-socials
+        *ngSwitchCase="COLLEGE_DETAILS_TYPE.SOCIALS"
+        [contacts]="college.contacts"
+        [twitter]="college['sportInfo'][collegeSport].twitter"
+        [collegeName]="college.name"
+      ></app-college-card-socials>
+
+      <app-college-card-questionnaire
+        *ngSwitchCase="COLLEGE_DETAILS_TYPE.QUESTIONNAIRE"
+        [sport]="collegeSport"
+        [questionnaire]="college['sportInfo'][collegeSport].questionnaire"
+        [college]="college"
+        [user]="user"
+        [collegeSport]="collegeSport"
+      ></app-college-card-questionnaire>
+
+      <app-college-card-camp
+        *ngSwitchCase="COLLEGE_DETAILS_TYPE.CAMPS"
+        [sport]="collegeSport"
+        [camp]="college['sportInfo'][collegeSport].camp"
+        [college]="college"
+        [user]="user"
+        [collegeSport]="collegeSport"
+      ></app-college-card-camp>
+
+      <app-college-card-info
+        [college]="college"
+        *ngSwitchCase="COLLEGE_DETAILS_TYPE.INFO"
+      ></app-college-card-info>
+    </ng-container>
+  </div>
+</div>

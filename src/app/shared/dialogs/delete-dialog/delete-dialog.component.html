@@ -1,0 +1,25 @@
+<div class="send-email-dialog">
+  <div class="content">
+    <header>
+      <img src="./assets/images/logo/logo.png" />
+    </header>
+    <main>{{ message }}</main>
+    <div class="info">{{ info }}</div>
+  </div>
+  <div class="buttons">
+    <div
+      class="review"
+      [style]="{ color: firstButtonColor, border: firstButtonBorder }"
+      (click)="dialogRef.close(true)"
+    >
+      {{ firstButtonText }}
+    </div>
+    <div
+      class="send"
+      [style]="{ color: secondButtonColor, border: secondButtonBorder }"
+      (click)="dialogRef.close(false)"
+    >
+      {{ secondButtonText }}
+    </div>
+  </div>
+</div>

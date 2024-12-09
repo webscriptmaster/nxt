@@ -1,0 +1,26 @@
+<div class="gender">
+  <div class="bar">
+    <canvas
+      baseChart
+      [labels]="doughnutChartLabels"
+      [datasets]="doughnutChartDatasets"
+      [legend]="false"
+      [type]="'doughnut'"
+    >
+    </canvas>
+  </div>
+  <div class="legend">
+    <div class="title">Student Body</div>
+    <div class="info">
+      <div class="male">
+        <div class="label">Male</div>
+        <div class="value">{{ male | number: '1.0-0' }}%</div>
+      </div>
+      <div class="female">
+        <div class="label">Female</div>
+        <div class="value">{{ female | number: '1.0-0' }}%</div>
+      </div>
+    </div>
+   
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'settings'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs()"
+    ></app-sidenav>
+
+    <div class="account-info">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">Account Information</div>
+      </header>
+
+      <div class="content">
+        <div
+          class="subscription"
+          *ngIf="
+            startDate &&
+            endDate &&
+            ((user$ | async)?.lastActivatedPlan === PLANS.SUBSCRIPTION ||
+              (user$ | async)?.lastActivePlan === PLANS.SUBSCRIPTION)
+          "
+        >
+          Start: {{ startDate | date : "M/d/yyyy" }} - Renewal:
+          {{ endDate | date : "M/d/yyyy" }}
+        </div>
+
+        <!-- <div
+          class="subscription"
+          *ngIf="
+            (user$ | async)?.lastActivatedPlan !== PLANS.SUBSCRIPTION &&
+            (user$ | async)?.lastActivePlan !== PLANS.SUBSCRIPTION
+          "
+        >
+          {{ (user$ | async)?.credits }} Colleges are in your account.
+        </div> -->
+
+        <div class="card">
+          <app-spinner *ngIf="loading$ | async"></app-spinner>
+
+          <div class="email">
+            <div class="label">Email</div>
+            <div class="field">
+              <input type="email" readonly [(ngModel)]="email" />
+              <img
+                (click)="onHelp()"
+                src="/assets/images/settings/help_gray.png"
+              />
+            </div>
+          </div>
+
+          <div class="password">
+            <div class="label">Password</div>
+            <div class="field">
+              <div class="input-container">
+                <input
+                  [formControl]="passwordControl"
+                  [type]="isShowPassword ? 'text' : 'password'"
+                  autocomplete="new-password"
+                  [ngClass]="{ error: wrongPassword }"
+                  (focus)="this.wrongPassword = false"
+                />
+                <div
+                  class="count"
+                  [ngClass]="{
+                    valid:
+                      this.passwordControl.value &&
+                      this.passwordControl.value.length >= 6
+                  }"
+                >
+                  {{ this.passwordControl.value?.length }}/6
+                </div>
+                <mat-icon
+                  class="icon"
+                  [ngClass]="{ active: isShowPassword }"
+                  (click)="isShowPassword = !isShowPassword"
+                  >visibility</mat-icon
+                >
+              </div>
+              <div
+                class="change"
+                [ngClass]="{ disabled: changeMode }"
+                (click)="onChangeMode()"
+              >
+                Change
+              </div>
+            </div>
+
+            <div class="label new" *ngIf="changeMode">New Password</div>
+            <div class="field" *ngIf="changeMode">
+              <div class="input-container">
+                <input
+                  [type]="isShowNewPassword ? 'text' : 'password'"
+                  autocomplete="new-password"
+                  [formControl]="newPasswordControl"
+                  (focus)="newPasswordControl.markAsTouched()"
+                />
+                <div
+                  class="count"
+                  [ngClass]="{
+                    valid:
+                      this.newPasswordControl.value &&
+                      this.newPasswordControl.value.length >= 6
+                  }"
+                >
+                  {{ this.newPasswordControl.value?.length }}/6
+                </div>
+                <mat-icon
+                  class="icon"
+                  [ngClass]="{ active: isShowNewPassword }"
+                  (click)="isShowNewPassword = !isShowNewPassword"
+                  >visibility</mat-icon
+                >
+              </div>
+              <div
+                class="change"
+                [ngClass]="{ disabled: newPasswordControl.invalid }"
+                (click)="onSubmitNewPassword()"
+                *ngIf="changeMode"
+              >
+                Submit
+              </div>
+            </div>
+
+            <p
+              class="password-tooltip"
+              *ngIf="
+                newPasswordControl.touched &&
+                newPasswordControl.invalid &&
+                changeMode
+              "
+            >
+              At least one
+              <span [ngClass]="{ valid: isNewPasswordHasUppercase }"
+                >uppercase letter</span
+              >,
+              <span [ngClass]="{ valid: isNewPasswordHasNumber }"
+                >one number</span
+              >
+            </p>
+          </div>
+
+          <div class="logout">
+            <span (click)="onLogout()">Logout</span>
+            <img
+              (click)="onLogout()"
+              src="/assets/images/settings/logout.png"
+            />
+          </div>
+
+          <div class="delete" (click)="onDelete()">Delete Account</div>
+        </div>
+      </div>
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>

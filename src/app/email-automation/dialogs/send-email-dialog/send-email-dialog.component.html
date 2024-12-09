@@ -1,0 +1,16 @@
+<div class="send-email-dialog">
+  <div class="content">
+    <header>
+      <img src="./assets/images/logo/logo.png" />
+    </header>
+    <main>
+      All emails will send separately to each coach. Email analytics will show
+      up in "activity" and "campaigns sent".
+      <span class="highlight"> Review and send.</span>
+    </main>
+  </div>
+  <div class="buttons">
+    <div class="review" (click)="dialogRef.close(false)">Review</div>
+    <div class="send" (click)="dialogRef.close(true)">Send</div>
+  </div>
+</div>

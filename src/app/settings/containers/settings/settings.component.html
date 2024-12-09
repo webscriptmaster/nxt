@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'settings'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs()"
+    ></app-sidenav>
+
+    <div class="settings">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">Settings</div>
+      </header>
+
+      <div class="content">
+        <!-- <div class="video-box">
+          <video
+            *ngIf="videos[activeVideoIndex]"
+            controls
+            muted
+            [src]="videos[activeVideoIndex].url"
+            [poster]="videos[activeVideoIndex].thumbnail"
+          ></video>
+        </div>
+
+        <div class="video-selector">
+          <div class="label" *ngIf="videos[activeVideoIndex]">
+            {{ videos[activeVideoIndex].title }}
+          </div>
+          <div class="dots">
+            <div
+              class="dot"
+              [ngClass]="{ active: i === activeVideoIndex }"
+              *ngFor="let dot of videos; let i = index"
+              (click)="activeVideoIndex = i"
+            ></div>
+          </div>
+        </div> -->
+
+        <ul class="menu mobile">
+          <li>
+            <img
+              class="icon"
+              src="/assets/images/settings/notifications.png"
+            /><span>Allow Notifications</span
+            ><ui-switch
+              [checked]="!!(user$ | async)?.pushNotifications"
+              (change)="onToggleNotifications($event)"
+            ></ui-switch>
+          </li>
+          <li>
+            <img
+              class="icon tracking"
+              src="/assets/images/settings/activity.png"
+            /><span>Turn Off Tracking</span
+            ><ui-switch
+              [checked]="!!(user$ | async)?.activityTracking"
+              (change)="onToggleActivityTracking($event)"
+            ></ui-switch>
+          </li>
+          <li (click)="onAccountInfo()">
+            <img
+              class="icon"
+              src="/assets/images/settings/account-info.png"
+            /><span>Account Information</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onMyRefferals()">
+            <img
+              class="icon refferals"
+              src="/assets/images/settings/refferals.png"
+            /><span>My Referrals</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onConnectProvider()" class="ref">
+            <img
+              class="icon refferals"
+              src="/assets/images/create-email/email.png"
+            /><span>{{ labelProvider }}</span>
+          </li>
+        </ul>
+
+        <ul class="menu mobile">
+          <li (click)="onFaq()">
+            <img class="icon" src="/assets/images/settings/faqs.png" /><span
+              >FAQs</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onRecruitingProcess()">
+            <img
+              class="icon"
+              src="/assets/images/settings/recruiting.png"
+            /><span>NXT 1 Recruiting Process</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onContactUs()">
+            <img
+              class="icon"
+              src="/assets/images/settings/contact-us.png"
+            /><span>Contact Us</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+        </ul>
+
+        <ul class="menu desktop">
+          <li (click)="onAccountInfo()" class="account">
+            <img
+              class="icon"
+              src="/assets/images/settings/account-info.png"
+            /><span>Account Information</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li class="info">
+            <img
+              class="icon"
+              src="/assets/images/settings/notifications.png"
+            /><span>Allow Notifications</span
+            ><ui-switch
+              [checked]="!!(user$ | async)?.pushNotifications"
+              (change)="onToggleNotifications($event)"
+            ></ui-switch>
+          </li>
+          <li class="tracking">
+            <img class="icon" src="/assets/images/settings/activity.png" /><span
+              >Turn Off Tracking</span
+            ><ui-switch
+              [checked]="!!(user$ | async)?.activityTracking"
+              (change)="onToggleActivityTracking($event)"
+            ></ui-switch>
+          </li>
+          <li (click)="onMyRefferals()" class="ref">
+            <img
+              class="icon refferals"
+              src="/assets/images/settings/refferals.png"
+            /><span>My Referrals</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onConnectProvider()" class="connect">
+            <img
+              class="icon refferals"
+              src="/assets/images/create-email/email.png"
+            /><span>{{ labelProvider }}</span>
+          </li>
+          <li (click)="onFaq()" class="faq">
+            <img class="icon" src="/assets/images/settings/faqs.png" /><span
+              >FAQs</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onRecruitingProcess()" class="recruiting">
+            <img
+              class="icon"
+              src="/assets/images/settings/recruiting.png"
+            /><span>NXT 1 Recruiting Process</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+          <li (click)="onContactUs()" class="contact">
+            <img
+              class="icon"
+              src="/assets/images/settings/contact-us.png"
+            /><span>Contact Us</span
+            ><img class="arrow" src="/assets/images/icons/go-to.png" />
+          </li>
+        </ul>
+
+        <div class="version">
+          {{ productionMode ? "" : "Staging" }} v. {{ appVersion }}
+        </div>
+      </div>
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>

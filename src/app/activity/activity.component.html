@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="activity">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Activity</p>
+        <a
+          class="offers"
+          *ngIf="[3, 4].includes(activeTab)"
+          routerLink="/offers/add-offers"
+        >
+          <mat-icon>add_circle_outline</mat-icon>
+        </a>
+      </header>
+
+      <div class="content">
+        <!-- <div class="activity__content"> -->
+        <app-offers-log
+          (activeTabChange)="onValueChange($event)"
+          [embedded]="true"
+        ></app-offers-log>
+        <!-- </div> -->
+      </div>
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>

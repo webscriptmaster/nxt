@@ -1,0 +1,53 @@
+<div class="save-btn" (click)="onSave()" *ngIf="edit">Save</div>
+
+<div class="email-template">
+  <div class="to">To</div>
+  <div class="subject own">
+    <input placeholder="Subject" type="text" [(ngModel)]="subject" />
+  </div>
+  <div [className]="type !== TEMPLATES.OWN ? 'own_placeholder custom-quill' : 'own_placeholder'">
+    <div class="view" >
+      <button *ngIf="!edit" (click)="editTemplate()">Edit Template</button>
+      <div *ngIf="!edit" class="view-content" [innerHTML]="template"></div>
+      <quill-editor
+        *ngIf="edit"
+        placeholder="Create your own Email Template to send to College coaches!"
+        [(ngModel)]="template"
+      ></quill-editor>
+    </div>
+    <button class="reset" (click)="resetTemplate()">RESET TEMPLATE</button>
+  </div>
+  <div class="prospect-sheet" *ngIf="prospectSheet">
+    <div>
+      <span
+        >{{ user?.firstName }} {{ user?.lastName }} - Prospect Sheet.pdf</span
+      >
+      <img src="/assets/images/icons/pdf.png" />
+    </div>
+    <a (click)="showProspectSheet = true"> View </a>
+  </div>
+  <div class="message" #message></div>
+</div>
+
+
+<div class="prospect-sheet-container" [ngClass]="{ show: showProspectSheet }" (click)="onCloseProspectSheet($event)">
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="user"
+      [user]="user"
+      [forPDF]="true"
+      [view]="true"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

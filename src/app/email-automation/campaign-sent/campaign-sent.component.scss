@@ -1,0 +1,375 @@
+.container {
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(32, 32, 32, 1) 30%,
+      rgba(50, 50, 50, 1) 50%,
+      rgba(32, 32, 32, 1) 70%,
+      rgba(0, 0, 0, 1) 100%);
+  height: 100%;
+  min-height: 100%;
+
+  .desktop {
+    display: none;
+  }
+}
+
+.main {
+  height: 100%;
+}
+
+.campaigns-sent {
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr) 90px;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ffffff;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    // position: relative;
+    .title {
+      font-family: "Rajdhani";
+          font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      top: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .date {
+      color: #fff;
+      font-size: 18px;
+      font-family: "Rajdhani";
+          font-weight: 700;
+      margin-right: 0;
+      padding-right: 0;
+      right: 0;
+      position: absolute;
+      right: 5px;
+    }
+  }
+
+  .content {
+    overflow: auto;
+    padding: 0;
+    min-height: 300px;
+    height: 100vh;
+    .loading {
+      width: 100%;
+      height: 100%;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .main-content {
+      margin: auto;
+      position: relative;
+      width: 100%;
+      max-width: 502px;
+      height: 100%;
+      padding-bottom: 25px;
+      background-color: #7070703D;
+      border-radius: 6px;
+      padding: 10px;
+
+      .tabs {
+        display: inline-flex;
+        justify-content: start;
+        margin-bottom: 15px;
+        width: 100%;
+        position: relative;
+        .tab {
+          color: #FFF;
+          font-family: "Rajdhani";
+          font-weight: 700;
+          font-size: 16px;
+          margin-right: 15px;
+          cursor: pointer;
+          &.active {
+            color: #ccff00;
+            text-decoration: underline;
+          }
+        }
+
+        .total {
+          color: #fff;
+          position: absolute;
+          right: 0;
+          font-family: "Rajdhani";
+          font-weight: 700;
+        }
+      }
+
+      .card {
+        padding: 5px 5px 0;
+        background: #707070;
+        z-index: 1;
+        position: relative;
+        border: 1px solid #CCFF00;
+        border-radius: 6px;
+        padding-bottom: 6px;
+        margin-bottom: 20px;
+        .top {
+          display: flex;
+          align-items: center;
+
+          .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 55px;
+            background-color: #fff;
+            height: 55px;
+            border-radius: 50%;
+            border: 1px solid #000000;
+            box-shadow: #00000029 2px 4px 6px;
+            font-size: 9px;
+            font-weight: 700;
+            margin: 0 5px 0 0;
+            overflow: hidden;
+            min-width: 55px;
+
+            img {
+              width: 80%;
+            }
+          }
+
+          .info {
+            width: 100%;
+          }
+
+          .name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .location {
+            font-size: 14px;
+            font-family: "Rajdhani";
+          font-weight: 600;
+            font-weight: 600;
+            color: #BFBFBF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .add {
+              color: #CCFF00;
+              font-family: "Rajdhani";
+          font-weight: 700;
+              font-size: 17px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: start;
+
+              .status {
+                display: flex;
+                flex-direction: row;
+              }
+
+              img {
+                width: 20px;
+                height: auto;
+                margin-left: 10px;
+              }
+
+              .see-more {
+                color: #fff;
+                font-size: 10px;
+                font-family: "Rajdhani";
+          font-weight: 700;
+              }
+            }
+          }
+
+          .div-conf {
+            display: flex;
+            align-items: center;
+
+            .division {
+              padding: 0 5px;
+              height: 17px;
+              background-color: #000000f0;
+              border: 1px solid #707070;
+              color: #fff;
+              font-size: 12px;
+              font-weight: 700;
+              display: flex;
+              justify-content: center;
+              border-radius: 20px;
+              margin-right: 15px;
+              min-width: 56px;
+            }
+
+            .conference {
+              display: flex;
+              align-items: flex-end;
+              font-size: 12px;
+              font-weight: 700;
+
+              img {
+                max-height: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    app-main-footer {
+      display: none;
+    }
+
+    app-sidenav {
+      &.mobile {
+        display: none;
+      }
+
+      &.desktop {
+        display: block;
+      }
+    }
+
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr);
+    max-width: unset;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("/assets/images/home/bg-desktop.png");
+      background-position: 0 0;
+      background-size: 100% 100%;
+    }
+
+    .main {
+      position: relative;
+      z-index: 1;
+      width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      grid-template-columns: 220px minmax(0, 1fr);
+      background-color: #171717;
+      border-right: 1px solid #ccff00;
+
+      .sidenav {
+        grid-row: 1/3;
+        grid-column: 1;
+      }
+    }
+
+    .campaigns-sent {
+      position: relative;
+      max-width: unset;
+      width: 100%;
+      z-index: 5;
+      grid-column: 2;
+      display: block;
+      overflow: auto;
+      padding: 30px 129px 100px;
+
+      header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: none;
+        position: relative;
+        .title {
+          font-size: 28px;
+          text-align: left;
+          top: 2px;
+        }
+        .date {
+          font-size: 24px;
+        }
+
+        .back-arrow {
+          width: 41px;
+          height: 41px;
+          left: -75px;
+        }
+      }
+
+      .content {
+        padding: 30px 0 0;
+        height: auto;
+        .main-content {
+          border: 1px solid #FFFFFF;
+        }
+      }
+
+      .info-block {
+        background-color: #70707067;
+        border: 1px solid #ccff00;
+        border-radius: 6px;
+        padding: 10px 15px 20px;
+
+        &-title {
+          font-size: 18px;
+        }
+
+        ul {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 12px;
+
+          li {
+            margin-bottom: 0;
+            padding: 5px 15px 5px 0;
+            height: 100px;
+            cursor: pointer;
+
+            .logo {
+              width: 85px;
+            }
+
+            .arrow {
+              width: 25px;
+
+              &.mobile {
+                display: none;
+              }
+
+              &.desktop {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

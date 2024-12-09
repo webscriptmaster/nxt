@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      [activePage]="'contact'"
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="contact-us">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">Contact Us</div>
+      </header>
+
+      <div class="content">
+        <img class="logo" src="./assets/images/logo/logo_600.png" alt="" />
+
+        <div class="form-container">
+          <div class="submit" (click)="onSubmit()">Submit</div>
+          <div class="form">
+            <div class="from">
+              <span class="label">From:</span>
+              <span class="value">{{ (auth.user$ | async)?.email }}</span>
+            </div>
+            <div class="to">
+              <span class="label">To:</span>
+              <span class="value">support@nxt1sports.com</span>
+            </div>
+            <input [(ngModel)]="subject" type="text" placeholder="Subject" />
+            <textarea [(ngModel)]="body" placeholder="Body"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>

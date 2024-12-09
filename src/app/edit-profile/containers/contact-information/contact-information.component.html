@@ -1,0 +1,175 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="contact-information">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow-black.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Contact Information</p>
+        <p class="sub-title">Choose how you want coaches to contact you.</p>
+      </header>
+
+      <div class="content">
+        <form [formGroup]="contactForm" *ngIf="contactForm">
+          <div class="form-control">
+            <label appAsterickSign>Email</label>
+            <input type="email" formControlName="contactEmail" />
+          </div>
+
+          <div class="form-control">
+            <label>Phone Number</label>
+            <input type="phone" formControlName="phoneNumber" />
+          </div>
+
+          <div class="form-control with-prefix">
+            <label>(X) @</label>
+            <span class="prefix">@</span>
+            <input type="text" formControlName="twitter" />
+          </div>
+
+          <div class="form-control with-prefix">
+            <label>Instagram @</label>
+            <span class="prefix">@</span>
+            <input type="text" formControlName="instagram" />
+          </div>
+
+          <div class="form-control">
+            <label>Hudl Account Link</label>
+            <input
+              placeholder="https://www.hudl.com/profile"
+              type="text"
+              formControlName="hudlAccountLink"
+            />
+          </div>
+
+          <div class="form-control">
+            <label>Youtube Account Link</label>
+            <input
+              placeholder="https://www.youtube.com/profile"
+              type="text"
+              formControlName="youtubeAccountLink"
+            />
+          </div>
+
+          <div class="form-control">
+            <label>247 Sports Account Link</label>
+            <input
+              placeholder="https://www.247sports.com/profile"
+              type="text"
+              formControlName="sportsAccountLink"
+            />
+          </div>
+
+          <div class="form-control">
+            <label>Home Address</label>
+            <input
+              type="text"
+              formControlName="address"
+              id="autocompleteAddress"
+            />
+          </div>
+
+          <div class="form-control">
+            <label>Home City</label>
+            <input type="text" formControlName="city" />
+          </div>
+
+          <div class="form-control">
+            <label>Home State</label>
+            <input type="text" formControlName="state" />
+          </div>
+
+          <div class="form-control">
+            <label>Home ZIP</label>
+            <input type="phone" formControlName="zipCode" />
+          </div>
+
+          <div class="form-control">
+            <label>Home Country</label>
+            <input type="text" formControlName="country" />
+          </div>
+        </form>
+
+        <div class="bottom desktop">
+          <div class="save" (click)="onSave()">Save</div>
+
+          <div class="prospect-sheet" (click)="goToProfile()">
+            View Prospect Profile
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom mobile">
+        <div class="save" (click)="onSave()">Save</div>
+
+        <div class="prospect-sheet" (click)="goToProfile()">
+          View Prospect Profile
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

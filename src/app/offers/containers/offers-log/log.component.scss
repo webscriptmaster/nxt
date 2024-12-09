@@ -1,0 +1,360 @@
+.container {
+  background: #000;
+  height: 100%;
+  min-height: 100%;
+
+  &.embedded {
+    background: transparent;
+
+    .offers {
+      grid-template-rows: 45px minmax(0, 1fr);
+    }
+  }
+}
+
+.offers {
+  position: relative;
+  margin: 0 auto;
+  max-width: 600px;
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 48px 45px minmax(0, 1fr) 90px;
+
+  header {
+    background-color: #000;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #fff;
+    display: flex;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      font-family: "Rajdhani";
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+      position: relative;
+      top: 2px;
+    }
+
+    a {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+
+      ::ng-deep mat-icon {
+        color: #fff !important;
+      }
+    }
+
+    .add-btn {
+      height: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      filter: invert(100);
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .tabs {
+    padding: 15px 10px;
+    display: flex;
+    color: #707070;
+    font-size: 15px;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    .tab {
+      margin-right: 25px;
+      cursor: pointer;
+      color: #bfbfbf;
+
+      &.highlight {
+        color: #ccff00;
+      }
+
+      &.active {
+        color: #fff;
+      }
+    }
+  }
+
+  .content {
+    overflow: auto;
+    padding: 0 10px;
+
+    .offer {
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid #707070;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 12px 0 7px;
+      min-height: 144px;
+
+      &:last-child {
+        margin-bottom: 50px;
+      }
+
+      &-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 60px;
+
+        .image {
+          width: 60px;
+          height: 60px;
+          border-radius: 13px;
+          border: 1px solid #fff;
+          box-shadow: #00000029 0 3px 6px;
+          background: #fff;
+
+          &.default {
+            background: radial-gradient(ellipse 50% 50% at 50% 50%,
+                rgba(181, 179, 179, 0.78),
+                #7d7b7b,
+                #a9a2a2);
+            padding: 10px;
+          }
+        }
+
+        .drop-down {
+          margin-top: 5px;
+          height: 53px;
+        }
+      }
+
+      &-body {
+        margin-left: 5px;
+        position: relative;
+        flex: 1 1 auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 125px;
+
+        .date {
+          font-size: 12px;
+          font-weight: 700;
+          color: #707070;
+        }
+
+        .message {
+          margin-top: 3px;
+          font-size: 14px;
+          color: #fff;
+          font-weight: 700;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          display: -webkit-box;
+        }
+
+        .links {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 15px !important;
+        }
+
+        .twitter {
+          color: #2cbeff;
+          text-decoration: underline;
+          font-size: 14px;
+          cursor: pointer;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 14px;
+            margin-right: 10px;
+
+            &.x-icon {
+              width: auto;
+              height: 18px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .highlight {
+          color: #2cbeff;
+          text-decoration: underline;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: 1;
+          cursor: pointer;
+        }
+
+        .sport {
+          display: flex;
+          align-items: center;
+          height: 21px;
+          text-align: center;
+          font-size: 13px;
+          font-weight: 700;
+          color: #000000;
+          font-family: "Rajdhani";
+          font-weight: 700;
+          background-color: #fff;
+          border: 1px solid #ccff00;
+          border-radius: 10px;
+          padding: 2px 7px 1px;
+          width: fit-content;
+          margin: 10px 0 0;
+          text-transform: capitalize;
+        }
+
+        .bottom {
+          position: absolute;
+          bottom: 0;
+        }
+
+        .delete {
+          position: absolute;
+          bottom: 0;
+          right: 5px;
+          color: #ff0303;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+      }
+
+      &-card {
+        height: 121px;
+        background: #a0a0a060;
+        width: 107px;
+        border-radius: 11px;
+        border: 1px solid #707070;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .college-logo {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-bottom: 10px;
+        }
+
+        .default.image {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-bottom: 10px;
+        }
+
+        .content {
+          font-family: "Rajdhani";
+          font-weight: 600;
+          font-size: 15px;
+          color: #fff;
+          text-align: center;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .tooltip {
+      line-height: 34px;
+      text-align: center;
+      margin-top: 100px;
+      font-size: 25px;
+      color: #707070;
+      font-weight: 700;
+      max-width: 250px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 200px;
+      opacity: 0.4;
+      position: absolute;
+      margin-top: 20px;
+      left: 50%;
+      transform: translateX(-100px);
+    }
+  }
+}
+
+app-main-footer {
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1280px) {
+  .offers {
+    .content {
+      .offer {
+        &-body {
+          .twitter {
+            img {
+              &.x-icon {
+                width: auto;
+                height: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .offers {
+    .content {
+      .offer {
+        &-body {
+          .twitter {
+            img {
+              margin-right: 5px;
+
+              &.x-icon {
+                width: auto;
+                height: 16px;
+              }
+            }
+          }
+
+          .links {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

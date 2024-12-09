@@ -1,0 +1,449 @@
+<div class="container">
+  <div class="main" *ngIf="user$ | async">
+    <ng-container
+      *ngIf="
+        !(
+          (user$ | async)?.completeAddSport &&
+          (user$ | async)?.appSport === 'secondary'
+        )
+      "
+    >
+      <div class="profile" (click)="sidenav.openSideNav()">
+        <img
+          *ngIf="(user$ |async)?.['profileImg']"
+          [src]="(user$ |async)?.['profileImg']"
+        />
+        <img
+          class="default"
+          *ngIf="!(user$ |async)?.['profileImg']"
+          src="./assets/images/logo/lighting_bolt_new.png"
+        />
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="
+        (user$ | async)?.completeAddSport &&
+        (user$ | async)?.appSport === 'secondary'
+      "
+    >
+      <div class="profile" (click)="sidenav.openSideNav()">
+        <img
+          *ngIf="(user$ |async)?.['secondarySportProfileImg']"
+          [src]="(user$ |async)?.['secondarySportProfileImg']"
+        />
+        <img
+          class="default"
+          *ngIf="!(user$ |async)?.['secondarySportProfileImg']"
+          src="./assets/images/logo/lighting_bolt_new.png"
+        />
+      </div>
+    </ng-container>
+
+    <header class="mobile">
+      <img src="./assets/images/logo/lighting_bolt_small.png" class="logo" />
+      <div class="name">
+        {{(user$ |async)?.['firstName']}} {{(user$ |async)?.['lastName']}}
+      </div>
+      <div class="positions">
+        <ng-container
+          *ngIf="
+            !(
+              (user$ | async)?.completeAddSport &&
+              (user$ | async)?.appSport === 'secondary'
+            )
+          "
+        >
+          {{ (user$ | async)?.primarySportPositions?.join(" / ") }}
+        </ng-container>
+        <ng-container
+          *ngIf="
+            (user$ | async)?.completeAddSport &&
+            (user$ | async)?.appSport === 'secondary'
+          "
+        >
+          {{ (user$ | async)?.secondarySportPositions?.join(" / ") }}
+        </ng-container>
+      </div>
+    </header>
+
+    <header class="desktop">
+      <div class="user">
+        <div class="user-image">
+          <ng-container
+            *ngIf="
+              !(
+                (user$ | async)?.completeAddSport &&
+                (user$ | async)?.appSport === 'secondary'
+              )
+            "
+          >
+            <div>
+              <img
+                *ngIf="(user$ |async)?.['profileImg']"
+                [src]="(user$ |async)?.['profileImg']"
+              />
+              <img
+                class="default"
+                *ngIf="!(user$ |async)?.['profileImg']"
+                src="./assets/images/logo/lighting_bolt_new.png"
+              />
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              (user$ | async)?.completeAddSport &&
+              (user$ | async)?.appSport === 'secondary'
+            "
+          >
+            <div>
+              <img
+                *ngIf="(user$ |async)?.['secondarySportProfileImg']"
+                [src]="(user$ |async)?.['secondarySportProfileImg']"
+              />
+              <img
+                class="default"
+                *ngIf="!(user$ |async)?.['secondarySportProfileImg']"
+                src="./assets/images/logo/lighting_bolt_new.png"
+              />
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="user-info">
+          <div class="name">
+            {{(user$ |async)?.['firstName']}} {{(user$ | async)?.['lastName']}}
+          </div>
+          <div class="positions">
+            <ng-container
+              *ngIf="
+                !(
+                  (user$ | async)?.completeAddSport &&
+                  (user$ | async)?.appSport === 'secondary'
+                )
+              "
+            >
+              {{ (user$ | async)?.primarySportPositions?.join(" / ") }}
+            </ng-container>
+            <ng-container
+              *ngIf="
+                (user$ | async)?.completeAddSport &&
+                (user$ | async)?.appSport === 'secondary'
+              "
+            >
+              {{ (user$ | async)?.secondarySportPositions?.join(" / ") }}
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div
+        class="add-sport"
+        [class.left]="showUpgradeButton"
+        (click)="onAddSport()"
+        *ngIf="!(user$ |async)?.['completeAddSport'] && (user$ |async)?.['canAddSport'] && !(user$ | async)?.['isRecruit']"
+      >
+        + Add sport
+      </div>
+      <ng-container
+        *ngIf="
+          (user$ | async)?.completeAddSport &&
+          (user$ | async)?.appSport === 'primary'
+        "
+      >
+        <div class="toggle-sport" [class.left]="showUpgradeButton">
+          <img
+            (click)="onSetAppSport('secondary')"
+            class="image"
+            [src]="(user$ |async)?.['secondarySportProfileImg']"
+            *ngIf="(user$ |async)?.['secondarySportProfileImg']"
+          />
+          <img
+            (click)="onSetAppSport('secondary')"
+            class="default image"
+            *ngIf="!(user$ |async)?.['secondarySportProfileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+        </div>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          (user$ | async)?.completeAddSport &&
+          (user$ | async)?.appSport === 'secondary'
+        "
+      >
+        <div class="toggle-sport" [class.left]="showUpgradeButton">
+          <img
+            (click)="onSetAppSport('primary')"
+            class="image"
+            [src]="(user$ |async)?.['profileImg']"
+            *ngIf="(user$ |async)?.['profileImg']"
+          />
+          <img
+            (click)="onSetAppSport('primary')"
+            class="default image"
+            *ngIf="!(user$ |async)?.['profileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+        </div>
+      </ng-container>
+    </header>
+    <div
+      *ngIf="showUpgradeButton"
+      class="upgrade"
+      (click)="onCredits(user?.credits)"
+    >
+      <div class="upgrade-button">Upgrade</div>
+    </div>
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'home'"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport()"
+      (setAppSport)="onSetAppSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="content-wrapper">
+      <div
+        class="release"
+        (click)="onBeta('https://forms.wix.com/r/7244194370004451596')"
+      >
+        Thanks for being a part of the NXT1 Beta Release!💯
+      </div>
+
+      <ul class="nav">
+        <li
+          class="college"
+          *ngIf="(user$ |async)?.['isRecruit']"
+          (click)="onLiveProfile()"
+        >
+          <span>
+            <img
+              class="Media-Pro"
+              src="./assets/images/home/icons/Live-Prospect-Profile.png"
+            />
+            Live Prospect Profile</span
+          >
+          <img
+            class="college-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li class="college yellow" (click)="onSportEffects()">
+          <span>
+            <img
+              class="Media-Pro"
+              src="./assets/images/home/icons/Media-Pro.png"
+            />
+            NXT 1 Media Pro</span
+          >
+          <img
+            class="college-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+      </ul>
+      <div class="highlight">
+        <div class="links">
+          <span class="left">
+            <a
+              >Spotlight Graphics ⚡️
+              <img src="assets/images/home/icons/right-64x64.svg"
+            /></a>
+          </span>
+          <!-- <span class="right">
+            <a [routerLink]="''">How to be a spotlight player?</a>
+          </span> -->
+        </div>
+        <div class="media">
+          <div class="media-wrapper"></div>
+        </div>
+      </div>
+      <div class="scroll-wrapper">
+        <ul class="nav scroll">
+          <li class="prospect" (click)="onAIBot()">
+            <span>Recruit AI</span>
+            <span class="icon">
+              <img class="" src="./assets/images/home/icons/NXT-1-Center.png" />
+              <img
+                class="prospect-img right"
+                src="./assets/images/nxt1-center/icons/right-64x64.svg"
+              />
+            </span>
+          </li>
+          <li class="recruiting" (click)="onRecruitingInfo()">
+            <span>Recruiting Info</span>
+            <span class="icon">
+              <img
+                class="recruit-info"
+                src="./assets/images/home/icons/Recruit-Info.png"
+              />
+              <img
+                class="recruiting-img right"
+                src="./assets/images/nxt1-center/icons/right-64x64.svg"
+              />
+            </span>
+          </li>
+          <li class="recruiting" (click)="onNXT1Center()">
+            <span>Guidance Hub</span>
+            <span class="icon">
+              <img
+                class="library"
+                src="./assets/images/home/icons/AI-Bot.png"
+              />
+              <img
+                class="recruiting-img right"
+                src="./assets/images/nxt1-center/icons/right-64x64.svg"
+              />
+            </span>
+          </li>
+        </ul>
+      </div>
+      <ul class="nav">
+        <li class="college red" (click)="onCollegeLibrary()">
+          <span>
+            <img
+              class="library"
+              src="./assets/images/home/icons/College-Library.png"
+            />
+            College Library</span
+          >
+          <img
+            class="college-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li class="college" (click)="onEmailAutomate()">
+          <span>
+            <img
+              class="library"
+              src="./assets/images/home/icons/Email-Campaign.png"
+            />
+            Email Campaign</span
+          >
+          <img
+            class="college-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li class="recruiting" (click)="onTemplates()">
+          <span>
+            <img
+              class="library"
+              src="./assets/images/home/icons/Templates.png"
+            />
+            Templates</span
+          >
+          <img
+            class="recruiting-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li
+          *ngIf="(user$ |async)?.['isRecruit']"
+          class="recruiting"
+          (click)="onMyQRCode()"
+        >
+          <span>
+            <img class="library" src="./assets/images/home/icons/QR.png" />
+            My QR Code</span
+          >
+          <img
+            class="recruiting-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <!-- <li class="recruiting" (click)="onAIBot()">
+          <span>
+            <img class="" src="./assets/images/home/icons/ai-bot.png" />
+            Recruit AI Bot</span
+          >
+          <img
+            class="recruiting-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li class="recruiting" (click)="onRecruitingInfo()">
+          <span>
+            <img class="" src="./assets/images/home/icons/recruit-info.png" />
+            Recruiting Info</span
+          >
+          <img
+            class="recruiting-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li>
+        <li class="nxt1-center" (click)="onNXT1Center()">
+          <span>
+            <img
+              class=""
+              src="./assets/images/nxt1-center/icons/nxt1center.png"
+            />
+            NXT 1 Center</span
+          >
+          <img
+            class="nxt1-center-img right"
+            src="./assets/images/nxt1-center/icons/right-64x64.svg"
+          />
+        </li> -->
+      </ul>
+      <div *ngIf="(user$ |async)?.['isRecruit'] " class="committed-wrapper">
+        <!-- <span class="committed">Committed? &nbsp;</span> -->
+        <span class="note"
+          >Turn On And Get Added To The
+          <span class="green">Prospect Center</span> ⭐️</span
+        >
+      </div>
+      <div *ngIf="(user$ |async)?.['isRecruit'] ">
+        <mat-slide-toggle
+          class="toggle"
+          [checked]="(user$ | async)?.isCommitted"
+          (change)="onCommitted($event)"
+        >
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div class="activity">
+      <header>
+        <div class="title">Activity</div>
+        <a
+          class="offers"
+          *ngIf="[3, 4].includes(activeTab)"
+          routerLink="/offers/add-offers"
+        >
+          <mat-icon>add_circle_outline</mat-icon> Offers
+        </a>
+      </header>
+      <div class="activity__content">
+        <app-offers-log
+          (activeTabChange)="activeTabChange($event)"
+          [embedded]="true"
+        ></app-offers-log>
+      </div>
+    </div>
+  </div>
+
+  <app-main-footer *ngIf="user$ | async"></app-main-footer>
+</div>
+
+<app-sidenav
+  class="mobile"
+  (logout)="onLogout($event)"
+  (settings)="onSettings($event)"
+  (editProfile)="onEditProfile($event)"
+  (addOffers)="onAddOffers($event)"
+  (addSport)="onAddSport()"
+  (setAppSport)="onSetAppSport($event)"
+  (referFriend)="onReferFriend($event)"
+  (contactUs)="onContactUs($event)"
+></app-sidenav>
+
+<app-trial-dialog
+  [showTrial]="showTrial"
+  [userId]="(user$ | async)?.id"
+></app-trial-dialog>

@@ -1,0 +1,158 @@
+:host {
+  display: block;
+  height: 100%;
+  .container {
+    height: 100%;
+    transition: all linear 500ms;
+    position: relative;
+  }
+
+
+  .version {
+    position: fixed;
+    bottom: 15px;
+    right: 0;
+    left: 0;
+    font-weight: 800;
+    opacity: 0.3;
+    color: red;
+    font-size: 10px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      180deg,
+      rgb(0, 0, 0) 0%,
+      rgb(32, 32, 32) 20%,
+      rgb(40, 40, 40) 60%,
+      rgb(32, 32, 32) 90%,
+      rgb(0, 0, 0) 100%
+    );
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.landscape {
+  display: none;
+}
+
+@media screen and (min-width:320px) and (max-width:1024px) and (orientation:landscape) {
+  .landscape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        180deg,
+        #000000 0%,
+        #202020 12%,
+        #323232 28%,
+        #353535 82%,
+        #000000 100%,
+        #333333 100%,
+        #bfbfbf 100%
+      )
+      0% 0% no-repeat padding-box;
+      .rotate-img {
+        width: 354px;
+        height: 354px;
+        margin-top: -80px;
+      }
+      .title {
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        color: #fff;
+        margin-top: -60px;
+      }
+      img {
+        margin-top: 15px;
+        width: 119px;
+        height: 28px;
+      }
+  }
+}
+
+
+.debug {
+  display: block;
+  background-color: #00000055;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  right: 50px;
+  z-index: 999;
+}
+
+.left-debug {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  background-color: red;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.right-debug {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  background-color: red;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.splash_screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: 250ms;
+  z-index: 9999;
+  video {
+    width: 100%;
+    max-width: 600px;
+  }
+  &.hide {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .splash_screen {
+    background: #000;
+  }
+  video {
+    display: none;
+  }
+}

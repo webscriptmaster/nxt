@@ -1,0 +1,1284 @@
+<div
+  class="successful"
+  [ngClass]="{
+    show: showSuccess && notiContent === 'Added Under My Media',
+    saved: showSuccess && notiContent !== 'Added Under My Media'
+  }"
+>
+  {{ notiContent }} <img src="./assets/images/icons/check-bg.svg" />
+</div>
+
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="prospect-profile">
+      <div class="loading" *ngIf="loading$ | async">
+        <img src="/assets/images/icons/loading.svg" alt="" />
+      </div>
+      <header *ngIf="!isShowEditing">
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">{{ categoryName }}</div>
+      </header>
+
+      <div
+        class="content"
+        [style]="{ height: isShowEditing ? 'calc(100vh)' : '' }"
+      >
+        <div class="tools" *ngIf="isShowEditing">
+          <div class="back-arrow">
+            <img
+              (click)="onBack()"
+              src="/assets/images/icons/back-arrow.png"
+              alt=""
+            />
+          </div>
+          <img
+            (click)="undo()"
+            src="/assets/images/prospect/3x/UndoIcon3x.png"
+            alt=""
+            class="undo-icon"
+          />
+          <img
+            (click)="redo()"
+            src="/assets/images/prospect/3x/RedoIcon3x.png"
+            alt=""
+            class="redo-icon"
+          />
+          <img
+            *ngIf="template.qrCode && !isShowQRCode"
+            (click)="scanQRCode()"
+            src="/assets/images/prospect/3x/QRCode3x.png"
+            alt=""
+          />
+          <span
+            *ngIf="template.qrCode && isShowQRCode"
+            (click)="scanQRCode()"
+            class="is-flip"
+            >Flip</span
+          >
+          <img
+            (click)="editGraphicName()"
+            src="/assets/images/prospect/EditName.png"
+            alt=""
+          />
+          <img
+            (click)="download()"
+            class="download"
+            src="/assets/images/prospect/3x/DownloadButton3x.png"
+            alt=""
+            [ngClass]="{ disabled: isSharing || isDownloading }"
+          />
+          <img
+            (click)="socialShare()"
+            src="/assets/images/prospect/share-green.png"
+            alt=""
+            class="share-icon"
+            [ngClass]="{ disabled: isSharing || isDownloading }"
+          />
+          <button (click)="save()" class="save">Save</button>
+        </div>
+        <div *ngIf="!isShowEditing" class="content-wrapper">
+          <div class="main-content" id="main-content-thumbnail">
+            <div class="image-content" id="image-centered">
+              <img [src]="template?.thumbnail" alt="" />
+            </div>
+          </div>
+          <div class="footer">
+            <div class="metas">
+              <span class="tag" *ngFor="let item of template?.tags">{{
+                item.label
+              }}</span>
+            </div>
+            <div class="btn-wrapper">
+              <button (click)="markFavorite()" class="heart">
+                <img [src]="heartUrl" alt="" /> {{ countTemplateFavorite }}
+              </button>
+              <button
+                (click)="useTemplate()"
+                *ngIf="isShowUseTemplate"
+                class="use"
+              >
+                Use Template
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="content-wrapper2" [class.no-show-editing]="!isShowEditing">
+          <div class="main-content">
+            <div class="image-content">
+              <div
+                id="svgContent"
+                #svgContainer
+                class="zoomable"
+                style="width: 100%; height: 100%; overflow: hidden"
+                (click)="onOuterSvgClick($event)"
+              ></div>
+              <div class="qr" *ngIf="isShowQRCode">
+                <img
+                  [width]="template.width"
+                  [height]="template.width"
+                  src=""
+                  alt=""
+                  id="image"
+                />
+              </div>
+              <textarea
+                class="editor-text"
+                type="text"
+                #textEditor
+                id="textEditor"
+                style="position: absolute; display: none"
+              ></textarea>
+            </div>
+          </div>
+          <div class="action open"></div>
+          <div *ngIf="state" [@slide]="state" class="toolbar">
+            <div *ngIf="state" class="action close">
+              <div class="mainFn">
+                <div *ngIf="mainFnBarState" class="main-fn-bar">
+                  <div class="fn">
+                    <img
+                      class="parent-fn"
+                      (click)="addTextBox()"
+                      src="/assets/images/prospect/3x/AddText3x.png"
+                      alt=""
+                    />
+                    <span>Text</span>
+                  </div>
+                  <label class="fn">
+                    <img
+                      class="parent-fn"
+                      src="/assets/images/prospect/3x/AddMedia3x.png"
+                      alt=""
+                    />
+                    <input type="file" (change)="onFileSelected($event)" />
+                    <span>Images</span>
+                  </label>
+                  <!-- <div class="fn">
+                    <img
+                      class="parent-fn"
+                      (click)="openElementFnBar()"
+                      src="/assets/images/prospect/3x/Elements3x.png"
+                      alt=""
+                    />
+                    <span>Elements</span>
+                  </div> -->
+                  <div class="fn">
+                    <img
+                      class="parent-fn"
+                      (click)="openLogoFnBar()"
+                      src="/assets/images/prospect/3x/CollegeLogos3x.png"
+                      alt=""
+                    />
+                    <span>Logos</span>
+                  </div>
+                </div>
+
+                <!-- Text Tools Area -->
+                <ng-container *ngIf="textFnBarState">
+                  <div class="text-fn-bar">
+                    <img
+                      class="close text"
+                      (click)="handleCloseClick()"
+                      src="/assets/images/prospect/icon/close.svg"
+                      alt=""
+                    />
+                    <div class="child">
+                      <img
+                        class="child-fn"
+                        (click)="deleteElement()"
+                        src="/assets/images/prospect/3x/Trash-2.png"
+                        alt=""
+                      />
+                      <span>Delete</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="editContent()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Edit3x.png"
+                        alt=""
+                      />
+                      <span>Edit</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="duplicateSelectedElement()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Duplicate_white3x.png"
+                        alt=""
+                      />
+                      <span>Duplicate</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openFontTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Font3x.png"
+                        alt=""
+                      />
+                      <span>Font</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openFontSizeTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/FontSize3x.png"
+                        alt=""
+                      />
+                      <span>Font Size</span>
+                    </div>
+                    <div class="child">
+                      <!-- <input
+                        type="button"
+                        class="color-picker-custom"
+                        cpAlphaChannel="disabled"
+                        cpPosition="top"
+                        [(colorPicker)]="color"
+                        [style.background]="color"
+                        (colorPickerChange)="changeColor($event)"
+                      /> -->
+                      <input
+                        type="color"
+                        (change)="changeColor($event)"
+                        class="color-picker"
+                      />
+                      <span>Color</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openBorderTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Border3x.png"
+                        alt=""
+                      />
+                      <span>Border</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        class="child-fn"
+                        (click)="toggleTextAlign()"
+                        [src]="alignmentIcon"
+                        alt="Alignment Icon"
+                      />
+                      <span>Align</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="toggleBold()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Bold3x.png"
+                        alt=""
+                      />
+                      <span>Bold</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="toggleItalic()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Italic3x.png"
+                        alt=""
+                      />
+                      <span>Italic</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="toggleUnderline()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Underline3x.png"
+                        alt=""
+                      />
+                      <span>Underline</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openSpacingTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Spacing3x.png"
+                        alt=""
+                      />
+                      <span>Spacing</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openOpacityTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Opacity3x.png"
+                        alt=""
+                      />
+                      <span>Opacity</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openShadowTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Shadow3x.png"
+                        alt=""
+                      />
+                      <span>Shadow</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="changeLayerPosition(); toggleActive()"
+                        [ngClass]="{ active: isActive }"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/LayerNew3x.png"
+                        alt=""
+                      />
+                      <span
+                        (click)="changeLayerPosition(); toggleActive()"
+                        [ngClass]="{ active: isActive }"
+                      >
+                        {{ currentActionText }}
+                      </span>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- Image Tools Area -->
+                <ng-container *ngIf="mediaFnBarState">
+                  <div class="media-fn-bar">
+                    <img
+                      class="close media"
+                      (click)="handleCloseClick()"
+                      src="/assets/images/prospect/icon/close.svg"
+                      alt=""
+                    />
+
+                    <div class="child">
+                      <img
+                        class="child-fn"
+                        (click)="deleteElement()"
+                        src="/assets/images/prospect/3x/Trash-2.png"
+                        alt=""
+                      />
+                      <span>Delete</span>
+                    </div>
+                    <div class="child">
+                      <label>
+                        <img
+                          class="child-fn replace"
+                          src="/assets/images/prospect/3x/replace3x.png"
+                          alt=""
+                        />
+                        <input type="file" (change)="onFileSelected($event)" />
+                      </label>
+                      <span>Replace</span>
+                    </div>
+                    <!-- <div class="child" (click)="applyCrop()">
+                                      OK
+                                    </div> -->
+                    <div class="child">
+                      <img
+                        class="child-fn"
+                        (click)="removeBg()"
+                        src="/assets/images/prospect/3x/BGRemover3x.png"
+                        alt=""
+                      />
+                      <span (click)="removeBg()">Remove BG</span>
+                    </div>
+                    <!-- (click)="openBgRemoverTool()" -->
+                    <div class="child">
+                      <!-- <input
+                        type="button"
+                        class="color-picker-custom"
+                        cpAlphaChannel="disabled"
+                        cpPosition="top"
+                        [(colorPicker)]="color"
+                        [style.background]="color"
+                        (colorPickerChange)="changeImageColor($event)"
+                      /> -->
+                      <input
+                        type="color"
+                        (change)="changeImageColor($event)"
+                        class="color-picker"
+                        rgba
+                      /> 
+                      <span>Color</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="openFilterTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/ImageFilter3x.png"
+                        alt=""
+                      />
+                      <span>Filters</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="changeLayerPosition(); toggleActive()"
+                        [ngClass]="{ active: isActive }"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/LayerNew3x.png"
+                        alt=""
+                      />
+                      <span
+                        (click)="changeLayerPosition(); toggleActive()"
+                        [ngClass]="{ active: isActive }"
+                        >{{ currentActionText }}</span
+                      >
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="!cropMode ? openCropImageTool() : applyCrop()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Crop3x.png"
+                        alt=""
+                      />
+                      <span>{{ !cropMode ? "Crop" : "Apply Crop" }}</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        class="child-fn"
+                        (click)="openLogoFnBar()"
+                        src="/assets/images/prospect/3x/CollegeLogos3x.png"
+                        alt=""
+                      />
+                      <span>Logos</span>
+                    </div>
+                    <div class="child">
+                      <!-- (click)="openBorderImageTool()" -->
+                      <img
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Border3x.png"
+                        alt=""
+                      />
+                      <span>Stroke</span>
+                    </div>
+
+                    <div class="child">
+                      <img
+                        (click)="openOpacityImageTool()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Opacity3x.png"
+                        alt=""
+                      />
+                      <span>Opacity</span>
+                    </div>
+                    <div class="child">
+                      <img
+                        (click)="duplicateSelectedElement()"
+                        class="child-fn"
+                        src="/assets/images/prospect/3x/Duplicate_white3x.png"
+                        alt=""
+                      />
+                      <span>Duplicate</span>
+                    </div>
+                    <!-- <div class="child">
+                                      <img
+                                        (click)="openShadowImageTool()"
+                                        class="child-fn"
+                                        src="/assets/images/prospect/3x/Shadow3x.png"
+                                        alt=""
+                                      />
+                                      <span>Shadow</span>
+                                    </div> -->
+                    <!-- <div class="child">
+                                      <img
+                                        (click)="flipImage()"
+                                        class="child-fn"
+                                        [style]="flipState"
+                                        src="/assets/images/prospect/3x/Flip3x.png"
+                                        alt=""
+                                      />
+                                      <span>Flip</span>
+                                    </div> -->
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text wrapper -->
+          <div
+            class="text-fn-wrapper"
+            *ngIf="textWrapperState"
+            [@slideUp]="textWrapperState"
+          >
+            <div class="bar text" (click)="handleCloseBarClick()"></div>
+            <div class="hidden-bar" (click)="handleCloseBarClick()"></div>
+            <span class="label">
+              <!-- <div class="title">{{ defaultLabel }}</div> -->
+              <div *ngIf="textToolsState.changeFontSizeState" class="font-size">
+                {{ this.textStyle.fontSize }} px
+              </div>
+            </span>
+
+            <!-- <div class="textbox-state" *ngIf="textToolsState.addTextBoxState">
+              <div class="default">
+                <div class="heading" (click)="addTextBox(27)">
+                  Add A Heading
+                </div>
+                <div class="subheading" (click)="addTextBox(21)">
+                  Add a subheadding
+                </div>
+                <div class="body-text" (click)="addTextBox(17)">
+                  Add a body text
+                </div>
+              </div>
+              <button (click)="addTextBox()">Add a text box</button>
+            </div> -->
+
+            <div class="font-state" *ngIf="textToolsState.changeFontState">
+              <div class="label">Current Font</div>
+              <div class="current-font">
+                <div
+                  class="font"
+                  [ngStyle]="{
+                    'font-family':
+                      selectedTextElement?.attr('font-family') ||
+                      selectedElement?.attr('font-family') ||
+                      textStyle.font
+                  }"
+                >
+                  {{
+                    selectedTextElement?.attr("font-family") ||
+                      selectedElement?.attr("font-family") ||
+                      textStyle.font
+                  }}
+                </div>
+              </div>
+              <div class="label">Change Font</div>
+              <div class="fonts">
+                <div
+                  (click)="chooseFont(font)"
+                  [ngStyle]="{ 'font-family': font }"
+                  *ngFor="let font of fonts"
+                  class="font"
+                  [class.selected]="textStyle.font?.includes(font)"
+                >
+                  {{ font }}
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="font-size-state"
+              *ngIf="textToolsState.changeFontSizeState"
+            >
+              <input
+                type="range"
+                min="0"
+                [max]="maxValue.fontSize"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                (change)="changeFontSize()"
+                [(ngModel)]="textStyle.fontSize"
+              />
+            </div>
+
+            <div class="color-state" *ngIf="textToolsState.changeColorState">
+              <!-- <input
+                type="button"
+                class="color-picker-custom"
+                cpAlphaChannel="disabled"
+                cpPosition="top"
+                [(colorPicker)]="textStyle.fill"
+                [style.background]="textStyle.fill"
+                (colorPickerChange)="changeColor($event)"
+              /> -->
+              <input
+                type="color"
+                (change)="changeColor($event)"
+                [(ngModel)]="textStyle.fill"
+              />
+            </div>
+
+            <div class="border-state" *ngIf="textToolsState.changeBorderState">
+              <div class="border-type">
+                <div
+                  class="type no-border"
+                  [class.selected]="textStyle.borderType === 'none'"
+                  (click)="changeBorderType('none')"
+                >
+                  <img
+                    src="/assets/images/prospect/3x/No-border-Icon.png"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="type"
+                  [class.selected]="textStyle.borderType === 'solid'"
+                  (click)="changeBorderType('solid')"
+                >
+                  <img src="/assets/images/prospect/3x/Border2.png" alt="" />
+                </div>
+              </div>
+              <div class="border-style">
+                <div class="weight">
+                  <label>Border Weight</label>
+                  <div class="border-weight">
+                    {{ textStyle.borderWidth }} px
+                  </div>
+                </div>
+                <input
+                  (change)="addBorderToText()"
+                  class="weight-slider"
+                  type="range"
+                  min="0"
+                  [style]="{
+                    background:
+                      'linear-gradient(to right, #ccff00 ' +
+                      currentPercentage +
+                      '%, white 0%)'
+                  }"
+                  [max]="maxValue.borderWidth"
+                  [(ngModel)]="textStyle.borderWidth"
+                />
+                <div class="color">
+                  <label>Color</label>
+                  <input
+                    type="color"
+                    (change)="addBorderToText()"
+                    [(ngModel)]="textStyle.borderColor"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="spacing-state"
+              *ngIf="textToolsState.changeSpacingState"
+            >
+              <div class="letter">
+                <label>Letter Spacing</label>
+                <div class="border-weight">
+                  {{ textStyle.letterSpacing }} px
+                </div>
+              </div>
+              <input
+                (change)="changeLetterSpacing()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentLetterSpacingPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.letterSpacing"
+                [(ngModel)]="textStyle.letterSpacing"
+              />
+
+              <div class="line">
+                <label>Line Spacing</label>
+                <div class="border-weight">{{ textStyle.lineSpacing }} px</div>
+              </div>
+              <input
+                (change)="changeLineSpacing()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentLineSpacingPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.lineSpacing"
+                [(ngModel)]="textStyle.lineSpacing"
+              />
+            </div>
+
+            <div
+              class="opacity-state"
+              *ngIf="textToolsState.changeOpacityState"
+            >
+              <div class="letter">
+                <label>Opacity</label>
+                <div class="border-weight">
+                  {{ textStyle.opacity * 100 }}
+                </div>
+              </div>
+              <input
+                (change)="changeOpacity()"
+                class="weight-slider"
+                step="0.1"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.opacity"
+                [(ngModel)]="textStyle.opacity"
+              />
+            </div>
+
+            <div class="shadow-state" *ngIf="textToolsState.changeShadowState">
+              <div class="letter">
+                <label>Angle</label>
+                <div class="border-weight">{{ textStyle.angle }} px</div>
+              </div>
+              <input
+                (change)="updateShadow()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentAnglePercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.angle"
+                [(ngModel)]="textStyle.angle"
+              />
+
+              <div class="letter">
+                <label>Distance</label>
+                <div class="border-weight">{{ textStyle.distance }} px</div>
+              </div>
+              <input
+                (change)="updateShadow()"
+                class="weight-slider"
+                type="range"
+                min="0"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentDistancePercentage +
+                    '%, white 0%)'
+                }"
+                [max]="maxValue.distance"
+                [(ngModel)]="textStyle.distance"
+              />
+
+              <div class="letter">
+                <label>Blur</label>
+                <div class="border-weight">{{ textStyle.blur }} px</div>
+              </div>
+              <input
+                (change)="updateShadow()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentBlurPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.blur"
+                [(ngModel)]="textStyle.blur"
+              />
+
+              <div class="letter">
+                <label>Color</label>
+              </div>
+              <input
+                class="color"
+                (change)="updateShadow()"
+                class="weight-slider"
+                type="color"
+                [(ngModel)]="textStyle.shadowColor"
+              />
+            </div>
+          </div>
+
+          <!-- Image wrapper -->
+          <div
+            class="image-fn-wrapper"
+            *ngIf="mediaWrapperState"
+            [@slideUp]="mediaWrapperState"
+          >
+            <div class="bar media" (click)="handleCloseBarClick()"></div>
+            <div class="hidden-bar" (click)="handleCloseBarClick()"></div>
+            <div class="textbox-state" *ngIf="textToolsState.addTextBoxState">
+              <div class="default">
+                <div class="heading" (click)="addTextBox(27, '#FFF', 1)">
+                  Add A Heading
+                </div>
+                <div class="subheading" (click)="addTextBox(21)">
+                  Add a subheadding
+                </div>
+                <div class="body-text" (click)="addTextBox(17)">
+                  Add a body text
+                </div>
+              </div>
+              <button (click)="addTextBox()">Add a text box</button>
+            </div>
+
+            <div class="font-state" *ngIf="textToolsState.changeFontState">
+              <div>
+                {{
+                  selectedTextElement?.attr("font-family") ||
+                    selectedElement?.attr("font-family")
+                }}
+              </div>
+              <div class="label">Change Font</div>
+              <div class="fonts">
+                <div
+                  (click)="chooseFont(font)"
+                  *ngFor="let font of fonts"
+                  class="font"
+                >
+                  {{ font }}
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="font-size-state"
+              *ngIf="textToolsState.changeFontSizeState"
+            >
+              <input
+                type="range"
+                min="0"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                [max]="maxValue.fontSize"
+                (change)="changeFontSize()"
+                [(ngModel)]="textStyle.fontSize"
+              />
+            </div>
+
+            <div class="color-state" *ngIf="textToolsState.changeColorState">
+              <!-- <input
+                type="button"
+                class="color-picker-custom"
+                cpAlphaChannel="disabled"
+                cpPosition="top"
+                [(colorPicker)]="textStyle.fill"
+                [style.background]="textStyle.fill"
+                (colorPickerChange)="changeColor($event)"
+              /> -->
+
+              <input
+                type="color"
+                (change)="changeColor($event)"
+                [(ngModel)]="textStyle.fill"
+              />
+            </div>
+
+            <div class="border-state" *ngIf="mediaToolsState.changeBorderState">
+              <!--                   (click)="changeImageBorderType('none')" -->
+              <div class="border-type">
+                <div
+                  class="type"
+                  [class.selected]="imageStyle.borderType === 'none'"
+                >
+                  <img
+                    src="/assets/images/prospect/3x/No-border-Icon.png"
+                    alt=""
+                  />
+                </div>
+                <!-- (click)="changeImageBorderType('solid')" -->
+                <div
+                  class="type"
+                  [class.selected]="imageStyle.borderType === 'solid'"
+                >
+                  <img src="/assets/images/prospect/3x/Border2.png" alt="" />
+                </div>
+                <!--                   (click)="changeImageBorderType('dash-long')" -->
+                <div
+                  class="type"
+                  [class.selected]="imageStyle.borderType === 'dash-long'"
+                >
+                  <img
+                    src="/assets/images/prospect/3x/Double-Line.png"
+                    alt=""
+                  />
+                </div>
+                <!--                   (click)="changeImageBorderType('dash-short')" -->
+                <div
+                  class="type"
+                  [class.selected]="imageStyle.borderType === 'dash-short'"
+                >
+                  <img
+                    src="/assets/images/prospect/3x/Triple-Line.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="border-style">
+                <div class="weight">
+                  <label>Border Weight</label>
+                  <div class="border-weight">
+                    {{ imageStyle.borderWidth }} px
+                  </div>
+                </div>
+                <input
+                  (change)="updateImageBorder()"
+                  class="weight-slider"
+                  step="0.5"
+                  type="range"
+                  [style]="{
+                    background:
+                      'linear-gradient(to right, #ccff00 ' +
+                      currentBorderWeightPercentage +
+                      '%, white 0%)'
+                  }"
+                  min="0"
+                  [max]="maxValue.borderWidth"
+                  [(ngModel)]="imageStyle.borderWidth"
+                />
+
+                <div class="weight">
+                  <label>Corner Rounding</label>
+                  <div class="border-weight">
+                    {{ imageStyle.borderRadius }} px
+                  </div>
+                </div>
+                <input
+                  (change)="updateImageBorder()"
+                  class="weight-slider"
+                  step="0.5"
+                  type="range"
+                  [style]="{
+                    background:
+                      'linear-gradient(to right, #ccff00 ' +
+                      currentBorderRadiusPercentage +
+                      '%, white 0%)'
+                  }"
+                  min="0"
+                  [max]="maxValue.borderRadius"
+                  [(ngModel)]="imageStyle.borderRadius"
+                />
+
+                <div class="color">
+                  <label>Color</label>
+                  <input
+                    type="color"
+                    (change)="updateImageBorder()"
+                    [(ngModel)]="imageStyle.borderColor"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="spacing-state"
+              *ngIf="textToolsState.changeSpacingState"
+            >
+              <div class="letter">
+                <label>Letter Spacing</label>
+                <div class="border-weight">
+                  {{ textStyle.letterSpacing }} px
+                </div>
+              </div>
+              <input
+                (change)="changeLetterSpacing()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.letterSpacing"
+                [(ngModel)]="textStyle.letterSpacing"
+              />
+
+              <div class="line">
+                <label>Line Spacing</label>
+                <div class="border-weight">{{ textStyle.lineSpacing }} px</div>
+              </div>
+              <input
+                (change)="changeLineSpacing()"
+                class="weight-slider"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.lineSpacing"
+                [(ngModel)]="textStyle.lineSpacing"
+              />
+            </div>
+
+            <div
+              class="opacity-state"
+              *ngIf="mediaToolsState.changeOpacityState"
+            >
+              <div class="letter">
+                <label>Opacity</label>
+                <div class="border-weight">
+                  {{ imageStyle.opacity * 100 }}
+                </div>
+              </div>
+              <input
+                (change)="changeOpacityImage()"
+                class="weight-slider"
+                step="0.1"
+                type="range"
+                [style]="{
+                  background:
+                    'linear-gradient(to right, #ccff00 ' +
+                    currentPercentage +
+                    '%, white 0%)'
+                }"
+                min="0"
+                [max]="maxValue.opacity"
+                [(ngModel)]="imageStyle.opacity"
+              />
+            </div>
+
+            <div class="filter-state" *ngIf="mediaToolsState.changeFilterState">
+              <label>Filter</label>
+              <div class="filters">
+                <div class="filter" (click)="applyFilter('')">Original</div>
+                <div class="child">
+                  <input
+                    type="color"
+                    class="filter color"
+                    (change)="addColorFilter($event)"
+                    rgba
+                  />
+                </div>
+                <div class="filter blur" (click)="applyFilter('blur')">
+                  blur
+                </div>
+                <div
+                  class="filter brightness"
+                  (click)="applyFilter('brightness')"
+                >
+                  brightness
+                </div>
+                <div class="filter contrast" (click)="applyFilter('contrast')">
+                  contrast
+                </div>
+                <div
+                  class="filter hueRotate"
+                  (click)="applyFilter('hueRotate')"
+                >
+                  hueRotate
+                </div>
+                <div
+                  class="filter grayscale"
+                  (click)="applyFilter('grayscale')"
+                >
+                  grayscale
+                </div>
+                <div class="filter invert" (click)="applyFilter('invert')">
+                  invert
+                </div>
+                <div class="filter saturate" (click)="applyFilter('saturate')">
+                  saturate
+                </div>
+                <div class="filter sepia" (click)="applyFilter('sepia')">
+                  sepia
+                </div>
+              </div>
+            </div>
+
+            <!-- Element wrapper -->
+            <!-- <div
+            class="element-fn-wrapper"
+            *ngIf="elementWrapperState"
+            [@slideUp]="elementWrapperState"
+          >
+            <div class="overlay" (click)="closeTextToolArea()"></div> NEED OVERLAY Closer (0 opacity) when instead of just bar to close
+            <div class="hidden-bar" (click)="closeElementToolArea()"></div>
+            <div class="bar text" (click)="closeElementToolArea()"></div>
+            <div class="section">
+              <label>Shapes</label>
+              <div class="elements">
+                <div
+                  (click)="selectImage(item.url, item.type)"
+                  class="shape"
+                  *ngFor="let item of shapes"
+                >
+                  <img [src]="item.url" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <label>Vectors</label>
+              <div class="elements">
+                <div
+                  (click)="selectImage(item.url, item.type)"
+                  class="vector"
+                  *ngFor="let item of vectors"
+                >
+                  <img [src]="item.url" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="section">
+              <label>Images</label>
+              <div class="elements">
+                <div
+                  (click)="selectImage(item.url, item.type)"
+                  class="image"
+                  *ngFor="let item of images"
+                >
+                  <img [src]="item.url" alt="" />
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+            <!-- Logo wrapper -->
+            <div
+              class="logo-fn-wrapper"
+              *ngIf="logoWrapperState"
+              [@slideUp]="logoWrapperState"
+            >
+              <div class="bar media" (click)="closeLogoToolArea()"></div>
+              <div class="hidden-bar" (click)="closeLogoToolArea()"></div>
+
+              <div class="logo-state">
+                <label>My Team Logo</label>
+                <div class="my-team">
+                  <div
+                    class="logo-container"
+                    [ngClass]="{ 'no-clip': !isLogoClipped }"
+                  >
+                    <img
+                      (click)="
+                        selectImage(
+                          user.teamLogoImg
+                            ? user.teamLogoImg
+                            : user.secondarySportTeamLogoImg,
+                          'logo'
+                        )
+                      "
+                      *ngIf="user.teamLogoImg || user.secondarySportTeamLogoImg"
+                      [src]="
+                        user.teamLogoImg
+                          ? user.teamLogoImg
+                          : user.secondarySportTeamLogoImg
+                      "
+                      alt=""
+                    />
+                    <span *ngIf="!user.teamLogoImg">Logo Container</span>
+                  </div>
+                  <label class="edit">
+                    <input
+                      style="display: none"
+                      type="file"
+                      id="file"
+                      #avatar
+                      (change)="changeTeamLogo($event)"
+                      name="image"
+                      autocomplete="off"
+                      accept="image/*"
+                    />
+                    Edit
+                  </label>
+                </div>
+
+                <label>College Logo</label>
+
+                <div class="search-area">
+                  <input
+                    (keyup.enter)="onSearch()"
+                    [(ngModel)]="nameFilter"
+                    type="text"
+                    placeholder="Search Colleges"
+                    class="search-college"
+                    [(ngModel)]="keyWord"
+                  />
+                  <button (click)="onSearch()" class="search">
+                    <img src="/assets/images/colleges-library/search.png" />
+                  </button>
+                </div>
+
+                <div class="colleges">
+                  <div
+                    (click)="selectImage(img.src, 'logo')"
+                    class="college"
+                    *ngFor="let college of colleges"
+                  >
+                    <div class="logo">
+                      <img
+                        #img
+                        [src]="college.logoUrl | collegeLogo"
+                        (error)="
+                          text.style.display = 'block';
+                          img.style.display = 'none'
+                        "
+                      />
+                      <span
+                        #text
+                        style="
+                          display: none;
+                          top: 25px;
+                          line-height: 20px;
+                          position: relative;
+                        "
+                        >Logo Container</span
+                      >
+                    </div>
+                    <div class="name">{{ college.name }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input
+    id="fileInput"
+    type="file"
+    #fileInput
+    (change)="onFileSelected($event)"
+  />
+
+  <div class="loading-template" #loadingTemplate style="display: none">
+    <div class="loading-in">Hang Tight! Your New Graphic Is Loading In..</div>
+    <div class="notification">Click "Save" to save under My Media</div>
+    <div class="loading">
+      <img width="50px" src="/assets/images/icons/loading.svg" alt="" />
+    </div>
+    <!-- <div class="continue" id="continue">Tap Here To Continue Flow</div> -->
+  </div>
+
+  <div #shareTemplate style="display: none">
+    <div class="social-template">
+      <div class="notification">
+        Make Sure To Tag Or Collab With Us For Maximum Exposure!
+      </div>
+      <div class="socials">
+        <div class="elm">
+          <img src="./assets/images/icons/x-icon-dark.png" alt="" />
+          <div>&#64;nxt1sports</div>
+          <div>&#64;nxt1{{ stripGenderFromSport(user.primarySport) }}</div>
+        </div>
+        <div class="elm">
+          <img src="./assets/images/activity/Instagram_logo.png" alt="" />
+          <div>&#64;nxt1sports</div>
+          <div>&#64;nxt1{{ stripGenderFromSport(user.primarySport) }}</div>
+        </div>
+      </div>
+      <div class="gotit" id="continue">Got It</div>
+    </div>
+  </div>
+</div>

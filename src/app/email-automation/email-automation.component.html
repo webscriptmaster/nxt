@@ -1,0 +1,209 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="email-automation">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Email Campaign</p>
+        <img
+          (click)="onHelp()"
+          class="desktop"
+          src="./assets/images/icons/help_white.png"
+        />
+      </header>
+
+      <div class="content">
+        <div class="loading" *ngIf="loading$ | async">
+          <img src="/assets/images/icons/loading.svg" alt="" />
+        </div>
+        <div class="main-content">
+          <div class="header">
+            <img src="assets/images/home/icons/Email-icon.png" alt="" />
+            <span>Secure 3 Step Campaign</span>
+          </div>
+          <ng-container [ngSwitch]="step">
+            <div *ngSwitchCase="0">
+              <div class="intro common">WELCOME TO MAGIC CAMPAIGN 🪄</div>
+              <div class="para1 common">
+                This feature automatically sends all of your emails for you!
+                Choose your colleges, write an email, and done!
+              </div>
+              <div class="para2 common">
+                Our system personalizes each email to individual coaches and
+                sends them separately<br /><br />
+                Say goodbye to hours of manually sending emails!<br /><br />
+                Track clicks under 'Campaigns Sent' and 'Activity'.<br /><br />
+                Email open tracking coming soon.
+              </div>
+              <div class="outtro common">
+                All college credits used here will also open up in the college
+                library and vice versa.
+              </div>
+              <div class="start common">
+                <button (click)="goToStep2()">Get started</button>
+              </div>
+            </div>
+            <div *ngSwitchCase="1">
+              <div class="steps">
+                <label>
+                  <span class="name" [class.complete]="process1 === 1"
+                    >Step 1: Select Colleges To Contact &nbsp;</span
+                  >
+                  <span *ngIf="process1 === 0">{{ process1 }} / 1</span>
+                  <span class="done" *ngIf="process1 === 1"
+                    >&nbsp;&nbsp;&nbsp;Complete
+                    <img src="assets/images/icons/complete.svg"
+                  /></span>
+                </label>
+                <div
+                  (click)="chooseCollege()"
+                  class="options3"
+                  [class.bg-complete]="process1 === 1"
+                >
+                  <div *ngIf="selectedColleges.coaches.length === 0">
+                    Choose Colleges
+                  </div>
+                  <div
+                    class="has-coach"
+                    *ngIf="selectedColleges.coaches.length !== 0"
+                  >
+                    College Recipients:
+                    <span class="count">{{ selectedColleges.recipients }}</span>
+                    &nbsp;&nbsp; College Coaches:
+                    <span class="count">{{
+                      selectedColleges.coaches.length
+                    }}</span>
+                  </div>
+                  <span
+                    class="help"
+                    (clickOutside)="showHelp($event, false)"
+                    (click)="showHelp($event, true)"
+                    >How it works?
+                    <div
+                      [class]="isShowHelp ? 'show' : ''"
+                      class="help-content"
+                    >
+                      All coaches within the colleges added will be sent a
+                      secure message sent from your email. These college credits
+                      unlock the school in college library as well.
+                    </div>
+                  </span>
+
+                  <img
+                    class="arrow"
+                    width="12px"
+                    src="/assets/images/icons/right-white.svg"
+                  />
+                </div>
+                <label>
+                  <span class="name" [class.complete]="process2 === 1"
+                    >Step 2: Fill Out Your Email &nbsp;</span
+                  >
+                  <span *ngIf="process2 === 0">{{ process2 }} / 1</span>
+                  <span class="done" *ngIf="process2 === 1"
+                    >&nbsp;&nbsp;&nbsp;Complete
+                    <img src="assets/images/icons/complete.svg"
+                  /></span>
+                </label>
+                <div
+                  class="options3"
+                  [class.bg-complete]="process2 === 1"
+                  (click)="createTemplateEmail()"
+                >
+                  {{
+                    !!pendingEmails[0]?.body
+                      ? "Review Email"
+                      : "Create Email To Colleges"
+                  }}
+                  <img
+                    class="arrow"
+                    width="12px"
+                    src="/assets/images/icons/right-white.svg"
+                  />
+                </div>
+                <label> Step 3: Send Out Your Campaign </label>
+                <br />
+                <button class="send-email" (click)="sendEmail()">
+                  + Send It Out
+                  <img src="assets/images/icons/send-email.png" alt="" />
+                </button>
+              </div>
+              <div class="campaigns-sent">
+                <label>Campaigns Sent</label>
+                <div class="campaigns-wrapper">
+                  <div
+                    class="campaign"
+                    *ngFor="let item of campaignsSent; let i = index"
+                    (click)="onCampaignDetail(item)"
+                  >
+                    <span class="name">{{ item.name }} - </span>
+                    <span class="date">&nbsp;{{ item.date }}</span>
+                    <img
+                      width="12px"
+                      src="/assets/images/icons/right-white.svg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>
+
+<div
+  class="send-email-dialog"
+  *ngIf="createEmail"
+  [ngClass]="{ show: showCreateEmail }"
+>
+  <app-create-email (close)="onClose()" [isOverlay]="true"></app-create-email>
+</div>
+<div #pdfContainer style="position: absolute; left: -9999px"></div>
+
+<ng-template #mailRequiredFieldPopup>
+  <div class="mail-required-dialog">
+    <p class="mail-required-dialog-description">
+      You're trying to send a missing Subject or Template email to these
+      contacts:
+    </p>
+    <ul class="mail-required-dialog-list">
+      <li
+        class="mail-required-dialog-list-item"
+        *ngFor="let contact of selectedContactMissingMailField"
+      >
+        {{ contact.email }}
+      </li>
+    </ul>
+    <p class="mail-required-dialog-description">
+      Please review your emails again.
+    </p>
+
+    <button
+      class="mail-required-dialog-button"
+      (click)="handleCloseMailRequiredFieldPopup()"
+    >
+      Review
+    </button>
+  </div>
+</ng-template>

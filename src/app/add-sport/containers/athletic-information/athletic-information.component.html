@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="athletic-information">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Athletic Information</p>
+      <p class="sub-title">Highlight your skills to coaches.</p>
+    </header>
+
+    <div class="content">
+      <app-shared-athletic-info-component
+        [sport]="sport"
+        [userData]="userData"
+        [isSecondarySport]="true"
+      ></app-shared-athletic-info-component>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="90"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

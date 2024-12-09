@@ -1,0 +1,106 @@
+.container {
+  .tabs,
+  .tabs2 {
+    padding: 15px 10px;
+    display: flex;
+    color: #707070;
+    font-size: 15px;
+    font-weight: 700;
+    // position: sticky;
+    top: 0;
+    padding: 15px 0;
+    height: fit-content;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      white-space: nowrap;
+      margin-right: 20px;
+      cursor: pointer;
+      color: #bfbfbf;
+      text-decoration: underline;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &-image-wrapper {
+        width: 65px;
+        height: 65px;
+        border: 1.5px solid #fff;
+        border-radius: 50%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        background-color: #000000;
+        .image {
+          width: 25px;
+        }
+      }
+      &-name {
+        font-size: 15px;
+        color: #bfbfbf;
+        font-family: "Rajdhani";
+        font-weight: 700;
+      }
+      &.active {
+        color: #ccff00;
+        .tab-name {
+          color: #ccff00;
+        }
+        .tab-image-wrapper {
+          background-color: #707070;
+        }
+      }
+    }
+    .tab2 {
+      white-space: nowrap;
+      margin-right: 10px;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      border: 1px solid #ccff00;
+      background-color: #000;
+      border-radius: 8px;
+      margin-right: 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5.5px 8.5px;
+      height: 30px;
+      font-family: "Rajdhani";
+      font-weight: 700;
+      &-name {
+        font-size: 15px;
+        color: #ffffff;
+        font-family: "Rajdhani";
+        font-weight: 700;
+      }
+      &.active {
+        color: #fff;
+        background-color: #ccff00;
+        .tab2-name {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .tab2:hover .tab2-name {
+    color: #ccff00;
+  }
+
+  .tab2.active:hover {
+    background-color: #ccff00;
+  }
+
+  .tab2.active .tab2-name {
+    color: #000;
+  }
+}

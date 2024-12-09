@@ -1,0 +1,38 @@
+<div class="container">
+  <header>
+    <img
+      (click)="onBack()"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow.png"
+      alt=""
+    />
+    <p class="title">Templates</p>
+    <div class="help-btn" (click)="onHelp()">
+      <img class="mobile" src="./assets/images/icons/help_white.png" />
+      <img class="desktop" src="./assets/images/icons/help_green.png" />
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="template-btn" (click)="onGeneralTemplate()">
+      GENERAL EMAIL TEMPLATE <img src="./assets/images/icons/go-to.png" />
+    </div>
+    <div class="template-btn" (click)="onPersonalTemplate()">
+      PERSONAL EMAIL TEMPLATE <img src="./assets/images/icons/go-to.png" />
+    </div>
+    <div class="template-btn" (click)="onOwnTemplate()">
+      MY EMAIL TEMPLATE
+      <img src="./assets/images/icons/go-to.png" />
+    </div>
+    <div class="template-btn" (click)="onSocialTemplate()">
+      SOCIAL MEDIA BIO TEMPLATE
+      <img src="./assets/images/icons/go-to.png" />
+    </div>
+  </div>
+
+  <div class="bottom">
+    <app-progress-bar class="progress-bar" [progress]="100"></app-progress-bar>
+    <button type="button" class="mobile" (click)="onContinue()">Lets Get to Work</button>
+    <button type="button" class="desktop" (click)="onContinue()">Continue</button>
+  </div>
+</div>

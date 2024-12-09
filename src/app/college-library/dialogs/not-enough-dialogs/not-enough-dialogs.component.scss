@@ -1,0 +1,95 @@
+.info-dialog {
+  max-width: 389px;
+  width: 308px;
+  height: 173px;
+  background-color: #161616;
+  border: 1px solid #ccff00;
+  padding: 15px;
+  border-radius: 9px;
+
+  .content {
+    width: 100%;
+    border-radius: 4px;
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      img {
+        width: 130px;
+      }
+    }
+
+    .title {
+      margin: 10px 12px 0;
+      font-family: "Rajdhani";
+          font-weight: 700;
+      font-weight: 700;
+      font-size: 19px;
+      color: #fff;
+      text-align: center;
+      padding: 0 0 3px;
+    }
+  }
+
+  .buttons {
+    margin-top: 5px;
+    width: 100%;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-flex;
+    justify-content: space-around;
+    gap: 15px;
+
+    div {
+      width: 50%;
+      height: 35px;
+      background-color: #000;
+      border-radius: 24px;
+      border: 1px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &.yes-btn {
+        color: #ccff00;
+      }
+
+      &.no-btn {
+        color: #fff;
+      }
+    }
+  }
+}
+
+// @media (min-width: 1280px) {
+//   .info-dialog {
+//     height: 225px;
+//     .content {
+//       .logo {
+//         img {
+//           width: 132px;
+//         }
+//       }
+//       .title {
+//         font-size: 23px;
+//       }
+//     }
+//     .buttons {
+//       font-size: 21px;
+//       div {
+//         height: 50px;
+//         &.yes-btn {
+//           color: #ccff00;
+//         }
+//         &.no-btn {
+//           color: #fff;
+//         }
+//       }
+//     }
+//   }
+// }

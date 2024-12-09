@@ -1,0 +1,19 @@
+<div class="social-wrapper">
+  <label>Suggested</label>
+  <button (click)="loginWithGoogle()">
+    <img src="/assets/images/icons/google.png" alt="" />
+    Continue With Google
+  </button>
+  <button (click)="loginWithMicrosoft()">
+    <img src="/assets/images/icons/microsoft.png" alt="" />
+    Continue With Microsoft
+  </button>
+  <div class="line"></div>
+  <button (click)="loginWithApple()">
+    <img src="/assets/images/icons/apple.png" alt="" />
+    Continue With Apple
+  </button>
+</div>
+<div *ngIf="shouldShowError" class="firebaseErr">
+  {{ firebaseErrorMessage }}
+</div>

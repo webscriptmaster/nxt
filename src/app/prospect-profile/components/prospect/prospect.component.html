@@ -1,0 +1,85 @@
+<div class="container">
+  <ng-container *ngIf="activeTab === '0' && (user$ |async)?.['isRecruit']">
+    <div class="content">
+      <div class="tabs2">
+        <div
+          class="tab2"
+          [ngClass]="{ active: activeTab3 === '-1' }"
+          (click)="selectProfileType(mainCategories, '-1')"
+        >
+          <div class="tab2-name">Home</div>
+        </div>
+        <div
+          *ngFor="let category of mainCategories"
+          class="tab2"
+          [ngClass]="{ active: activeTab3 === category.order }"
+          (click)="selectProfileType(category, category.order)"
+        >
+          <div class="tab2-name">{{ category.name }}</div>
+        </div>
+      </div>
+      <div class="main-content">
+        <app-prospect-card
+          (viewAllFn)="onTabChange($event)"
+          [isViewAll]="isViewAll"
+          [listProfile]="listProfile"
+        ></app-prospect-card>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === '2'">
+    <div class="content" *ngIf="activeTab2 === '0'">
+      <div class="tabs2">
+        <div
+          class="tab2"
+          [ngClass]="{ active: activeTab3 === '-1' }"
+          (click)="selectProfileType(mainCategories, '-1')"
+        >
+          <div class="tab2-name">Home</div>
+        </div>
+        <div
+          *ngFor="let category of mainCategories"
+          class="tab2"
+          [ngClass]="{ active: activeTab3 === category.order }"
+          (click)="selectProfileType(category, category.order)"
+        >
+          <div class="tab2-name">{{ category.name }}</div>
+        </div>
+      </div>
+      <div class="main-content">
+        <app-cards
+          (viewAllFn)="onTabChange($event)"
+          [isViewAll]="isViewAll"
+          [listProfile]="listProfile"
+        ></app-cards>
+      </div>
+    </div>
+    <div class="content" *ngIf="activeTab2 === '1'">
+      <div class="main-content">
+        <app-cards
+          [listProfile]="listMyProfile"
+          (viewAllFn)="onTabChange($event)"
+        ></app-cards>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="activeTab === '3'">
+    <div class="tabs">
+      <ng-container *ngFor="let tab of listTab; let i = index">
+        <div
+          class="tab"
+          *ngIf="(user$ |async)?.['isRecruit'] || (!(user$ |async)?.['isRecruit'] && tab.activeTab !== 0)"
+          [ngClass]="{ active: activeTab2 == i.toString() }"
+          (click)="findOrMy(tab.activeTab)"
+        >
+          <div class="tab-name">{{ tab.name }}</div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="content">
+      <div class="main-content">
+        <app-my-media [activeTab2]="activeTab2"></app-my-media>
+      </div>
+    </div>
+  </ng-container>
+</div>

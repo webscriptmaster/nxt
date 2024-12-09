@@ -1,0 +1,16 @@
+<div class="send-email-dialog">
+  <div class="content">
+    <header>
+      <img src="./assets/images/logo/logo.png" />
+    </header>
+    <div class="upload" (click)="dialogRef.close(true)">
+        Upload From Camera Roll
+    </div>
+
+    <div *ngIf="type === 'video'" class="tittle">Embed Video (Hudl or Youtube)</div>
+    <div *ngIf="type === 'video'" class="input-wrapper">
+      <input #embbedLink class="embbed" placeholder="Add Full Link Here" type="text" (change)="dialogRef.close(embbedLink.value)" />
+    </div>
+  </div>
+</div>
+

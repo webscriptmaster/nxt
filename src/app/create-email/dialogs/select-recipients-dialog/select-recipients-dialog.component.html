@@ -1,0 +1,29 @@
+<div class="select-recipients-dialog">
+  <div class="content">
+    <header>
+      <p class="title">Add To:</p>
+      <div class="divider"></div>
+    </header>
+    <main>
+      <ul>
+        <li (click)="selectedOption = 'all'">
+          <div
+            class="toggle-box"
+            [ngClass]="{ selected: selectedOption === 'all' }"
+          ></div>
+          <span>All Coaches</span>
+        </li>
+        <li (click)="selectedOption = contact">
+          <div
+            class="toggle-box"
+            [ngClass]="{ selected: selectedOption === contact }"
+          ></div>
+          <span>{{ contact }}</span>
+        </li>
+      </ul>
+    </main>
+    <div class="buttons">
+      <div class="add" (click)="onAdd()">Add</div>
+    </div>
+  </div>
+</div>

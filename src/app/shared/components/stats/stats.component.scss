@@ -1,0 +1,122 @@
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  &.center {
+    justify-content: center;
+    .tab {
+      margin-right: 30px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .tab {
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-weight: 700;
+    font-size: 15px;
+    color: #bfbfbf;
+    border-radius: 4px;
+    padding: 3px 8px;
+    transition: all ease 300ms;
+    text-transform: capitalize;
+    cursor: pointer;
+    &.active {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+
+  &.edit {
+    .tab {
+      &.active {
+        background-color: #fff;
+        color: #000;
+      }
+    }
+  }
+}
+
+form {
+  margin-top: 15px;
+  input {
+    height: 48px;
+    font-size: 16px;
+    background-color: #000;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    font-family: "Rajdhani";
+          font-weight: 600;
+    color: #fff;
+    font-weight: 700;
+    &:focus {
+      outline: none;
+    }
+    &.ng-invalid.ng-touched {
+      border: 1px solid red;
+    }
+    &.error {
+      border: 1px solid red;
+    }
+  }
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    label {
+      font-size: 17px;
+      font-weight: 700;
+      color: #bfbfbf;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+      .star {
+        font-size: 12px;
+        color: red;
+        align-self: flex-start;
+        margin-left: 3px;
+      }
+      &.title-stat {
+        color: #CCFF00;
+      }
+    }
+
+  }
+  &.edit {
+    input {
+      background-color: #000;
+    }
+    .form-control {
+      label {
+        color: #bfbfbf;
+        &.title-stat {
+          color: #CCFF00;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 1280px) {
+  .tabs {
+    padding: 0 60px;
+    .tab {
+      font-size: 19px;
+    }
+  }
+  form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 24px;
+    .form-control {
+      label {
+        font-size: 14px;
+      }
+    }
+  }
+}

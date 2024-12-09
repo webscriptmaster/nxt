@@ -1,0 +1,41 @@
+<div class="desktop-container">
+<div class="container">
+  <div class="prospect-sheet">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow mobile"
+        src="/assets/images/icons/back-arrow-black.png"
+        alt=""
+      />
+      <img
+      (click)="onBack()"
+      class="back-arrow desktop"
+      src="/assets/images/icons/back-arrow.png"
+      alt=""
+    />
+      <p class="title">Prospect Sheet</p>
+      <div class="help-btn" (click)="onHelp()">
+        <img class="mobile" src="./assets/images/icons/help.png" />
+        <img class="desktop" src="./assets/images/icons/help_green.png" />
+      </div>
+    </header>
+
+    <div class="content">
+      <app-prospect-sheet-info
+        [user]="userData"
+        *ngIf="userData"
+      ></app-prospect-sheet-info>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar
+        class="progress-bar"
+        [progress]="100"
+      ></app-progress-bar>
+      <button type="button" class="mobile" (click)="onTemplates()">View Templates</button>
+      <button type="button" class="desktop" (click)="onTemplates()">Continue</button>
+    </div>
+  </div>
+</div>
+</div>

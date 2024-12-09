@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="coach-information">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Team Information</p>
+      <p class="sub-title">Your coach will be the first person they talk to.</p>
+    </header>
+
+    <div class="content">
+      <div class="team-logo">
+        <input
+          style="display: none"
+          type="file"
+          id="file"
+          #avatar
+          (change)="onFileSelected($event)"
+          name="image"
+          autocomplete="off"
+          accept="image/*"
+        />
+
+        <div
+          class="team-logo__image"
+          (click)="avatar.click()"
+          [ngClass]="{ custom: this.imagePreview }"
+        >
+          <img
+            *ngIf="!this.imagePreview"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+          <img *ngIf="this.imagePreview" [src]="imagePreview" class="custom" />
+        </div>
+        <div class="team-logo__text" (click)="avatar.click()">
+          Add Team Logo
+        </div>
+      </div>
+
+      <form [formGroup]="coachForm">
+        <div *ngFor="let coachNumber of getCoachNumbers()" class="form-group">
+          <div class="form-control">
+            <label>Coach {{ coachNumber > 1 ? coachNumber : "" }} Title</label>
+            <input
+              type="text"
+              [formControlName]="
+                coachNumber > 1
+                  ? 'secondarySportCoach' + coachNumber + 'Title'
+                  : 'secondarySportCoachTitle'
+              "
+            />
+          </div>
+          <div class="form-control">
+            <label
+              >Coach {{ coachNumber > 1 ? coachNumber : "" }} First Name</label
+            >
+            <input
+              type="text"
+              [formControlName]="
+                coachNumber > 1
+                  ? 'secondarySportCoach' + coachNumber + 'FirstName'
+                  : 'secondarySportCoachFirstName'
+              "
+            />
+          </div>
+          <div class="form-control">
+            <label
+              >Coach {{ coachNumber > 1 ? coachNumber : "" }} Last Name</label
+            >
+            <input
+              type="text"
+              [formControlName]="
+                coachNumber > 1
+                  ? 'secondarySportCoach' + coachNumber + 'LastName'
+                  : 'secondarySportCoachLastName'
+              "
+            />
+          </div>
+          <div class="form-control">
+            <label
+              >Coach {{ coachNumber > 1 ? coachNumber : "" }} Phone
+              Number</label
+            >
+            <input
+              type="phone"
+              [formControlName]="
+                coachNumber > 1
+                  ? 'secondarySportCoach' + coachNumber + 'PhoneNumber'
+                  : 'secondarySportCoachPhoneNumber'
+              "
+            />
+          </div>
+          <div class="form-control">
+            <label>Coach {{ coachNumber > 1 ? coachNumber : "" }} Email</label>
+            <input
+              type="email"
+              [formControlName]="
+                coachNumber > 1
+                  ? 'secondarySportCoach' + coachNumber + 'Email'
+                  : 'secondarySportCoachEmail'
+              "
+            />
+          </div>
+        </div>
+        <button type="button" class="add-coach" (click)="addNewCoach()">
+          <img src="assets/images/icons/plus-grey.svg" alt="add icon" />
+        </button>
+      </form>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="80"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

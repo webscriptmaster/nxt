@@ -1,0 +1,4 @@
+<div class="container">
+  <img *ngIf="!message" src="/assets/images/icons/loading.svg" alt="" />
+  <p class="message" *ngIf="message">{{ message }}</p>
+</div>

@@ -1,0 +1,14 @@
+<div class="backdrop" [ngClass]="{ show: showTrial }"></div>
+
+<div class="trial-dialog" [ngClass]="{ show: showTrial }">
+  <div class="title">HERE’S WHAT COMES WITH THE TRIAL 🎉</div>
+  <div class="tooltip">Cancel anytime in settings</div>
+
+  <ul>
+    <li *ngFor="let item of trialFeatures">
+      <img src="./assets/images/landing/star.png" alt="star" />{{ item.text }}
+    </li>
+  </ul>
+
+  <button type="button" (click)="onClose()">Get Started</button>
+</div>

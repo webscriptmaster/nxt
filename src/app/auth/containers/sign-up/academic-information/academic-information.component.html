@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="academic-information">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Academic Information</p>
+      <p class="sub-title">Make sure coaches know your qualified.</p>
+    </header>
+
+    <div class="content">
+      <app-academic-category
+        [userData]="userData"
+        [edit]="true"
+        >
+        </app-academic-category>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="60"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

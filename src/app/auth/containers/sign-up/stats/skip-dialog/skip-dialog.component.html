@@ -1,0 +1,23 @@
+<div class="skip-dialog">
+  <div class="content">
+    <div class="logo"><img src="./assets/images/logo/logo_600.png" /></div>
+    <header>Do you want to add stats to your prospect profile?</header>
+
+    <ul>
+      <li>
+        1. Increases chance of getting offer.
+        <img src="./assets/images/icons/circle_arrow.png" />
+      </li>
+      <li>
+        2. Gives coaches the info they look for.
+        <img src="./assets/images/icons/circle_arrow.png" />
+      </li>
+    </ul>
+
+    <div class="tooltip">Add or edit in profile later.</div>
+  </div>
+  <div class="buttons">
+    <div class="yes-btn" (click)="dialogRef.close(true)">Yes</div>
+    <div class="skip-btn" (click)="dialogRef.close(false)">Skip</div>
+  </div>
+</div>

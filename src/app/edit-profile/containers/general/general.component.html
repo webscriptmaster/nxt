@@ -1,0 +1,265 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="general">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow-black.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">General</p>
+      </header>
+
+      <div class="content">
+        <ng-container *ngIf="noRecruitForm">
+          <form [formGroup]="noRecruitForm" *ngIf="noRecruitForm">
+            <div class="form-control">
+              <label appAsterickSign>First Name </label>
+              <input type="text" formControlName="firstName" />
+            </div>
+            <div class="form-control">
+              <label appAsterickSign>Last Name </label>
+              <input type="text" formControlName="lastName" />
+            </div>
+            <div class="form-control">
+              <label appAsterickSign>Email </label>
+              <input type="text" formControlName="email" />
+            </div>
+            <div class="form-control scrollable-box-2">
+              <label appAsterickSign>Sport </label>
+              <ng-select
+                class="sign-up-select"
+                [searchable]="false"
+                formControlName="sport"
+                appendTo=".scrollable-box-2"
+              >
+                <ng-option
+                  *ngFor="let sport of sportsList"
+                  [value]="sport.name"
+                  >{{ sport.name }}</ng-option
+                >
+              </ng-select>
+            </div>
+
+            <div class="form-control">
+              <label>Organization</label>
+              <input type="text" formControlName="organization" />
+            </div>
+            <div class="form-control">
+              <label>Organization 2</label>
+              <input type="text" formControlName="secondOrganization" />
+            </div>
+            <div class="form-control">
+              <label>Coach Title (if applicable)</label>
+              <input type="text" formControlName="coachTitle" />
+            </div>
+          </form>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            !(
+              userData?.completeAddSport && userData?.appSport === 'secondary'
+            ) && !noRecruitForm
+          "
+        >
+          <form [formGroup]="generalForm" *ngIf="generalForm">
+            <div class="form-control scrollable-box-2">
+              <label>Athlete, Parent Or Coach?</label>
+              <ng-select
+                class="sign-up-select"
+                [searchable]="false"
+                formControlName="athleteOrParentOrCoach"
+                appendTo=".scrollable-box-2"
+              >
+                <ng-option
+                  *ngFor="let item of athleteOrParentOrCoach"
+                  [value]="item"
+                  >{{ item }}</ng-option
+                >
+              </ng-select>
+            </div>
+            <div class="form-control">
+              <label>First Name</label>
+              <input type="text" formControlName="firstName" />
+            </div>
+            <div class="form-control">
+              <label>Last Name</label>
+              <input type="text" formControlName="lastName" />
+            </div>
+            <div class="form-control high-school scrollable-box">
+              <label>High School, Juco or Middle School </label>
+              <input type="text" formControlName="highSchool" />
+              <ng-select
+                class="sign-up-select"
+                [searchable]="false"
+                [clearable]="false"
+                formControlName="highSchoolSuffix"
+                appendTo=".scrollable-box"
+                [items]="['High School', 'Juco', 'Middle School']"
+              >
+              </ng-select>
+            </div>
+            <div class="form-control">
+              <label>Club</label>
+              <input type="text" formControlName="club" />
+            </div>
+            <div class="form-control scrollable-box">
+              <label>Class Of </label>
+              <ng-select
+                class="sign-up-select"
+                [searchable]="false"
+                formControlName="classOf"
+                appendTo=".scrollable-box"
+              >
+                <ng-option *ngFor="let class of clases" [value]="class">{{
+                  class
+                }}</ng-option>
+              </ng-select>
+            </div>
+            <div
+              class="switch-positions"
+              (click)="onSwitchPositions()"
+              *ngIf="!hidePositions"
+            >
+              <span>Switch Positions</span> <mat-icon>chevron_right</mat-icon>
+            </div>
+          </form>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            userData?.completeAddSport &&
+            userData?.appSport === 'secondary' &&
+            !noRecruitForm
+          "
+        >
+          <form [formGroup]="secondaryGeneralForm" *ngIf="secondaryGeneralForm">
+            <div class="form-control">
+              <label>First Name </label>
+              <input type="text" formControlName="firstName" />
+            </div>
+            <div class="form-control">
+              <label>Last Name </label>
+              <input type="text" formControlName="lastName" />
+            </div>
+            <div class="form-control high-school scrollable-box-1">
+              <label>High School, Juco or Middle School</label>
+              <input type="text" formControlName="secondaryHighSchool" />
+              <ng-select
+                class="sign-up-select grey"
+                [searchable]="false"
+                [clearable]="false"
+                formControlName="secondaryHighSchoolSuffix"
+                appendTo=".scrollable-box-1"
+                [items]="['High School', 'Club']"
+              >
+              </ng-select>
+            </div>
+
+            <div class="form-control scrollable-box-2">
+              <label>Class Of </label>
+              <ng-select
+                class="sign-up-select grey"
+                [searchable]="false"
+                formControlName="classOf"
+                appendTo=".scrollable-box-2"
+              >
+                <ng-option *ngFor="let class of clases" [value]="class">{{
+                  class
+                }}</ng-option>
+              </ng-select>
+            </div>
+            <div
+              class="switch-positions"
+              (click)="onSwitchPositions()"
+              *ngIf="!hidePositions"
+            >
+              <span>Switch Positions</span> <mat-icon>chevron_right</mat-icon>
+            </div>
+          </form>
+        </ng-container>
+
+        <!-- <div class="switch-positions" (click)="onSwitchPositions()" *ngIf="!hidePositions">
+          <span>Switch Positions</span> <mat-icon>chevron_right</mat-icon>
+        </div> -->
+
+        <div class="bottom desktop">
+          <div class="save" (click)="onSave()">Save</div>
+
+          <div class="prospect-sheet" (click)="goToProfile()">
+            View Prospect Profile
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom mobile">
+        <div class="save" (click)="onSave()">Save</div>
+
+        <div class="prospect-sheet" (click)="goToProfile()">
+          View Prospect Profile
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <!-- <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info> -->
+  </div>
+</div>

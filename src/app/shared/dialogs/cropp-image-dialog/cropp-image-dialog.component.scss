@@ -1,0 +1,73 @@
+.cropp-dialog {
+  background-color: #161616;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  margin: 0 auto;
+  padding: 10px;
+
+  .cropp {
+    width: 1;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    z-index: 99;
+    position: relative;
+    div {
+      cursor: pointer;
+      margin: 0 15px;
+      mat-icon {
+        font-size: 30px;
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+
+  ::ng-deep.cr-boundary {
+    overflow: visible;
+  }
+
+  ::ng-deep.cropper-view-box,
+  ::ng-deep.cropper-face {
+    // border-radius: 50%;
+    background-color: transparent;
+  }
+
+  ::ng-deep.cropper-dashed {
+    display: none;
+  }
+
+  /* The css styles for `outline` do not follow `border-radius` on iOS/Safari (#979). */
+  ::ng-deep.cropper-view-box {
+    outline: 0;
+    box-shadow: 0 0 0 2px #fff;
+  }
+
+  ::ng-deep.cropper-modal {
+    background-color: transparent;
+  }
+
+  ::ng-deep.cropper-canvas,
+  ::ng-deep.cropper-wrap-box {
+    overflow: visible;
+  }
+}

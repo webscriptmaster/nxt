@@ -1,0 +1,268 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~quill/dist/quill.snow.css";
+@import "node_modules/ngx-sharebuttons/themes/modern.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1280px) {
+  * {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+
+html,
+body {
+  min-height: 100% !important;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  // font-family: "Avenir Next";
+  font-family: "Rajdhani";
+  // font-weight: 700;
+  overflow: hidden;
+  background-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+
+.ql-container {
+  // font-family: "Avenir Next";
+  font-family: "Rajdhani";
+  font-weight: 700;
+}
+
+.back-btn {
+  cursor: pointer;
+  position: absolute;
+  z-index: 99;
+  top: 15px;
+  left: 15px;
+
+  img {
+    width: 15px;
+    height: 25px;
+  }
+}
+
+img.back-arrow {
+  cursor: pointer;
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  left: 14px;
+  z-index: 2;
+}
+
+img.circleX {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 14px;
+  z-index: 2;
+  top: 9px;
+}
+
+ng-select {
+  &.sign-up-select {
+    .ng-select-container {
+      height: 48px !important;
+      background-color: #000 !important;
+      // border: 1px solid #CCFF00 !important;
+      border: 1px solid #fff !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #fff !important;
+    }
+
+    &.grey {
+      .ng-select-container {
+        background-color: #efefef !important;
+      }
+    }
+  }
+
+  &.filter-select {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #000 !important;
+
+    .ng-value-container {
+      overflow: visible !important;
+    }
+  }
+}
+
+.ng-dropdown-panel {
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  width: 180px !important;
+  min-width: unset !important;
+  right: 0;
+  left: unset !important;
+
+  &.ng-select-bottom {
+    .scroll-host {
+      top: -25px;
+    }
+  }
+
+  &.ng-select-top {
+    .scroll-host {
+      bottom: -25px;
+    }
+  }
+
+  &.filter-select {
+    right: unset;
+    left: unset;
+
+    .scroll-host {
+      right: unset;
+      top: 2px;
+    }
+  }
+
+  .scroll-host {
+    max-height: 240px;
+    position: absolute;
+    right: 25px;
+    min-width: 186px;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    // font-family: "Avenir Next";
+    font-family: "Rajdhani";
+    font-weight: 700;
+    font-size: 17px;
+    color: #000;
+    background-color: #efefef;
+    padding: 7px 8px 0;
+    box-shadow: 2px 4px 6px #00000029;
+  }
+
+  .ng-option {
+    &.ng-option-marked {
+      background-color: #efefef !important;
+    }
+
+    background-color: #efefef !important;
+    border-bottom: 1px solid #bfbfbf;
+    padding: 10px 8px;
+
+    &:first-child {
+      padding-top: 5px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// Dialog styles
+.cdk-overlay-pane {
+  max-width: unset !important;
+}
+
+.mdc-dialog {
+  .mdc-dialog__surface {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+.cdk-overlay-backdrop-showing {
+  opacity: 0.5 !important;
+  background: #70707080 !important;
+  backdrop-filter: blur(1px) !important;
+}
+
+.switch {
+  height: 25px !important;
+  width: 42px !important;
+
+  &.checked {
+    background: #32d74b !important;
+
+    small {
+      left: 28px !important;
+    }
+  }
+
+  small {
+    height: 19px !important;
+    width: 19px !important;
+    top: 3px !important;
+    left: 3px !important;
+  }
+}
+
+.ql-container {
+  font-size: 16px !important;
+}
+
+.ql-editor {
+  p {
+    margin: 7px 0;
+  }
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #ccff00;
+  border-radius: 10px;
+  outline: none;
+  opacity: 1;
+  transition: background 0.3s ease;
+}
+
+input[type=range]:hover {
+  opacity: 1;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #ccff00;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type=range]::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  background: #ccff00;
+  cursor: pointer;
+  border-radius: 50%;
+}

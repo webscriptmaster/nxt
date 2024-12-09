@@ -1,0 +1,234 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="campaigns-sent">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Campaigns Sent</p>
+        <p class="date">{{ campaignsSent.date }}</p>
+      </header>
+
+      <div class="content">
+        <div class="main-content">
+          <div class="tabs">
+            <span class="tab" [class.active]="tab === 0" (click)="selectTab(0)"
+              >Delivered</span
+            >
+            <span class="tab" [class.active]="tab === 1" (click)="selectTab(1)"
+              >Opened</span
+            >
+            <span class="tab" [class.active]="tab === 2" (click)="selectTab(2)"
+              >Link Clicks</span
+            >
+            <span class="total"
+              >{{
+                tab === 0
+                  ? numberOfSentEmail
+                  : tab === 1
+                  ? numberOfOpenEmail
+                  : numberOfClicks
+              }}&nbsp;{{
+                tab === 0
+                  ? "Emails Sent"
+                  : tab === 1
+                  ? "Emails Opened"
+                  : "Link Clicks"
+              }}</span
+            >
+          </div>
+          <div class="loading" *ngIf="loading$ | async">
+            <img src="/assets/images/icons/loading.svg" alt="" />
+          </div>
+          <ng-container [ngSwitch]="tab">
+            <div *ngSwitchCase="0">
+              <div class="card" *ngFor="let college of collegesInCampaign">
+                <div class="top">
+                  <div class="logo">
+                    <img
+                      #img
+                      [src]="college.logoUrl | collegeLogo"
+                      (error)="
+                        text.style.display = 'block'; img.style.display = 'none'
+                      "
+                    />
+                    <span #text style="display: none">College logo</span>
+                  </div>
+                  <div class="info">
+                    <div class="name">{{ college.name }}</div>
+                    <div class="location">
+                      <span>{{ college.city }}, {{ college.state }}</span>
+                      <span class="add">
+                        <div class="status">
+                          <span>Emails Complete</span>
+                          <img src="/assets/images/icons/email-complete.svg" />
+                        </div>
+                        <span class="see-more"
+                          >See more details in activity.</span
+                        >
+                      </span>
+                    </div>
+                    <div class="div-conf">
+                      <div class="division">
+                        {{
+                          college["sportInfo"][collegeSport].division
+                            | collegeDivision
+                        }}
+                      </div>
+                      <div class="conference">
+                        <span #confText style="display: none">
+                          {{
+                            college["sportInfo"][collegeSport].conference
+                          }}</span
+                        >
+                        <img
+                          #confImage
+                          [src]="
+                            college['sportInfo'][collegeSport] | conferenceLogo
+                          "
+                          (error)="
+                            confText.style.display = 'block';
+                            confImage.style.display = 'none'
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="1">
+              <div class="card" *ngFor="let college of collegeHasCoachOpen">
+                <div class="top">
+                  <div class="logo">
+                    <img
+                      #img
+                      [src]="college.logoUrl | collegeLogo"
+                      (error)="
+                        text.style.display = 'block'; img.style.display = 'none'
+                      "
+                    />
+                    <span #text style="display: none">College logo</span>
+                  </div>
+                  <div class="info">
+                    <div class="name">{{ college.name }}</div>
+                    <div class="location">
+                      <span>{{ college.city }}, {{ college.state }}</span>
+                      <span class="add">
+                        <div class="status">
+                          <span>Emails Complete</span>
+                          <img src="/assets/images/icons/email-complete.svg" />
+                        </div>
+                        <span class="see-more"
+                          >See more details in activity.</span
+                        >
+                      </span>
+                    </div>
+                    <div class="div-conf">
+                      <div class="division">
+                        {{
+                          college["sportInfo"][collegeSport].division
+                            | collegeDivision
+                        }}
+                      </div>
+                      <div class="conference">
+                        <span #confText style="display: none">
+                          {{
+                            college["sportInfo"][collegeSport].conference
+                          }}</span
+                        >
+                        <img
+                          #confImage
+                          [src]="
+                            college['sportInfo'][collegeSport] | conferenceLogo
+                          "
+                          (error)="
+                            confText.style.display = 'block';
+                            confImage.style.display = 'none'
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="2">
+              <div class="card" *ngFor="let college of collegeHasCoachClick">
+                <div class="top">
+                  <div class="logo">
+                    <img
+                      #img
+                      [src]="college.logoUrl | collegeLogo"
+                      (error)="
+                        text.style.display = 'block'; img.style.display = 'none'
+                      "
+                    />
+                    <span #text style="display: none">College logo</span>
+                  </div>
+                  <div class="info">
+                    <div class="name">{{ college.name }}</div>
+                    <div class="location">
+                      <span>{{ college.city }}, {{ college.state }}</span>
+                      <span class="add">
+                        <div class="status">
+                          <span>Emails Complete</span>
+                          <img src="/assets/images/icons/email-complete.svg" />
+                        </div>
+                        <span class="see-more"
+                          >See more details in activity.</span
+                        >
+                      </span>
+                    </div>
+                    <div class="div-conf">
+                      <div class="division">
+                        {{
+                          college["sportInfo"][collegeSport].division
+                            | collegeDivision
+                        }}
+                      </div>
+                      <div class="conference">
+                        <span #confText style="display: none">
+                          {{
+                            college["sportInfo"][collegeSport].conference
+                          }}</span
+                        >
+                        <img
+                          #confImage
+                          [src]="
+                            college['sportInfo'][collegeSport] | conferenceLogo
+                          "
+                          (error)="
+                            confText.style.display = 'block';
+                            confImage.style.display = 'none'
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div
+  class="tabs"
+  *ngIf="tabs.length > 1"
+  [ngClass]="{ center: tabs.length == 2, edit }"
+>
+  <div
+    *ngFor="let tab of tabs"
+    class="tab"
+    [ngClass]="{ active: selectedTab === tab }"
+    (click)="selectedTab = tab"
+  >
+    {{ tab }}
+  </div>
+</div>
+<form *ngIf="sport" [formGroup]="form" [ngClass]="{edit}">
+  <!-- <div class="form-control">
+      <label class="title-stat">Title Stats</label>
+      <input formControlName="titleStat" />
+    </div> -->
+  <div
+    class="form-control"
+    *ngFor="let stat of SPORTS_STATS[sport][selectedTab]"
+  >
+    <label [class]="stat.field.includes('title_stats') ? 'title-stat' : ''">{{
+      stat.label
+    }}</label>
+    <input
+      [formControlName]="stat.field"
+      [placeholder]="
+        stat.field.includes('title_stats') ? '2024 Season Stats' : ''
+      "
+    />
+  </div>
+</form>

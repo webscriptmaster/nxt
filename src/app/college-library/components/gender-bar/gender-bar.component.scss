@@ -1,0 +1,47 @@
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin: 15px 0 20px;
+}
+
+.bar {
+  width: 100px;
+  transform: rotate(90deg) rotateX(180deg);
+}
+
+.legend {
+  flex: 1;
+  margin-left: 30px;
+  .title {
+    color: #707070;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 11px;
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 10px;
+    .label {
+      color: #000;
+      margin-bottom: 7px;
+    }
+    .male {
+      .value {
+        color: #BFED05;
+      }
+    }
+    .female {
+      .value {
+        color: #707070;
+      }
+    }
+  }
+}

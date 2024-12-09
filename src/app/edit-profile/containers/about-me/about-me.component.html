@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="general">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow-black.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">About Me</p>
+      </header>
+
+      <div class="content">
+        <ng-container
+          *ngIf="
+            !(userData?.completeAddSport && userData?.appSport === 'secondary')
+          "
+        >
+          <form [formGroup]="aboutMeForm" *ngIf="aboutMeForm">
+            <div class="form-control scrollable-box-2">
+              <label>About</label>
+              <textarea
+                (input)="countWord($event)"
+                placeholder="Quickly Tell Coaches About Your Story & Who You Are."
+                class="about-me"
+                formControlName="aboutMe"
+              ></textarea>
+              <!-- <span class="count" [class]="countWords > 75 ? 'over' : ''">
+                {{ countWords }}/ 75</span
+              > -->
+            </div>
+          </form>
+        </ng-container>
+
+        <div class="bottom desktop">
+          <div class="save" (click)="onSave()">Save</div>
+          <!-- 
+          <div class="prospect-sheet" (click)="goToProfile()">
+            View Prospect Profile
+          </div> -->
+        </div>
+      </div>
+
+      <div class="bottom mobile">
+        <div class="save" (click)="onSave()">Save</div>
+
+        <!-- <div
+          class="prospect-sheet"
+          (click)="goToProfile()"
+        >
+          View Prospect Profile
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

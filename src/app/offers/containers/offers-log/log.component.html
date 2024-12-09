@@ -1,0 +1,207 @@
+<div class="container" [ngClass]="{embedded}">
+  <div class="offers">
+    <header *ngIf="!embedded">
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <div class="title">Offers</div>
+      <!-- <div class="add-btn" (click)="onAdd()">
+        <img src="./assets/images/sidebar/add.png" />
+      </div> -->
+      <a class="offers" routerLink="/offers/add-offers">
+        <mat-icon>add_circle_outline</mat-icon>
+      </a>
+    </header>
+
+    <div class="tabs">
+      <div
+        *ngIf="currentRouter !== '/offers'"
+        class="tab"
+        [ngClass]="{ active: activeTab === 0 }"
+        (click)="selectTab(0); filterOffers()"
+      >
+        Emails
+      </div>
+      <div
+        *ngIf="currentRouter !== '/offers'"
+        class="tab"
+        [ngClass]="{ active: activeTab === 1 }"
+        (click)="selectTab(1); filterOffers()"
+      >
+        Questionnaires
+      </div>
+      <div
+        *ngIf="currentRouter !== '/offers'"
+        class="tab"
+        [ngClass]="{ active: activeTab === 2 }"
+        (click)="selectTab(2); filterOffers()"
+      >
+        Camps
+      </div>
+      <div
+        class="tab highlight"
+        [ngClass]="{ active: activeTab === 3 }"
+        (click)="selectTab(3); filterOffers()"
+      >
+        Offers
+      </div>
+      <div
+        class="tab highlight"
+        [ngClass]="{ active: activeTab === 4 }"
+        (click)="selectTab(4); filterOffers()"
+        *ngIf="(user$ |async)?.['isRecruit'] "
+      >
+        My Offers
+      </div>
+    </div>
+
+    <div class="content">
+      <ng-container
+        *ngIf="[3, 4].includes(activeTab) && offers && offers.length > 0"
+      >
+        <div *ngFor="let offer of offers" class="offer">
+          <div class="offer-side">
+            <img class="image" [src]="offer['logo']" *ngIf="offer['logo']" />
+            <img
+              class="default image"
+              *ngIf="!offer['logo']"
+              src="./assets/images/logo/lighting_bolt_new.png"
+            />
+            <img
+              class="drop-down"
+              src="./assets/images/icons/offer-drop-down.png "
+            />
+          </div>
+          <div class="offer-body">
+            <div class="date">{{ offer.date.toDate() | dateAgo }}</div>
+            <div class="message">
+              {{ (user$ | async)?.id === offer.userId ? "You" : offer.name }}
+              {{ offer.message }}
+            </div>
+            <div class="bottom">
+              <div class="links">
+                <div
+                  class="twitter"
+                  *ngIf="offer.hudlAccountLink"
+                  (click)="onHudl(offer.hudlAccountLink)"
+                >
+                  <img class="x-icon" src="assets/images/activity/hudl.png" />
+                </div>
+
+                <div
+                  class="twitter"
+                  *ngIf="offer.sportsAccountLink"
+                  (click)="onSport247(offer.sportsAccountLink)"
+                >
+                  <img
+                    class="x-icon"
+                    src="assets/images/activity/247sport-icon.png"
+                  />
+                </div>
+
+                <div
+                  class="twitter"
+                  *ngIf="offer.twitter"
+                  (click)="onTwitter(offer.twitter)"
+                >
+                  <img class="x-icon" [src]="xIcon" />
+                </div>
+
+                <div
+                  class="twitter"
+                  *ngIf="offer.youtubeAccountLink"
+                  (click)="onYoutube(offer.youtubeAccountLink)"
+                >
+                  <img
+                    class="x-icon"
+                    src="assets/images/activity/Youtube_logo.png"
+                  />
+                </div>
+
+                <div
+                  class="twitter"
+                  *ngIf="offer.instagram"
+                  (click)="onInstagram(offer.instagram)"
+                >
+                  <img
+                    class="x-icon"
+                    src="assets/images/activity/Instagram_logo.png"
+                  />
+                </div>
+              </div>
+              <div class="sport">{{ offer.sport }}</div>
+            </div>
+
+            <div
+              class="delete"
+              *ngIf="(user$ | async)?.id === offer.userId"
+              (click)="onDeleteOffer(offer.collegeName)"
+            >
+              Delete
+            </div>
+          </div>
+          <div class="offer-card">
+            <img
+              [src]="offer.logoUrl"
+              alt="College Logo"
+              class="college-logo"
+              (error)="
+                defaultLogo.style.display = 'block';
+                defaultLogo.style.display = 'none'
+              "
+            />
+            <img
+              #defaultLogo
+              style="display: none"
+              class="default image"
+              src="./assets/images/logo/lighting_bolt_new.png"
+            />
+            <div class="content">
+              <!-- Add any additional content here -->
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        class="animation"
+        *ngIf="activeTab === 0 && currentRouter !== 'offers'"
+      >
+        <app-emails></app-emails>
+      </ng-container>
+      <ng-container
+        class="animation"
+        *ngIf="activeTab === 1 && currentRouter !== 'offers'"
+      >
+        <app-questionnares></app-questionnares>
+      </ng-container>
+      <ng-container
+        class="animation"
+        *ngIf="activeTab === 2 && currentRouter !== 'offers'"
+      >
+        <app-camps></app-camps>
+      </ng-container>
+
+      <ng-container
+        *ngIf="[3, 4].includes(activeTab) && offers && offers.length === 0"
+      >
+        <div *ngIf="activeTab === 0" class="tooltip">
+          <p>No offers added yet. Turn on notifications & check back soon!</p>
+        </div>
+        <div *ngIf="activeTab === 1" class="tooltip">
+          <p>Add your offers!</p>
+        </div>
+        <img
+          *ngIf="embedded"
+          class="logo"
+          src="./assets/images/logo/lighting_bolt_new.png"
+        />
+      </ng-container>
+    </div>
+
+    <app-main-footer *ngIf="(user$ | async) && !embedded"></app-main-footer>
+  </div>
+</div>

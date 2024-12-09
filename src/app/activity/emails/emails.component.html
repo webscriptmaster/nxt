@@ -1,0 +1,111 @@
+<div class="container emails">
+  <div class="content">
+    <ng-container *ngIf="showContainer && !!(user$ | async)?.activityTracking && emails.length === 0">
+      <div class="no-data">Send emails in the College Library & Email Campaign to track them here.</div>
+    </ng-container>
+    <ng-container *ngIf="!(user$ | async)?.activityTracking">
+      <div>
+        <label>Turn On Activity Tracking</label>
+        <ui-switch [checked]="!!(user$ | async)?.activityTracking" (change)="onToggleTracking($event)"></ui-switch>
+        <div class="guide">
+          Activity tracking allows you to see your emails sent and follow-up, <span class="highlight">what coaches viewed your email,</span> questionnaires
+          taken, and camps signed up for. ALL FOR FREE!
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!!(user$ | async)?.activityTracking && emails.length > 0">
+      <div *ngFor="let email of emails; let i = index" class="offer">
+        <div class="offer-side">
+          <img #logo class="image" [src]="email.logoUrl | collegeLogo"
+            (error)="defaultLogo.style.display = 'block'; logo.style.display = 'none'" />
+          <img #defaultLogo style="display: none;" class="default image" src="./assets/images/logo/lighting_bolt_new.png" />
+          <img class="drop-down" src="./assets/images/icons/offer-drop-down.png " />
+        </div>
+        <div class="offer-body">
+          <div class="date">{{ email.date.toDate() | dateAgo }} <span *ngIf="email.type === 'automation'; then automation"></span></div>
+          <ng-template #automation>
+            <span class="type">Campaign <img src="assets/images/activity/Check.svg" alt="" /></span>
+          </ng-template>
+          <div class="message">
+            <span class="coach-name" (click)="openCreateEmail(email)">
+              Coach
+              {{ email.coachName }}
+            </span>
+            {{ email.message }}
+          </div>
+          <div class="college">
+            {{ email.collegeName }}
+          </div>
+          <div class="position">
+            {{ email.position ? email.position : ''}}
+          </div>
+          <div class="bottom">
+            <div class="sport">
+              <div class="left">
+                <span class="sport-name">
+                  {{ email.division | collegeDivision }}
+                </span>
+                <div class="twitter" *ngIf="email.twitter" (click)="onTwitter(email.twitter)">
+                  <img class="x-icon" [src]="xIcon" />
+                </div>
+              </div>
+              <div class="right">
+                <span class="is-viewed" *ngIf="email.isClick">
+                  <span>Clicked</span>
+                  <img src="assets/images/activity/Clicked.png" alt="" />
+                </span>
+                <span class="is-viewed" *ngIf="email.isOpen">
+                  <span>Opened</span>
+                  <img src="assets/images/activity/Opened.png" alt="" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    
+    <div *ngIf="user && !user?.connectedGmailToken && !user.connectedMicrosoftToken" class="connect-wrapper">
+      <div class="guide2">
+        To track viewed emails, you must connect a Google or Microsoft email account. <a class="more" href="">Learn More</a>
+      </div>
+      <div class="connect google" (click)="connectEmailFlow('gmail')">
+        <img src="/assets/images/icons/google.png" alt="" />
+        <span>Connect With Google</span>
+        <img src="/assets/images/icons/right-white.svg" alt="" />
+      </div>
+      <div class="connect microsoft" (click)="connectEmailFlow('microsoft')">
+        <img src="/assets/images/icons/microsoft.png" alt="" />
+        <span>Connect With Microsoft</span>
+        <img src="/assets/images/icons/right-white.svg" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="send-email-dialog" *ngIf="createEmail" [ngClass]="{ show: showCreateEmail }">
+  <app-create-email (close)="onClose()" [isOverlay]="true"></app-create-email>
+</div>
+<div #pdfContainer style="position: absolute; left: -9999px"></div>
+<!-- 
+<ng-template #mailRequiredFieldPopup>
+  <div class="mail-required-dialog">
+    <p class="mail-required-dialog-description">
+      You're trying to send a missing Subject or Template email to these
+      contacts:
+    </p>
+    <ul class="mail-required-dialog-list">
+      <li class="mail-required-dialog-list-item" *ngFor="let contact of selectedContactMissingMailField">
+        {{ contact.email }}
+      </li>
+    </ul>
+    <p class="mail-required-dialog-description">
+      Please review your emails again.
+    </p>
+
+    <button class="mail-required-dialog-button" (click)="handleCloseMailRequiredFieldPopup()">
+      Review
+    </button>
+  </div>
+</ng-template> -->
+  

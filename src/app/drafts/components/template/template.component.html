@@ -1,0 +1,28 @@
+<div class="content-container" #container>
+
+  <img *ngIf="editMode" (click)="onDelete(draft.id)" class="delete" src="./assets/images/icons/delete.png">
+
+  <div class="card" #card (click)="onSelectDraft(draft.id)">
+    <header>
+      <div class="contact" *ngFor="let contact of draft.templates; let i = index">
+        <div class="logo">
+          <img
+            #img
+            [src]="contact.college.logoUrl | collegeLogo"
+            (error)="text.style.display = 'block'; img.style.display = 'none'"
+          />
+          <span #text style="display: none">College logo</span>
+        </div>
+        <span>{{ contact.email }}</span>
+      </div>
+    </header>
+  
+    <div class="subject">
+      {{ draft.templates[0].subject ? draft.templates[0].subject : "Subject" }}
+    </div>
+  
+    <div class="template" #template></div>
+  </div>
+</div>
+
+

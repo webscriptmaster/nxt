@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="profile" *ngFor="let profile of listProfile; let i = index">
+    <div class="top">
+      <div class="left">{{ profile.name }}</div>
+      <div class="all" (click)="!isViewAll ? viewAll(i) : goBack()">
+        {{ !isViewAll ? "View All" : "Go Back" }}
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="scroll">
+        <div class="cards" [class]="isViewAll ? 'view-all' : ''">
+          <div
+            (click)="viewDetail(profile, card)"
+            [class.none]="j >= 5 && !isViewAll"
+            *ngFor="let card of profile.profiles; let j = index"
+            class="card"
+          >
+            <div
+              class="star"
+              *ngIf="
+                card?.id === isLiveProfile?.id ||
+                (card.isStarting && !isLiveProfile)
+              "
+            >
+              <img src="assets/images/profile/star.svg" alt="" />
+            </div>
+            <div
+              *ngIf="card.thumbnailUrl"
+              [ngStyle]="{
+                'background-image': 'url(' + card.thumbnailUrl + ')',
+                'background-color': card.backgroundColor
+              }"
+              class="card-content"
+            ></div>
+            <div
+              *ngIf="!card.thumbnailUrl"
+              [ngStyle]="{
+                'background-image': 'url(' + card.profileUrl + ')'
+              }"
+              class="card-content"
+            ></div>
+            <div
+              class="price"
+              *ngIf="
+                !card.isStarting && !user?.availableProfiles?.includes(card.id)
+              "
+              [class.free]="card.credit === 0"
+            >
+              {{ card.credit > 0 ? card.credit : "FREE" }}
+            </div>
+            <div
+              class="status"
+              *ngIf="
+                card?.id === isLiveProfile?.id ||
+                (card.isStarting && !isLiveProfile)
+              "
+            >
+              LIVE
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

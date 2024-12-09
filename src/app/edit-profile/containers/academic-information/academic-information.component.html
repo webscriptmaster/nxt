@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="academic-information">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow mobile"
+          src="/assets/images/icons/back-arrow-black.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow desktop"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title mobile">Academic Information</p>
+        <p class="title desktop">Academic</p>
+        <p class="sub-title">Make sure coaches know your qualified.</p>
+      </header>
+
+      <div class="content">
+        <app-academic-category [userData]="userData" [edit]="true">
+        </app-academic-category>
+        <div class="bottom desktop">
+          <div class="save" (click)="onSave()">Save</div>
+          <div class="prospect-sheet" (click)="goToProfile()">
+            View Prospect Profile
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom mobile">
+        <div class="save" (click)="onSave()">Save</div>
+        <div class="prospect-sheet" (click)="goToProfile()">
+          View Prospect Profile
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

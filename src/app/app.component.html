@@ -1,0 +1,25 @@
+<!-- <div class="loading" *ngIf="loading$ | async" [@inOutAnimation]>
+  <img src="./assets/images/logo/lighting_bolt_new.png" />
+</div> -->
+
+<main
+  class="container app-container"
+  [@triggerName]="prepareRoute(router)"
+>
+  <app-send-email-result></app-send-email-result>
+  <router-outlet #router="outlet"></router-outlet>
+</main>
+
+<div class="landscape">
+  <div class="rotate-img">
+    <ng-lottie [options]="rotateOptions"></ng-lottie>
+  </div>
+  <div class="title">App Requires Portrait Mode.</div>
+  <img src="./assets/images/logo/logo.png" />
+</div>
+
+<div class="splash_screen" *ngIf="splash" [ngClass]="{hide: hideSplash}">
+  <video autoplay playsinline muted="muted" id="splash" (ended)="onSplashEnded()" #splash>
+    <source src="./assets/video/splash.mp4" type="video/mp4" />
+  </video>
+</div>

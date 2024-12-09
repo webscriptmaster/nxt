@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="offers">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Add Current Offers</p>
+      <p class="sub-title" [ngClass]="{ invisible: hideTooltip }">
+        Great Job, lets get some more.
+      </p>
+    </header>
+
+    <!-- <div class="content">
+      <form>
+        <div class="form-control">
+          <label>Offers</label>
+          <textarea
+            #textarea
+            (keyup)="textAreaAdjust(textarea)"
+            [formControl]="offersControl"
+          ></textarea>
+        </div>
+      </form>
+    </div> -->
+    <header class="mobile">
+      <div class="input-container">
+        <input
+          [(ngModel)]="nameFilter"
+          (keyup)="onSearchByName($event)"
+          type="text"
+          placeholder="Wisconsin, Georgia..."
+        />
+        <div class="search" (click)="onFilter()">
+          <img src="/assets/images/colleges-library/search.png" />
+        </div>
+      </div>
+
+      <div
+        class="submit"
+        (click)="onSubmit()"
+        [ngClass]="{ active: ObjectKeys(offers).length }"
+      >
+        Submit
+      </div>
+    </header>
+    <div class="content">
+      <div class="search">
+        <div class="input-container">
+          <input
+            [(ngModel)]="nameFilter"
+            (keyup)="onSearchByName($event)"
+            type="text"
+            placeholder="Wisconsin, Georgia..."
+          />
+          <div class="search-icon" (click)="onFilter()">
+            <img src="/assets/images/colleges-library/search.png" />
+          </div>
+        </div>
+
+        <div
+          class="submit"
+          (click)="onSubmit()"
+          [ngClass]="{ active: ObjectKeys(offers).length }"
+        >
+          Submit
+        </div>
+      </div>
+
+      <div class="loading" *ngIf="loading$ | async">
+        <img src="/assets/images/icons/loading.svg" alt="" />
+      </div>
+
+      <div *ngIf="colleges && colleges.length && !(loading$ | async)">
+        <div class="colleges">
+          <app-offers-college-card
+            *ngFor="let college of colleges"
+            [college]="college"
+            [collegeSport]="collegeSport"
+            [user]="userData"
+            [offers]="offers"
+            [existOffers]="existOffers"
+          ></app-offers-college-card>
+        </div>
+      </div>
+
+      <div class="filter-to-find" *ngIf="clearedFilters">
+        <div class="img">
+          <ng-lottie [options]="options"></ng-lottie>
+        </div>
+        <div class="text">
+          Search To Find College <br />
+          Offered By
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="85"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

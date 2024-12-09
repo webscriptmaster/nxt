@@ -1,0 +1,55 @@
+.confirm-dialog {
+  max-width: 95vw;
+  width: 322px;
+  border: 1px solid #ccff00;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  .content {
+    width: 100%;
+    padding: 7px 18px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .buttons {
+    width: 100%;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    height: 57px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #fff;
+    text-align: center;
+    border-top: 1px solid #000;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .yes-btn {
+      color: #bfed05;
+      border-right: 1px solid #000;
+    }
+    .no-btn {
+      color: #bfbfbf;
+    }
+  }
+}
+@media (min-width: 1280px) { 
+  .confirm-dialog {
+    width: 408px;
+    .content {
+      padding: 20px 22px 25px;
+      font-size: 23px;
+    }
+    .buttons {
+      font-size: 28px;
+      height: 60px;
+      div {
+        cursor: pointer;
+      }
+    }
+  }
+}

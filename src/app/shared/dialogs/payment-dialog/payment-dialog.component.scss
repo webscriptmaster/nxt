@@ -1,0 +1,166 @@
+.loading {
+  background-color: #70707080;
+  backdrop-filter: blur(1px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  img {
+    width: 150px;
+    height: auto;
+  }
+}
+
+.plans {
+  position: relative;
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #ccff00;
+  border-radius: 11px;
+  padding: 10px 0 13px;
+  background-color: #161616F0;
+  color: #FFFFFF;
+  .plan {
+    border-right: 1.5px solid #707070;
+    padding: 0 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:last-child {
+      border-right: none;
+    }
+    &-price {
+      font-weight: 700;
+      color: #ccff00;
+      font-size: 25px;
+      line-height: 34px;
+    }
+    &-period {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    &-arrow {
+      filter: invert(1);
+      transform: rotateZ(90deg);
+      width: 15px;
+      margin: 10px 0;
+    }
+    &-description {
+      color: #ccff00;
+      span {
+        color: #fff;
+      }
+    }
+    &-list {
+      list-style: none;
+      li {
+        margin-top: 12px;
+        &:last-child {
+          margin-bottom: 12px;
+        }
+        span {
+          font-size: 10.5px;
+          color: #BFBFBF;
+        }
+        &.video {
+          color: #ccff00;
+          a {
+            font-size: 11px;
+            color: #BFBFBF;
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+        &.best-value {
+          font-size: 16px;
+          text-transform: uppercase;
+          color: #ccff00;
+        }
+      }
+    }
+    &-button {
+      text-transform: uppercase;
+      margin: auto auto 0 ;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ccff00;
+      background-color: #000000;
+      width: 110px;
+      max-width: 100%;
+      height: 26px;
+      line-height: 26px;
+      cursor: pointer;
+      border: 1px solid #ccff00;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.subscription {
+        border: 1px solid #fff
+      }
+
+    }
+  }
+
+}
+
+@media (min-width: 1280px) {
+  .plans {
+    font-size: 17px;
+    padding: 8px 0 11px;
+    border-radius: 3px;
+    .plan {
+      padding: 0px;
+      &-price {
+        font-size: 40px;
+        line-height: 55px;
+      }
+      &-period {
+        font-size: 18px;
+      }
+      &-arrow {
+        width: 22px;
+      }
+      &-description {
+        padding: 0 21px;
+      }
+      &-list {
+        padding: 0 20px;
+        li {
+          margin-top: 10px;
+          span {
+            font-size: 13px;
+          }
+          &.video {
+            a {
+              font-size: 13px;
+            }
+          }
+          &.best-value {
+            font-size: 17px;
+          }
+        }
+      }
+      &-button {
+        font-size: 17px;
+        width: 163px;
+        height: 30px;
+        border-radius: 15px;
+      }
+    }
+  }
+}

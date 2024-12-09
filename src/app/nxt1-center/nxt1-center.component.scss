@@ -1,0 +1,313 @@
+.container {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(32, 32, 32, 1) 30%,
+    rgba(50, 50, 50, 1) 50%,
+    rgba(32, 32, 32, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .desktop {
+    display: none;
+  }
+}
+
+.main {
+  height: 100%;
+}
+
+.nxt1-center {
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr) 0px;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ffffff;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+
+    .title {
+      font-family: "Rajdhani";
+      font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      top: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .desktop {
+      position: absolute;
+      right: 10px;
+      width: 24px;
+      cursor: pointer;
+    }
+  }
+
+  .video-section {
+    margin-top: 50px;
+    .video-box {
+      width: 370px;
+      min-height: 211px;
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: transparent;
+      border: 1px solid #ffffff;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      video {
+        height: 211px;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .video-selector {
+      min-height: 43px;
+      margin: 10px auto 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .label {
+        color: #707070;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .dots {
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 1px solid #bfbfbf;
+        background-color: black;
+        transition: all ease-in 300ms;
+        cursor: pointer;
+        &.active {
+          background-color: #ccff00;
+        }
+      }
+    }
+  }
+
+  .content {
+    overflow: auto;
+  }
+
+  .info-block {
+    width: 100%;
+    background-color: #7070703d;
+    margin-top: 45px;
+    margin-bottom: 24px;
+    padding: 5px 10px 12px;
+    &-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ccff00;
+      text-transform: capitalize;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 12px;
+      li {
+        background-color: #000000;
+        height: 75px;
+        padding: 10px 15px 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: #00000029 0px 3px 6px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+        border: 1px solid #ffffff;
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        // .logo {
+        //   opacity: 0.25;
+        //   width: 100px;
+        // }
+        .arrow {
+          width: 20px;
+          &.desktop {
+            display: none;
+          }
+        }
+        span {
+          margin: 0 auto 0 5px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    app-main-footer {
+      display: none;
+    }
+    app-sidenav {
+      &.mobile {
+        display: none;
+      }
+      &.desktop {
+        display: block;
+      }
+    }
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr);
+    max-width: unset;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("/assets/images/home/HOME-BG-2.0.svg");
+      background-position: center center;
+      background-size: cover;
+    }
+
+    .main {
+      position: relative;
+      z-index: 1;
+      width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      grid-template-columns: 220px minmax(0, 1fr);
+      background-color: #171717;
+      border-right: 1px solid #ffffff;
+      .sidenav {
+        grid-row: 1/3;
+        grid-column: 1;
+      }
+    }
+
+    .nxt1-center {
+      position: relative;
+      max-width: unset;
+      width: 100%;
+      z-index: 5;
+      grid-column: 2;
+      display: block;
+      overflow: auto;
+      padding: 30px 129px 100px;
+
+      header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: none;
+        .title {
+          font-size: 28px;
+          text-align: left;
+          top: 2px;
+        }
+        .back-arrow {
+          width: 41px;
+          height: 41px;
+          left: 64px;
+        }
+      }
+
+      .content {
+        margin-top: 0px !important;
+      }
+
+      .info-block {
+        background-color: #70707067;
+        border: 1px solid #707070;
+        border-radius: 6px;
+        padding: 10px 15px 20px;
+        &-title {
+          font-size: 18px;
+        }
+        ul {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 12px;
+          li {
+            margin-bottom: 0;
+            padding: 5px 15px 5px 0;
+            padding-left: 15px;
+            height: 100px;
+            cursor: pointer;
+            .arrow {
+              width: 25px;
+              &.mobile {
+                display: none;
+              }
+              &.desktop {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+
+      .video-section {
+        .video-box {
+          width: 386px;
+          min-height: 215px;
+          video {
+            height: 215px;
+          }
+        }
+        .video-selector {
+          min-height: 58px;
+          .label {
+            font-size: 20px;
+          }
+          .dots {
+            width: 163px;
+          }
+          .dot {
+            width: 21px;
+            height: 21px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    .nxt1-center {
+      header {
+        .title {
+          left: 15px;
+        }
+      }
+    }
+  }
+}

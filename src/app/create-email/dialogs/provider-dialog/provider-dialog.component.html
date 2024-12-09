@@ -1,0 +1,19 @@
+<div class="dialog">
+  <div class="title">Choose Provider</div>
+  <div class="message">
+    Connection Needed For This Feature. All Responses From College Coaches Go To Your
+    <a href="https://nxt1sports.com/faqs?block=13" target="_blank" class="message__link">Personal Inbox.</a>
+  </div>
+
+  <div class="provider" (click)="dialogRef.close('gmail')">
+    <img class="provider__logo" src="./assets/images/create-email/google.png">
+    <span class="provider__name">Connect With Google</span>
+    <img class="provider__arrow" src="./assets/images/create-email/arrow.png">
+  </div>
+
+  <div class="provider" (click)="dialogRef.close('microsoft')">
+    <img class="provider__logo" src="./assets/images/create-email/microsoft-logo.png">
+    <span class="provider__name">Connect With Microsoft</span>
+    <img class="provider__arrow" src="./assets/images/create-email/arrow.png">
+  </div>
+</div>

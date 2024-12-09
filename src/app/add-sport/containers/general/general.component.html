@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="general">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">General</p>
+    </header>
+
+    <div class="content">
+      <div class="profile-picture">
+        <input
+          style="display: none"
+          type="file"
+          id="file"
+          #avatar
+          (change)="onFileSelected($event)"
+          name="image"
+          autocomplete="off"
+          accept="image/*"
+        />
+
+        <div class="profile-picture__image" (click)="avatar.click()">
+          <img
+            *ngIf="!this.imagePreview"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+          <img *ngIf="this.imagePreview" [src]="imagePreview" class="custom" />
+        </div>
+        <div class="profile-picture__text" (click)="avatar.click()">
+          Add Profile Picture
+        </div>
+      </div>
+
+      <form [formGroup]="generalForm" *ngIf="generalForm">
+        <div class="form-control scrollable-box-2">
+          <label>Athlete, Parent Or Coach?</label>
+          <ng-select
+            class="sign-up-select"
+            [searchable]="false"
+            formControlName="secondaryAthleteOrParentOrCoach"
+            appendTo=".scrollable-box-2"
+          >
+            <ng-option
+              *ngFor="let item of athleteOrParentOrCoach"
+              [value]="item"
+              >{{ item }}</ng-option
+            >
+          </ng-select>
+        </div>
+        <div class="form-control">
+          <label>First Name </label>
+          <input type="text" formControlName="firstName" />
+        </div>
+        <div class="form-control">
+          <label>Last Name </label>
+          <input type="text" formControlName="lastName" />
+        </div>
+        <div class="form-control high-school scrollable-box-1">
+          <label>High School, Juco or Middle School</label>
+          <input type="text" formControlName="secondaryHighSchool" />
+          <ng-select
+            class="sign-up-select"
+            [searchable]="false"
+            [clearable]="false"
+            formControlName="secondaryHighSchoolSuffix"
+            appendTo=".scrollable-box-1"
+            [items]="['High School', 'Club']"
+          >
+          </ng-select>
+        </div>
+
+        <div class="form-control scrollable-box-2">
+          <label>Class Of </label>
+          <ng-select
+            class="sign-up-select"
+            [searchable]="false"
+            formControlName="classOf"
+            appendTo=".scrollable-box-2"
+          >
+            <ng-option *ngFor="let class of clases" [value]="class">{{
+              class
+            }}</ng-option>
+          </ng-select>
+        </div>
+      </form>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="50"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

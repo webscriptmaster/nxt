@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="container">
+    <a routerLink="auth/sign-in" class="back desktop">Login</a>
+    <a routerLink="auth/sign-in" class="back mobile">Back</a>
+    <img class="logo" src="./assets/images/logo/logo_600.png" />
+    <div class="form-control code-field">
+      <div class="label">Type/Paste Your Access Code Here:</div>
+      <input
+        type="text"
+        placeholder="Code Here"
+        [(ngModel)]="code"
+        autocomplete="off"
+      />
+      <!-- <p class="code-tooltip" *ngIf="error.show">{{error.message}}</p> -->
+      <!-- <p class="code-tooltip">Expired code</p> -->
+      <!-- <p class="code-tooltip" *ngIf="error.show">Invalid code</p> -->
+    </div>
+    <button class="next-btn" type="button" (click)="onSubmitCode()">
+      Submit Code
+    </button>
+  </div>
+</div>

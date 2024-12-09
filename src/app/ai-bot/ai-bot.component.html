@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="ai-bot">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Recruit AI Assistant</p>
+      </header>
+
+      <div class="content">
+        <div class="loading" *ngIf="loading$ | async">
+          <div class="spinner"></div>
+        </div>
+        <iframe
+          src="https://interfaces.zapier.com/embed/chatbot/clvlh9x9b001vj09bxqs8effw"
+          height="100%"
+          width="100%"
+          allow="clipboard-write *"
+        ></iframe>
+        <div *ngIf="isChatBotLoaded" class="grey-bar2"></div>
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+      <div class="grey-bar"></div>
+    </div>
+  </div>
+</div>

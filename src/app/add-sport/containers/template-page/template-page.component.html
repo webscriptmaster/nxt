@@ -1,0 +1,34 @@
+<div class="template">
+  <header class="{{ type }}">
+    <img
+      (click)="onBack()"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow.png"
+      alt=""
+    />
+    <p class="title" *ngIf="type == TEMPLATES.GENERAL">General Template</p>
+    <p class="title" *ngIf="type == TEMPLATES.PERSONAL">Personal Template</p>
+    <p class="title" *ngIf="type == TEMPLATES.OWN">My Email Template</p>
+
+    <p class="title twitte mobile" *ngIf="type == TEMPLATES.SOCIAL">Bio Template</p>
+    <p class="title twitter desktop" *ngIf="type == TEMPLATES.SOCIAL">SOCIAL MEDIA BIO TEMPLATE</p>
+  </header>
+
+  <div class="content" *ngIf="userData" [ngClass]="{social: type === TEMPLATES.SOCIAL}">
+    <app-email-template
+      *ngIf="
+        type == TEMPLATES.GENERAL ||
+        type == TEMPLATES.PERSONAL ||
+        type == TEMPLATES.OWN
+      "
+      [type]="type"
+      [user]="userData"
+      (save)="onSave($event)"
+    ></app-email-template>
+
+    <app-social-template
+      *ngIf="type == TEMPLATES.SOCIAL"
+      [user]="userData"
+    ></app-social-template>
+  </div>
+</div>

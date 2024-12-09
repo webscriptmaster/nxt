@@ -1,0 +1,78 @@
+<div class="camp">
+  <div class="left">
+    <div class="first_row">{{ sport }} Camps</div>
+    <div *ngIf="camp" class="second_row" (click)="openLink(camp)">
+      Camp Information
+    </div>
+    <div *ngIf="!camp" class="second_row grey">No Info Available</div>
+  </div>
+
+  <div class="right" *ngIf="camp">
+    <div class="share" (click)="onShare($event, camp)">
+      <img class="mobile" src="/assets/images/icons/share.png" />
+      <img class="desktop" src="/assets/images/icons/web_share.png" />
+    </div>
+    <div class="go-to" (click)="openLink(camp)">Go to link</div>
+  </div>
+</div>
+
+<div
+  class="shareMenu"
+  [ngClass]="{ show: showShare }"
+  (clickOutside)="showShare = false"
+>
+  <div class="shareMenu__title">Share Your Link</div>
+  <div class="shareMenu__buttons">
+    <div class="button-block">
+      <button (click)="copy(camp); showShare = false">
+        <img src="/assets/images/icons/copy_2.png" />
+      </button>
+      <div class="label">Copy</div>
+    </div>
+    <!-- <div class="button-block">
+      <button
+        shareButton="sms"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/messages.png" />
+      </button>
+      <div class="label">Messages</div>
+    </div> -->
+    <div class="button-block">
+      <button shareButton="email" [url]="camp">
+        <img src="/assets/images/icons/mail.png" />
+      </button>
+      <div class="label">Email</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="twitter" [url]="camp">
+        <img src="/assets/images/icons/x-icon.png" />
+      </button>
+      <div class="label">Twitter</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="facebook" [url]="camp">
+        <img src="/assets/images/icons/facebook_2.png" />
+      </button>
+      <div class="label">Facebook</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="whatsapp" [url]="camp">
+        <img src="/assets/images/icons/whatsapp.png" />
+      </button>
+      <div class="label">WhatsApp</div>
+    </div>
+
+    <div class="button-block">
+      <button shareButton="telegram" [url]="camp">
+        <img src="/assets/images/icons/telegram.png" />
+      </button>
+      <div class="label">Telegram</div>
+    </div>
+  </div>
+  <div class="shareMenu__close" (click)="showShare = false">Close</div>
+</div>

@@ -1,0 +1,53 @@
+<form [formGroup]="signInForm">
+  <div class="form-control" *ngIf="showSignInForm">
+    <div class="label">Email</div>
+    <input
+      [ngClass]="{ error: errors['auth/user-not-found'] }"
+      type="email"
+      formControlName="email"
+    />
+  </div>
+  <div class="form-control" *ngIf="showSignInForm">
+    <div class="label">Password</div>
+    <input
+      [ngClass]="{ error: errors['auth/wrong-password'] }"
+      type="password"
+      formControlName="password"
+      autocomplete="new-password"
+    />
+  </div>
+
+  <div class="error-msg" *ngIf="showSignInForm">
+    <ng-container *ngIf="errors['auth/wrong-password']">
+      Wrong password!
+    </ng-container>
+    <ng-container *ngIf="errors['auth/user-not-found']">
+      Wrong email!
+    </ng-container>
+    <ng-container *ngIf="errors['auth/too-many-requests']">
+      Too many attempts. Try later.
+    </ng-container>
+  </div>
+  <button *ngIf="showSignInForm" type="submit" (click)="onSignIn()">
+    Log In
+  </button>
+
+  <app-external-sign-up
+    *ngIf="!showSignInForm"
+    class="external-sign-up"
+    [firebaseErrorMessage]="firebaseErrorMessage"
+  >
+  </app-external-sign-up>
+  <button class="continue" (click)="onShowSignInForm()" *ngIf="!showSignInForm">
+    Continue With Email
+  </button>
+
+  <div class="bottom-row">
+    <div *ngIf="!showSignInForm" class="help" (click)="onLoginHelp()">
+      Need help logging in?
+    </div>
+    <div *ngIf="showSignInForm" class="sign-up" (click)="onSignUp()">
+      Sign Up
+    </div>
+  </div>
+</form>

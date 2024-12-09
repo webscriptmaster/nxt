@@ -1,0 +1,180 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="general">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Edit Profile</p>
+        <div class="help-btn" (click)="onHelp()">
+          <img class="mobile" src="./assets/images/icons/help_white.png" />
+          <img class="desktop" src="./assets/images/icons/help_green.png" />
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="profile-picture">
+          <input
+            style="display: none"
+            type="file"
+            id="file"
+            #avatar
+            (change)="onFileSelected($event)"
+            name="image"
+            autocomplete="off"
+            accept="image/*"
+          />
+
+          <div class="profile-picture__image" (click)="avatar.click()">
+            <img
+              *ngIf="!this.imagePreview"
+              src="./assets/images/logo/lighting_bolt_new.png"
+            />
+            <img
+              *ngIf="this.imagePreview"
+              [src]="imagePreview"
+              class="custom"
+            />
+            <div class="loading" *ngIf="loading$ | async">
+              <img src="/assets/images/icons/loading.svg" alt="" />
+            </div>
+          </div>
+          <div class="profile-picture__text" (click)="avatar.click()">
+            Change Profile Picture
+          </div>
+        </div>
+
+        <div class="progress-bar-container">
+          <app-progress-bar
+            class="progress-bar"
+            [progress]="100"
+          ></app-progress-bar>
+        </div>
+
+        <!-- <div class="templates" (click)="onTemplates()">
+          <span>Templates</span> <mat-icon>chevron_right</mat-icon>
+        </div> -->
+
+        <ul class="menu">
+          <li (click)="onGeneral()">
+            <span>General</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <li *ngIf="(user$ |async)?.['isRecruit']" (click)="onContactInfo()">
+            <span>Contact</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <li *ngIf="(user$ |async)?.['isRecruit']" (click)="onAboutMe()">
+            <span>About me</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <li *ngIf="(user$ |async)?.['isRecruit']" (click)="onAcademicInfo()">
+            <span>Academic</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <li *ngIf="(user$ |async)?.['isRecruit']" (click)="onAthleticInfo()">
+            <span>Athletic</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <!-- <li (click)="onVideoImage()">
+            <span>Media</span
+            ><img class="arrow" src="/assets/images/nxt1-center/icons/right-64x64.svg" />
+          </li> -->
+          <li *ngIf="(user$ |async)?.['isRecruit']" (click)="onCoachInfo()">
+            <span>Team</span
+            ><img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <li
+            (click)="onStats()"
+            *ngIf="!hideStats && (user$ |async)?.['isRecruit']"
+          >
+            <span>Stats</span>
+            <img
+              (click)="onShowStatsInfo($event)"
+              class="info"
+              src="/assets/images/icons/info.png"
+            />
+            <img
+              class="arrow"
+              src="/assets/images/nxt1-center/icons/right-64x64.svg"
+            />
+          </li>
+          <!-- <li (click)="onParents()">
+          <span>Parents</span>
+          <img
+            (click)="onShowParentsInfo($event)"
+            class="info"
+            src="/assets/images/icons/info.png"
+          />
+          <img class="arrow" src="/assets/images/icons/go-to.png" />
+        </li> -->
+        </ul>
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>
+
+<div
+  class="info-overlay"
+  *ngIf="statsInfo || parentsInfo"
+  (click)="statsInfo = false; parentsInfo = false"
+>
+  <div class="info-container">
+    <div class="info-content" *ngIf="statsInfo">
+      <p>
+        Add stats to the prospect sheet to highlight achievements to college
+        coaches, increasing your chance of getting an offer.
+      </p>
+      <br />
+      <p>
+        If you don’t add, they won’t show up on the prospect sheet when you send
+        to coaches.
+      </p>
+    </div>
+    <div class="info-content" *ngIf="parentsInfo">
+      <p>
+        Add parent’s contact information to autofill college recruiting
+        questionnaires and save time filling out information.
+      </p>
+    </div>
+    <div class="info-button" (click)="statsInfo = false; parentsInfo = false">
+      Ok
+    </div>
+  </div>
+</div>

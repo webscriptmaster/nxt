@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="profile" *ngFor="let profile of listProfile; let i = index">
+    <div class="top">
+      <div class="left">{{ profile.name }}</div>
+      <div class="all" (click)="!isViewAll ? viewAll(i) : goBack()">
+        {{ !isViewAll ? "View All" : "Go Back" }}
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="scroll">
+        <div class="cards" [class]="isViewAll ? 'view-all' : ''">
+          <div
+            (click)="viewDetail(profile, card)"
+            [class.none]="j >= 5 && !isViewAll"
+            *ngFor="let card of profile.templates; let j = index"
+            class="card"
+          >
+            <div class="star" *ngIf="!!card.isLive">
+              <img src="" alt="" />
+            </div>
+            <div
+              [ngStyle]="{ 'background-image': 'url(' + card.thumbnail + ')' }"
+              class="card-content"
+            >
+              {{ card.name }}
+            </div>
+            <div class="price" [class.free]="card.credit === 0">
+              {{ card.credit > 0 ? card.credit : "FREE" }}
+            </div>
+            <div class="status" *ngIf="!!card.isLive">LIVE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

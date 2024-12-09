@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "nxt-1-de054",
+    "staging": "nxt-1-staging"
+  },
+  "targets": {},
+  "etags": {}
+}

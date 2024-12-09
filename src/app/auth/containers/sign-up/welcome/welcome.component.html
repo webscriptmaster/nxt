@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="welcome">
+    <header>
+      <p>Welcome To</p>
+      <img class="logo" src="./assets/images/logo/logo_600.png" />
+    </header>
+
+    <div class="content">
+      <div class="img">
+        <img src="./assets/images/sign-up/welcome-image.png" alt="" />
+      </div>
+
+      <!-- <p class="description">
+        <span class="notice"
+          >LETS GET STARTED. FILL OUT THE MAIN INFORMATION.</span
+        >
+        <br />
+        <span class="notice2">You can finish the details later.</span>
+      </p> -->
+      <div class="form-control scrollable-box-2">
+        <label appAsterickSign>Are You Signing Up As A Recruit?</label>
+        <ng-select
+          class="recruit-select"
+          [searchable]="false"
+          appendTo=".scrollable-box-2"
+          (change)="onChangeSelect($event)"
+          [(ngModel)]="isRecruit"
+        >
+          <ng-option *ngFor="let item of recruitValue" [value]="item">{{
+            item
+          }}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="0"></app-progress-bar>
+
+      <button type="button" (click)="onGetStarted()">Get Started</button>
+    </div>
+  </div>
+</div>

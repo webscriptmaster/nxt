@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="choose-sport">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Choose your sport</p>
+      <p class="sub-title">If you play more than one, you can add later.</p>
+    </header>
+
+    <div class="content">
+      <div class="sports">
+        <div
+          *ngFor="let sport of sportsList; trackBy: sportName"
+          class="sport-item"
+          (click)="onSelectSport(sport.name)"
+          [ngClass]="{ selected: selectedSport === sport.name }"
+        >
+          <img [src]="sport.icon" />
+          <p>{{ sport.name | sportWrap }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="20"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

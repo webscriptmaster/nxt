@@ -1,0 +1,109 @@
+<form [formGroup]="signUpForm" class="sign-up-group" *ngIf="signUpForm">
+  <div class="form-control email-field">
+    <div class="label">Email</div>
+    <input type="text" formControlName="email" autocomplete="off" />
+    <p
+      class="email-tooltip"
+      *ngIf="
+        (signUpForm.controls['email']['errors'] &&
+          signUpForm.controls['email']['errors']['existEmail'] &&
+          signUpForm.controls['email'].touched) ||
+        (signUpForm.controls['email'].touched && this.wrongPasswordError)
+      "
+    >
+      Email Already Used.
+    </p>
+  </div>
+
+  <div class="form-control password-field">
+    <div class="label">Password</div>
+    <input
+      [type]="isShowPassword ? 'text' : 'password'"
+      formControlName="password"
+      autocomplete="new-password"
+      (focus)="this.signUpForm.controls['password'].markAsTouched()"
+    />
+    <div
+      class="count"
+      [ngClass]="{
+        valid: this.signUpForm.controls['password'].value.length >= 6
+      }"
+    >
+      {{ this.signUpForm.controls["password"].value.length }}/6
+    </div>
+    <mat-icon
+      class="icon"
+      [ngClass]="{ active: isShowPassword }"
+      (click)="isShowPassword = !isShowPassword"
+      >visibility</mat-icon
+    >
+    <p
+      class="password-tooltip"
+      *ngIf="
+        signUpForm.controls['password'].touched &&
+        signUpForm.controls['password'].invalid
+      "
+    >
+      At least one
+      <span [ngClass]="{ valid: isPasswordHasUppercase }">uppercase letter</span
+      >,
+      <span [ngClass]="{ valid: isPasswordHasNumber }">one number</span>
+    </p>
+  </div>
+
+  <div class="form-control password-field">
+    <div class="label">Verify Password</div>
+    <input
+      [type]="isShowConfirmPassword ? 'text' : 'password'"
+      formControlName="confirmPassword"
+      (focus)="this.signUpForm.controls['confirmPassword'].markAsTouched()"
+      [ngClass]="{
+        error:
+          signUpForm['errors'] &&
+          signUpForm['errors']['confirmPassword'] &&
+          signUpForm['controls']['confirmPassword']['touched']
+      }"
+    />
+    <mat-icon
+      class="icon"
+      [ngClass]="{ active: isShowConfirmPassword }"
+      (click)="isShowConfirmPassword = !isShowConfirmPassword"
+      >visibility</mat-icon
+    >
+  </div>
+
+  <button class="next-btn" type="button" (click)="onSignUp()">
+    Create Account
+  </button>
+
+  <!-- <div
+    class="provider-message"
+    *ngIf="showProviderMessage"
+    (clickOutside)="closeProviderDialog()"
+  >
+    <div>
+      <mat-icon (click)="closeProviderDialog()" class="close">close</mat-icon>
+    </div>
+    <p>
+      Notice, to use email features in this app, you will need a
+      <a
+        href="https://accounts.google.com/signup/v2/createaccount?flowName=GlifWebSignIn&flowEntry=SignUp"
+        target="_blank"
+        >Google</a
+      >
+      or
+      <a
+        href="https://signup.live.com/signup?sru=https%3a%2f%2flogin.live.com%2foauth20_authorize.srf%3flc%3d1033%26client_id%3d81feaced-5ddd-41e7-8bef-3e20a2689bb7%26mkt%3dEN-US%26opid%3d45CC185B2A9EB371%26opidt%3d1686167273%26uaid%3d4bf81ec93e704a35be9a0017a8103739%26contextid%3dA71027535C15D2EB%26opignore%3d1&mkt=EN-US&uiflavor=web&lw=1&fl=easi2&client_id=81feaced-5ddd-41e7-8bef-3e20a2689bb7&uaid=4bf81ec93e704a35be9a0017a8103739&suc=81feaced-5ddd-41e7-8bef-3e20a2689bb7&lic=1"
+        target="_blank"
+        >Microsoft</a
+      >
+      email account.
+    </p>
+    <p class="note">
+      Note: A school or business email may already be one of these providers.
+    </p>
+    <div class="provider-message-continue" (click)="onSignUp(true)">
+      Continue Without <mat-icon>chevron_right</mat-icon>
+    </div>
+  </div> -->
+</form>

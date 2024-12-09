@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="complete">
+    <img
+      (click)="onBack()"
+      class="back-arrow mobile"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+    <img
+    (click)="onBack()"
+    class="back-arrow desktop"
+    src="/assets/images/icons/back-arrow.png"
+    alt=""
+  />
+
+    <div class="img">
+      <ng-lottie [options]="options"></ng-lottie>
+    </div>
+
+    <p class="title">NEW SPORT ADDED!</p>
+    <p class="description">
+      Your Prospect sheet and templates are now ready to use. You can switch
+      between sports by clicking on profile picture.
+    </p>
+
+    <div class="bottom">
+      <app-progress-bar
+        class="progress-bar"
+        [progress]="100"
+      ></app-progress-bar>
+
+      <button type="button" (click)="onProspectSheet()">
+        View Prospect Sheet
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="page-purchase">
+    <div class="loading" *ngIf="loading$ | async">
+        <img src="/assets/images/icons/loading.svg" alt="" />
+    </div>
+    <div class="purchase">
+        <img
+            (click)="dialogRef.close()"
+            class="purchase__back"
+            src="/assets/images/icons/back-arrow.png"
+            alt=""
+        />
+        <div class="purchase__title">
+            <img class="purchase__title__logo" src="./assets/images/logo/logo_600.png" alt="" />
+            <div class="purchase__title__main" [innerHtml]="titles.header1"></div>
+            <div class="purchase__title__extra" [innerHtml]="titles.header2"></div>
+        </div>
+        <div class="purchase__packages">
+            <div *ngFor="let item of listPlan; let i = index" class="purchase__packages__wrapper">
+                <div *ngIf="item.hasSale" class="purchase__packages__sale"><span style="color: #fff;">{{item.discount}}%</span> &nbsp; <span [innerHtml]="titles.sales"></span></div>
+                <div *ngIf="!item.hasSale" class="purchase__packages__sale">&nbsp;</div>
+                <div class="purchase__packages__common" [class]="item.className">
+                    <div class="action">
+                        <div class="name" [class.no-platinum]="item.period !== 'year'">{{item.name}}</div>
+                        <div class="button_wrapper">
+                            <div class="left">
+                                <div class="options" *ngIf="item.period === 'year'">
+                                    <button [class.active]="item.isActiveMonthly" (click)="changeOption(i, item.priceIdForMonth, item.planId, 'month')">Monthly</button>
+                                    <button [class.active]="item.isActiveYearly" (click)="changeOption(i, item.priceId, item.planId, 'year')">Yearly</button>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <button (click)="onPayDynamic(item.priceId, item.period, item.planId, item.periodText, item.currentOption)">purchase</button>
+                            </div>
+                        </div>
+                        <div class="price" [class.no-platinum]="item.period !== 'year'">
+                            <span *ngIf="item.hasSale" [class]="item.hasSale ? 'has-sale' : ''" class="price__old">${{item.oldPrice}}</span>
+                            <span class="price__current">${{item.price}}{{item.periodText}}</span>
+                        </div>
+                    </div>
+                    <div class="purchase__packages__expand">
+                        <mat-accordion>
+                            <mat-expansion-panel [expanded]="item.planId === 'platinum'">
+                                <mat-expansion-panel-header>
+                                </mat-expansion-panel-header>
+                                <div class="purchase__packages__expand__features">
+                                    <div [innerHTML]="item.features"></div>
+                                </div>
+                                <div class="tag" *ngIf="item.planId === 'platinum'">best value</div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

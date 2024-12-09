@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="complete">
+    <img
+      (click)="onBack()"
+      class="back-arrow mobile"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+    <img
+      (click)="onBack()"
+      class="back-arrow desktop"
+      src="/assets/images/icons/back-arrow.png"
+      alt=""
+    />
+    <div class="img">
+      <ng-lottie [options]="options"></ng-lottie>
+    </div>
+
+    <p class="title">Great Job!</p>
+    <p class="description">
+      Your Prospect sheet and templates are now ready to use.
+    </p>
+
+    <div class="bottom">
+      <app-progress-bar
+        class="progress-bar"
+        [progress]="100"
+      ></app-progress-bar>
+
+      <button type="button" class="mobile" (click)="onProspectSheet()">
+        View Prospect Sheet
+      </button>
+      <button type="button" class="desktop" (click)="onProspectSheet()">
+        Continue
+      </button>
+    </div>
+  </div>
+</div>

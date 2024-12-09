@@ -1,0 +1,110 @@
+.hear-about {
+  background-color: #161616f0;
+  border-radius: 11px;
+  border: 1px solid #ccff00;
+  padding: 15px 30px;
+  color: #fff;
+
+  .title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    margin: 13px 0;
+    font-size: 15px;
+    font-weight: 600;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 22px;
+      .select {
+        width: 18px;
+        height: 18px;
+        border: 1px solid #ccff00;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      &.selected {
+        .select {
+          background-color: #ccff00;
+        }
+      }
+
+      input {
+        margin-left: 10px;
+        background-color: transparent;
+        color: #fff;
+        border-style: none;
+        outline: none;
+        border-bottom: 1px solid #707070;
+        font-size: 16px;
+        font-weight: 600;
+        ::placeholder {
+          color: #707070;
+        }
+      }
+    }
+  }
+
+  .last-row {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    margin: 10px auto 0;
+    background-color: #ccff00;
+    border-radius: 3px;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+    font-size: 24px;
+    font-family: "Avenir Next";
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hear-about {
+    padding: 20px 40px;
+    .title {
+      font-size: 21px;
+    }
+    ul {
+      margin: 22px 0;
+      font-size: 19px;
+      li {
+        .select {
+          width: 23px;
+          height: 23px;
+        }
+        input {
+          font-size: 18px;
+        }
+      }
+    }
+    .last-row {
+      font-size: 18px;
+    }
+    button {
+      cursor: pointer;
+      height: 57px;
+      font-size: 25px;
+      margin: 12px auto 0;
+    }
+  }
+}

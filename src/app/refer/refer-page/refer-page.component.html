@@ -1,0 +1,157 @@
+<div class="container" (click)="$event.stopPropagation(); onHideShare()">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'referral'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+    <div class="refer">
+      <header>
+        <img
+          (click)="onBack()"
+          class="circleX mobile"
+          src="/assets/images/icons/circleX.png"
+          alt=""
+        />
+        <img
+        (click)="onBack()"
+        class="back-arrow desktop"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title desktop">REFERRAL</p>
+
+        <div class="my-referrals" (click)="onMyReferrals()">My Referrals</div>
+      </header>
+
+      <div class="content">
+
+        <div class="expired" *ngIf="!canRefer">
+          <div class="bg"></div>
+          <div class="message">
+            The opportunity for first-year referrals has passed.
+          </div>
+        </div>
+
+        <div class="expired" *ngIf="canRefer && !haveSubscription">
+          <div class="bg"></div>
+          <div class="message">
+            Unlock the unlimited plan to activate referrals!
+          </div>
+        </div>
+
+        <div class="img" [ngClass]="{ hide: !canRefer }">
+          <ng-lottie [options]="options"></ng-lottie>
+        </div>
+
+        <div class="title">Refer A Friend</div>
+
+        <div class="subtitle">PAY ONLY <span>$35</span> NXT YEAR.</div>
+
+        <div class="price-row">
+          <div class="price old"><span>$65</span>/year</div>
+          <div class="to">To</div>
+          <div class="price new"><span>$35</span>/year</div>
+        </div>
+
+        <div class="description">
+          Refer 1 Friend - Get $30 off 1 year, Refer 2 Friends - Get $30 off 2
+          years, Refer 3 Friends - Get $30 off 3 years, and so on.. (EXPIRES
+          AFTER FIRST YEAR)
+        </div>
+      </div>
+
+      <button type="button" (click)="onInvite($event)">
+        Invite <img src="/assets/images/icons/share.png" />
+      </button>
+    </div>
+
+    
+  </div>
+</div>
+
+<div class="shareMenu" [ngClass]="{ show: showShare }">
+  <div class="shareMenu__title">Share Your Link</div>
+  <div class="shareMenu__buttons">
+    <div class="button-block">
+      <button (click)="copy(shareUrl); showShare = false">
+        <img src="/assets/images/icons/copy_2.png" />
+      </button>
+      <div class="label">Copy</div>
+    </div>
+    <!-- <div class="button-block">
+      <button
+        shareButton="sms"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/messages.png" />
+      </button>
+      <div class="label">Messages</div>
+    </div> -->
+    <div class="button-block">
+      <button
+        shareButton="email"
+        [url]="shareUrl"
+        [description]="shareDescription"
+        [title]="shareTitle"
+      >
+        <img src="/assets/images/icons/mail.png" />
+      </button>
+      <div class="label">Email</div>
+    </div>
+
+    <div class="button-block">
+      <button
+        shareButton="twitter"
+        [url]="shareUrl"
+        [description]="shareDescription"
+        [title]="shareTitle"
+      >
+        <img src="/assets/images/icons/x-icon.png" />
+      </button>
+      <div class="label">Twitter</div>
+    </div>
+
+    <div class="button-block">
+      <button
+        shareButton="facebook"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/facebook_2.png" />
+      </button>
+      <div class="label">Facebook</div>
+    </div>
+
+    <div class="button-block">
+      <button
+        shareButton="whatsapp"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/whatsapp.png" />
+      </button>
+      <div class="label">WhatsApp</div>
+    </div>
+
+    <div class="button-block">
+      <button
+        shareButton="telegram"
+        [url]="shareUrl"
+        [description]="shareDescription"
+      >
+        <img src="/assets/images/icons/telegram.png" />
+      </button>
+      <div class="label">Telegram</div>
+    </div>
+  </div>
+  <div class="shareMenu__close" (click)="showShare = false">Close</div>
+</div>

@@ -1,0 +1,346 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'settings'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs()"
+    ></app-sidenav>
+
+    <div class="faq">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">FAQs</div>
+      </header>
+
+      <div class="content mobile">
+        <div
+          *ngFor="let block of faq"
+          id="mobile-{{block.index}}"
+          class="question-block question-block-{{block.index}}"
+          (click)="activeBlocks[block.index] = !activeBlocks[block.index]"
+          [ngClass]="{ active: activeBlocks[block.index] }"
+        >
+          <div class="question">
+            <span>{{block.title}}</span> <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer" [stringToHtml]="block.body">
+          </div>
+        </div>
+      </div>
+
+      <div class="content desktop">
+        <div class="left">
+          <div
+          *ngFor="let block of faqLeft"
+          id="desktop-{{block.index}}"
+          class="question-block question-block-{{block.index}}"
+          (click)="activeBlocks[block.index] = !activeBlocks[block.index]"
+          [ngClass]="{ active: activeBlocks[block.index] }"
+        >
+          <div class="question">
+            <span>{{block.title}}</span> <img src="/assets/images/icons/plus.png" alt="open">
+          </div>
+          <div class="answer" [stringToHtml]="block.body">
+          </div>
+        </div>
+        </div>
+
+        <div class="right">
+          <div
+          *ngFor="let block of faqRight"
+          id="desktop-{{block.index}}"
+          class="question-block question-block-{{block.index}}"
+          (click)="activeBlocks[block.index] = !activeBlocks[block.index]"
+          [ngClass]="{ active: activeBlocks[block.index] }"
+        >
+          <div class="question">
+            <span>{{block.title}}</span> <img src="/assets/images/icons/plus.png" alt="open">
+          </div>
+          <div class="answer" [stringToHtml]="block.body">
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- <div class="content">
+        <div
+          class="question-block question-block-1"
+          (click)="activeBlocks[1] = !activeBlocks[1]"
+          [ngClass]="{ active: activeBlocks[1] }"
+        >
+          <div class="question">
+            <span>What is NXT 1?</span> <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              NXT 1 serves as a recruitment platform for athletes to maximize
+              their exposure with complete access to college coaches’ emails,
+              social media accounts, & phone numbers together with tools to
+              connect with them fast & effectively.
+            </p>
+            <p>
+              NXT 1’s full solution continues to aid athletes with the ability
+              to sign up for camps, fill out recruitment questionnaires &
+              provides academic info for each college.
+            </p>
+            <p>
+              NXT 1’s mission is to help athletes receive a scholarship &
+              fulfill their dreams of playing college sports.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-2"
+          (click)="activeBlocks[2] = !activeBlocks[2]"
+          [ngClass]="{ active: activeBlocks[2] }"
+        >
+          <div class="question">
+            <span>What is a prospect sheet?</span> <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              A prospect sheet is set of contact, athletic & academic
+              information that is highlighted for college coaches & provides
+              them with key information they are looking for. Share your
+              prospect sheet to coaches to give yourself the best opportunity to
+              get recruited.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-3"
+          (click)="activeBlocks[3] = !activeBlocks[3]"
+          [ngClass]="{ active: activeBlocks[3] }"
+        >
+          <div class="question">
+            <span>What are templates used for?</span> <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Email templates are used in order to send appropriate emails to
+              coaches and create a positive first impression. Additionally, this
+              will eliminate writing each email individually & make the process
+              faster.
+            </p>
+            <p>
+              The purpose of the social media template is to copy in your bio to
+              give college coaches that view your social media accounts a proper
+              introduction.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-4"
+          (click)="activeBlocks[4] = !activeBlocks[4]"
+          [ngClass]="{ active: activeBlocks[4] }"
+        >
+          <div class="question">
+            <span>Why can’t I change my account email?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Your account email serves as your unique identifier in our
+              database and aids in preventing unauthorized usage of the
+              platform.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-5"
+          (click)="activeBlocks[5] = !activeBlocks[5]"
+          [ngClass]="{ active: activeBlocks[5] }"
+        >
+          <div class="question">
+            <span>Why only twitter for coaches?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Twitter is the main social media app that coaches from every sport
+              prefer to reach, engage with & evaluate athletes they are
+              interested in recruiting.
+            </p>
+            <p>
+              We will add other social media apps if active recruitment in those
+              platforms continue to rise.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-6"
+          (click)="activeBlocks[6] = !activeBlocks[6]"
+          [ngClass]="{ active: activeBlocks[6] }"
+        >
+          <div class="question">
+            <span>How will coaches contact me back?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              NXT 1 allows you to instantly reach coaches through many different
+              platforms. You will receive communication back from coaches via
+              your own personal accounts (Email, social media & phone).
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-7"
+          (click)="activeBlocks[7] = !activeBlocks[7]"
+          [ngClass]="{ active: activeBlocks[7] }"
+        >
+          <div class="question">
+            <span>Why should I share my offers?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              1. Encourages other athletes to complete the actions necessary to
+              get an offer.
+            </p>
+            <p>
+              2. Enhances your publicity because other athletes will be able to
+              see your accomplishments & follow you on your social media through
+              our app.
+            </p>
+            <p>
+              3. Adds to your prospect sheet so coaches are aware of the
+              additional offers you have received.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-8"
+          (click)="activeBlocks[8] = !activeBlocks[8]"
+          [ngClass]="{ active: activeBlocks[8] }"
+        >
+          <div class="question">
+            <span>How do emails send individually when grouped together?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Personalize emails & group multiple coaches from the same or
+              different colleges in one email. Our high speed merging system
+              will automatically separate them & send individually.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-9"
+          (click)="activeBlocks[9] = !activeBlocks[9]"
+          [ngClass]="{ active: activeBlocks[9] }"
+        >
+          <div class="question">
+            <span>When will I need to renew my account?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Your account will automatically renew annually from the sign up
+              date unless you opt out or delete your account.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-10"
+          (click)="activeBlocks[10] = !activeBlocks[10]"
+          [ngClass]="{ active: activeBlocks[10] }"
+        >
+          <div class="question">
+            <span>How do I refer a friend?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+
+          <div class="answer">
+            <p>1. Tap your profile picture on the home page.</p>
+            <p>2. Tap on “Refer a Friend”.</p>
+            <p>3. Tap on “Invite” bar.</p>
+            <p>
+              4. Send to your friend through your preferred method of
+              communication.
+            </p>
+            <p>
+              5. Your friend will receive a link to our website where they can
+              sign up.
+            </p>
+            <p>
+              6. Once they sign up, you will see your discount in ‘My Referrals’
+              under settings.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-11"
+          (click)="activeBlocks[11] = !activeBlocks[11]"
+          [ngClass]="{ active: activeBlocks[11] }"
+        >
+          <div class="question">
+            <span>How do discounts work if I refer people to NXT 1?</span>
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              When you refer friends to NXT 1, your 50% off discount(s) apply
+              for your upcoming year(s) with NXT 1. The first year is always the
+              regular price, than any year after you stay with us would be
+              discounted based on your referrals.
+              <br />
+              <br />
+              For example: <br />
+              <br />
+              If you refer 3 friends during your first year using NXT 1, Your
+              nxt 3 following years would be 50% off. The first year would still
+              be the same price. If any more questions, please contact us at:
+              support@nxt1sports.com
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="question-block question-block-11"
+          (click)="activeBlocks[12] = !activeBlocks[12]"
+          [ngClass]="{ active: activeBlocks[12] }"
+        >
+          <div class="question">
+            <span
+              >Should I continue to use NXT 1 if I have received an offer?</span
+            >
+            <mat-icon>add</mat-icon>
+          </div>
+          <div class="answer">
+            <p>
+              Yes! You want to keep connecting with more coaches to expand your
+              choices for attending the ideal college for you academically &
+              athletically.
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <app-main-footer></app-main-footer>
+    </div>
+  </div>
+</div>

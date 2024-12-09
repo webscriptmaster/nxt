@@ -1,0 +1,11 @@
+<div class="cropp-dialog">
+  <!-- <div class="cropp" id="cropp"></div> -->
+  <div>
+    <img id="image" [src]="data.img">
+  </div>
+
+  <div class="buttons">
+    <div (click)="onClose()"><mat-icon>close</mat-icon></div>
+    <div (click)="onCropp()"><mat-icon>check</mat-icon></div>
+  </div>
+</div>

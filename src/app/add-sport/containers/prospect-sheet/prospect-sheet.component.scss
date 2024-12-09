@@ -1,0 +1,244 @@
+.desktop-container {
+  height: 100%;
+  overflow: auto;
+}
+.container {
+  background-color: #fff;
+  height: 100%;
+}
+.prospect-sheet {
+  margin: 0 auto;
+  min-height: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr) 180px;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.5px solid #000000;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 0 0;
+    background-color: #efefef;
+    box-shadow: 0 1px 3px #0000004d;
+    position: relative;
+    z-index: 1;
+
+    .help-btn {
+      height: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      position: absolute;
+      bottom: 7px;
+      right: 15px;
+      z-index: 2;
+      img {
+        width: 100%;
+      }
+    }
+
+    .title {
+      font-family: "Avenir Next";
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #000;
+      font-weight: 700;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .content {
+    overflow: auto;
+  }
+
+  .bottom {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 0 10px 40px;
+    border-top: 1px solid #000;
+
+    .progress-bar {
+      display: block;
+      margin: 27px auto 21px;
+      width: calc(100% - 84px);
+    }
+
+    button {
+      &.desktop {
+        display: none;
+      }
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 8px;
+      height: 64px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+      background: #ccff00;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      cursor: pointer;
+    }
+  }
+
+  .back-arrow {
+    &.desktop {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(32, 32, 32, 1) 30%,
+      rgba(50, 50, 50, 1) 50%,
+      rgba(32, 32, 32, 1) 70%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 44px 0 88px;
+    height: fit-content;
+    overflow: auto;
+    
+  }
+  .prospect-sheet {
+    min-height: unset;
+    max-width: 806px;
+    border-radius: 6px;
+    border: 1px solid #ccff00;
+    padding: 0 82px 27px;
+    background-color: #161616F0;
+    display: block;
+
+    header {
+      width: 100%;
+      position: relative;
+      height: 64px;
+      justify-content: center;
+      background-color: transparent;
+      align-items: center;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #fff;
+      
+      .help-btn {
+        display: none;
+      }
+     
+      .title {
+        font-size: 24px;
+        color: #fff;
+      }
+      .back-arrow {
+        &.desktop {
+          display: block;
+        }
+        &.mobile {
+          display: none;
+        }
+        top: 10px;
+        left: 0;
+        width: 43px;
+        height: 41px;
+      }
+    }
+    .content {
+      background-color: #fff;
+      ::ng-deep .general {
+        .profile-img {
+          width: 112px;
+          height: 112px;
+        }
+        .info {
+          height: unset;
+          .name {
+            font-size: 25px;
+            margin-bottom: 8px;
+          }
+          .position {
+            font-size: 20px;
+            margin-bottom: 8px;
+          }
+          .college {
+            font-size: 20px;
+          }
+        }
+        .team-logo {
+          width: 78px;
+        }
+      }
+      ::ng-deep .highlights {
+        &-title {
+          font-size: 16px;
+        }
+        &-content {
+          .video {
+            height: 203px;
+            width: 354px;
+          }
+          .info {
+            grid-row-gap: 43px;
+            &-cell {
+              &__label {
+                font-size: 17px;
+              }
+              &__value {
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
+      ::ng-deep .info-block {
+        &__title {
+          font-size: 21px;
+        }
+        &__row {
+          font-size: 17px;
+        }
+      }
+    }
+    .bottom {
+      background-color: transparent;
+      border-top: none;
+      padding: 0;
+      max-width: unset;
+      .progress-bar {
+        width: 356px;
+        margin: 42px auto 15px;
+      }
+      button {
+        &.mobile {
+          display: none;
+        }
+        &.desktop {
+          display: flex;
+        }
+        font-size: 34px;
+        height: 74px;
+        width: 594px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+}

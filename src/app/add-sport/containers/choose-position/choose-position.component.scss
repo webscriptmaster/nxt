@@ -1,0 +1,209 @@
+.container {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(32, 32, 32, 1) 30%,
+    rgba(50, 50, 50, 1) 50%,
+    rgba(32, 32, 32, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100%;
+}
+
+.choose-position {
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(32, 32, 32, 1) 30%,
+    rgba(50, 50, 50, 1) 50%,
+    rgba(32, 32, 32, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  display: grid;
+  grid-template-rows: 63px minmax(0, 1fr) 180px;
+  &.withoutTooltip {
+    grid-template-rows: 43px minmax(0, 1fr) 180px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #fff;
+    width: calc(100% - 20px);
+    text-align: center;
+    margin: 0 auto;
+
+    .back-arrow {
+      top: 7px;
+    }
+
+    .title {
+      font-family: "Avenir Next";
+      font-size: 20px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+    }
+    .sub-title {
+      margin-top: 3px;
+      font-family: "Avenir Next";
+      font-size: 14px;
+      color: #bfbfbf;
+      font-weight: 700;
+    }
+  }
+
+  .content {
+    overflow: auto;
+    padding: 25px 10px;
+
+    .positions {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: 54px;
+      grid-gap: 12px;
+      .position-item {
+        white-space: break-spaces;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        background-color: #707070;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        transition: all ease 300ms;
+        cursor: pointer;
+        &.selected {
+          background-color: #ccff00;
+          color: #000000;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    width: 100%;
+    padding: 0 10px 40px;
+    border-top: 1px solid #fff;
+
+    .progress-bar {
+      display: block;
+      margin: 30px auto;
+      width: 80%;
+    }
+
+    button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 8px;
+      height: 64px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+      background: #ccff00;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      cursor: pointer;
+    }
+  }
+}
+
+
+@media (min-width: 1280px) {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .choose-position {
+    max-width: unset;
+    width: 720px;
+    border: 1px solid #ccff00;
+    border-radius: 6px;
+    padding: 30px 63px 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: unset;
+    height: 620px;
+    max-height: 99vh;
+    overflow: auto;
+
+    header {
+      width: 100%;
+      position: relative;
+      height: 57px;
+      justify-content: flex-start;
+      .title {
+        font-size: 24px;
+      }
+      .sub-title {
+        font-size: 16px;
+        margin-top: 0;
+      }
+      .back-arrow {
+        top: -7px;
+        left: 0;
+        width: 43px;
+        height: 41px;
+      }
+    }
+
+    .content {
+      padding: 10px 0;
+      margin: 0 0 auto;
+      width: 100%;
+      .positions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 59px;
+        grid-column-gap: 10px;
+        grid-row-gap: 14px;
+        .position-item {
+
+        }
+      }
+    }
+
+    .bottom {
+      border-top: none;
+      padding: 0;
+      .progress-bar {
+        width: 356px;
+        margin: 15px auto 15px;
+      }
+      button {
+        font-size: 34px;
+        height: 74px;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .choose-position {
+    header {
+      width: 100%;
+      .title {
+        position: relative;
+        left: 15px;
+      }
+    }
+  }
+}

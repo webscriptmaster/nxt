@@ -1,0 +1,319 @@
+.container {
+  .content {
+    label {
+      font-family: "Rajdhani";
+          font-weight: 700;
+      font-size: 16px;
+      color: #ccff00;
+      display: block;
+      margin: 20px 0 10px 0px;
+    }
+
+    .guide {
+      font-family: "Rajdhani";
+          font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      margin: 10px 0;
+
+      .highlight {
+        color: #ecf500;
+      }
+    }
+
+    .guide2 {
+      font-size: 16px;
+      color: #ccff00;
+      font-family: "Rajdhani";
+          font-weight: 700;
+      margin-bottom: 25px;
+
+      .more {
+        color: #fff;
+      }
+    }
+
+    .connect-wrapper {
+      .connect {
+        border: 1.5px solid #fff;
+        background-color: #7070703d;
+        height: 68px;
+        width: 208px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+
+        span {
+          font-size: 14px;
+          color: #fff;
+          font-family: "Rajdhani";
+          font-weight: 700;
+          margin: 0 10px;
+        }
+
+        &.google {
+        }
+
+        &.microsoft {
+        }
+      }
+    }
+
+    .offer {
+      width: 100%;
+      position: relative;
+      border-bottom: 1px solid #707070;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 12px 0 7px;
+      display: flex;
+      flex-direction: row;
+      height: 144px;
+
+      &:last-child {
+        margin-bottom: 50px;
+      }
+
+      &-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 60px;
+
+        .image {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: #fff;
+          border: 1px solid #fff;
+          box-shadow: #00000029 0 3px 6px;
+
+          &.default {
+            background-color: #000;
+            padding: 10px;
+          }
+        }
+
+        .drop-down {
+          margin-top: 5px;
+          height: 53px;
+        }
+      }
+
+      &-body {
+        margin-left: 5px;
+        position: relative;
+        flex: 1 1 auto;
+        height: 100%;
+
+        .date {
+          font-size: 12px;
+          font-weight: 700;
+          color: #bfbfbf;
+
+          .type {
+            color: #ecf500;
+            font-size: 12px;
+            font-family: "Rajdhani";
+          font-weight: 700;
+          }
+        }
+
+        .message {
+          margin-top: 3px;
+          font-size: 14px;
+          color: #fff;
+          font-weight: 700;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          display: -webkit-box;
+        }
+
+        .college {
+          font-size: 14px;
+          font-family: "Rajdhani";
+          font-weight: 600;
+          color: #bfbfbf;
+          margin: 8px 0;
+        }
+
+        .links {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+
+          .division {
+            display: flex;
+            align-items: center;
+            height: 21px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #000000;
+            font-family: "Rajdhani";
+          font-weight: 700;
+            background-color: #fff;
+            border: 1px solid #ccff00;
+            border-radius: 10px;
+            padding: 2px 7px 1px;
+            width: -moz-fit-content;
+            width: fit-content;
+          }
+
+          .conference {
+            position: relative;
+            display: flex;
+            left: 10px;
+            img {
+              width: auto;
+              height: auto;
+              max-height: 17px;
+            }
+          }
+
+          .team-logo {
+            display: flex;
+            position: relative;
+            left: 20px;
+            img {
+              width: auto;
+              height: auto;
+              max-height: 17px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .twitter {
+          color: #2cbeff;
+          text-decoration: underline;
+          font-size: 14px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 14px;
+            margin-right: 5px;
+            cursor: pointer;
+            &.x-icon {
+              width: 18px;
+              height: 18px;
+            }
+          }
+        }
+
+        .highlight {
+          color: #2cbeff;
+          text-decoration: underline;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .sport {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: baseline;
+
+          &-name {
+            display: flex;
+            align-items: center;
+            height: 21px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #000000;
+            font-family: "Rajdhani";
+          font-weight: 700;
+            background-color: #fff;
+            border: 1px solid #ccff00;
+            border-radius: 10px;
+            padding: 2px 7px 1px;
+            width: fit-content;
+            margin: 14px 0 0;
+            text-transform: capitalize;
+          }
+
+          .is-viewed {
+            color: #ccff00;
+            font-size: 13px;
+            font-family: "Rajdhani";
+          font-weight: 500;
+          }
+        }
+
+        .delete {
+          position: absolute;
+          bottom: 0;
+          right: 5px;
+          color: #ff0303;
+          font-size: 14px;
+          font-weight: 700;
+        }
+
+        .bottom {
+          position: absolute;
+          bottom: 0;
+        }
+      }
+
+      &-card {
+        height: 121px;
+        background: #a0a0a060;
+        width: 107px;
+        border-radius: 11px;
+        border: 1px solid #707070;
+        flex: 0 0 auto;
+
+        .content {
+          font-family: "Rajdhani";
+          font-weight: 600;
+          font-size: 15px;
+          color: #fff;
+          text-align: center;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .tooltip {
+      line-height: 34px;
+      text-align: center;
+      margin-top: 100px;
+      font-size: 25px;
+      color: #707070;
+      font-weight: 700;
+      max-width: 250px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 200px;
+      opacity: 0.4;
+      position: absolute;
+      margin-top: 20px;
+      left: 50%;
+      transform: translateX(-100px);
+    }
+
+    .no-data {
+      font-size: 22px;
+      font-family: "Rajdhani";
+          font-weight: 600;
+      color: #efefef;
+      text-align: center;
+      padding: 45px 20px 30px 20px;
+    }
+  }
+}

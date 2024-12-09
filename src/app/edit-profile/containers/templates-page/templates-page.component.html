@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="templates">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Templates</p>
+        <div class="help-btn" (click)="onHelp()">
+          <img class="mobile" src="./assets/images/icons/help_white.png" />
+          <img class="desktop" src="./assets/images/icons/help_green.png" />
+        </div>
+      </header>
+      <div class="banner">
+        * Do not delete text wrapped with parentheses under email templates (Ex:
+        "(Coach Name)")
+      </div>
+      <div class="content">
+        <div class="section1" *ngFor="let item of listTemplate">
+          <p class="name">{{ item.category }}</p>
+          <div
+            *ngFor="let item2 of item.templates"
+            class="template-btn"
+            (click)="onGoToTemplate(item2)"
+          >
+            {{ item2.name
+            }}<img src="./assets/images/home/icons/right-white-64x64.svg" />
+          </div>
+          <!-- <div class="template-btn" (click)="onPersonalTemplate()">
+            PERSONAL EMAIL TEMPLATE <img src="./assets/images/home/icons/right-white-64x64.svg" />
+          </div>
+          <div class="template-btn" (click)="onOwnTemplate()">
+            MY EMAIL TEMPLATE
+            <img src="./assets/images/home/icons/right-white-64x64.svg" />
+          </div> -->
+        </div>
+        <!-- <div class="section2">
+          <p class="name">Social Media Templates</p>
+          <div class="template-btn" (click)="onSocialTemplate()">
+            SOCIAL MEDIA BIO TEMPLATE
+            <img src="./assets/images/home/icons/right-white-64x64.svg" />
+          </div>
+        </div> -->
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,264 @@
+<div class="container">
+  <div class="video-image">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Media</p>
+      <p class="sub-title">Showcase your talents.</p>
+    </header>
+    <div class="content">
+      <div class="loading" *ngIf="loading$ | async">
+        <img src="/assets/images/icons/loading.svg" alt="" />
+      </div>
+      <div class="content__regular">regular videos</div>
+      <p *ngIf="flow === 'sign-up'" class="content__next">
+        Add custom NXT 1 Videos Later
+      </p>
+      <p *ngIf="flow === 'edit-profile'" class="content__next">
+        Add custom NXT 1 Videos On Home Screen
+      </p>
+      <!-- <div class="content__upcoming">
+                <label>Link to upcoming game</label>
+                <input [(ngModel)]="videoImage.upcomingGamesLink" class="content__upcoming__game" type="text" />
+            </div> -->
+      <div class="content__videos">
+        <div
+          [sortablejs]="videoImage.videos"
+          [sortablejsOptions]="{ animation: 150, handle: '.handle' }"
+        >
+          <div *ngFor="let item of videoImage.videos; let i = index">
+            <div class="content__videos--name">
+              <input
+                type="text"
+                [(ngModel)]="item.name"
+                placeholder="Name Your Video"
+              />
+            </div>
+            <div class="content__videos--item-wrapper">
+              <div class="handle">
+                <span class="order">{{ i + 1 }}</span>
+                <img width="35" src="assets/icons/re-order.svg" alt="" />
+              </div>
+              <div class="content__videos--video-wrapper">
+                <iframe
+                  [src]="item.transformUrl"
+                  class="video"
+                  *ngIf="item.type === 'video' && item.transformUrl"
+                  [id]="'video' + i"
+                  #videoFrame
+                  loading="true"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+                <img
+                  loading="lazy"
+                  class="video"
+                  (click)="preview('video', item)"
+                  *ngIf="item.previewImage"
+                  [src]="item.previewImage"
+                  alt=""
+                />
+                <div
+                  class="left"
+                  *ngIf="
+                    item.type === 'video' &&
+                    !item.previewImage &&
+                    !item.transformUrl
+                  "
+                >
+                  <input
+                    (blur)="getLinkVideo($event.target, i)"
+                    type="text"
+                    class="content__videos__highlight"
+                    placeholder="Add Link Here"
+                  />
+                  <label>Highlight Link</label>
+                </div>
+
+                <div
+                  class="right"
+                  *ngIf="
+                    item.type === 'video' &&
+                    !item.previewImage &&
+                    !item.transformUrl
+                  "
+                >
+                  <div class="file-upload-container">
+                    <label
+                      *ngIf="
+                        item.type === 'video' &&
+                        !item.previewImage &&
+                        !item.transformUrl
+                      "
+                      class="square"
+                    >
+                      <img src="assets/icons/plus.svg" class="" alt="" />
+                      <input
+                        type="file"
+                        (change)="add(i, 'video', $event)"
+                        accept="video/*"
+                      />
+                    </label>
+                  </div>
+                  <label
+                    *ngIf="
+                      item.type === 'video' &&
+                      !item.previewImage &&
+                      !item.transformUrl
+                    "
+                    >Camera Roll</label
+                  >
+                </div>
+              </div>
+              <div
+                class="action"
+                [class.visible]="
+                  item.type === 'video' &&
+                  (item.previewImage || item.transformUrl)
+                "
+              >
+                <img
+                  (click)="reset(item, i, 'video')"
+                  src="assets/icons/delete.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <img src="assets/icons/strip.svg" alt="strip" />
+      </div>
+      <div class="content__regular">Images</div>
+      <div class="content__images">
+        <div
+          [sortablejs]="videoImage.images"
+          class="sortable-custom"
+          [sortablejsOptions]="{
+            animation: 150,
+            handle: '.order-icon',
+            direction: 'horizontal'
+          }"
+        >
+          <div *ngFor="let item of videoImage.images; let i = index">
+            <div class="content__images--name">
+              <input
+                type="text"
+                [(ngModel)]="item.name"
+                placeholder="Name Your Image"
+              />
+            </div>
+            <div class="content__images--item-wrapper">
+              <div class="handle">
+                <img
+                  [class.visible]="item.type === 'image' && item.previewImage"
+                  (click)="reset(item, i, 'image')"
+                  src="assets/icons/delete.svg"
+                />
+                <div class="order-icon">
+                  <img width="35" src="assets/icons/re-order.svg" alt="" />
+                  <span class="order">{{ i + 1 }}</span>
+                </div>
+              </div>
+              <div class="content__images--image-wrapper">
+                <img
+                  loading="lazy"
+                  (click)="preview('image', item)"
+                  [src]="item.previewImage"
+                  *ngIf="item.type === 'image' && item.previewImage"
+                  height="138"
+                  alt="Image"
+                />
+
+                <div
+                  class="right"
+                  *ngIf="item.type === 'image' && !item.previewImage"
+                >
+                  <div class="file-upload-container">
+                    <label class="square">
+                      <img
+                        src="assets/icons/plus.svg"
+                        class=""
+                        alt="Add Image"
+                      />
+                      <input
+                        type="file"
+                        (change)="add(i, 'image', $event)"
+                        accept="image/*"
+                      />
+                    </label>
+                  </div>
+                  <label>Camera Roll</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="75"></app-progress-bar>
+      <button type="button" (click)="onContinue()">
+        {{ flow === "sign-up" ? "Continue" : "Save" }}
+      </button>
+      <div
+        *ngIf="flow !== 'sign-up'"
+        class="prospect-sheet"
+        (click)="goToProfile()"
+      >
+        View Prospect Profile
+      </div>
+    </div>
+  </div>
+  <app-preview
+    (click)="closeModal($event)"
+    *ngIf="currentObject"
+    [preview]="currentObject"
+  ></app-preview>
+</div>
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

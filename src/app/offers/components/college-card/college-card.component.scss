@@ -1,0 +1,159 @@
+.college {
+  margin: 0 auto 15px;
+  width: 100%;
+  min-height: 86px;
+  max-height: 100%;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccff00;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.card {
+  padding: 5px 5px 0;
+  background: #fff;
+  z-index: 1;
+  position: relative;
+  width: 100%;
+
+  .top {
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 1px solid #efefef;
+      box-shadow: #00000029 2px 4px 6px;
+      font-size: 9px;
+      font-weight: 700;
+      margin: 0 5px 0 0;
+      overflow: hidden;
+      min-width: 55px;
+      img {
+        width: 80%;
+      }
+    }
+    .info {
+      width: calc(100% - 130px);
+    }
+    .name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .location {
+      font-size: 14px;
+      font-weight: 600;
+      color: #707070;
+    }
+    .div-conf {
+      display: flex;
+      align-items: center;
+      .division {
+        padding: 0 5px;
+        height: 17px;
+        background-color: #161616f0;
+        border: 1px solid #ccff00;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        border-radius: 20px;
+        margin-right: 15px;
+        min-width: 56px;
+      }
+      .conference {
+        display: flex;
+        align-items: flex-end;
+        font-size: 12px;
+        font-weight: 700;
+        img {
+          max-height: 15px;
+        }
+      }
+    }
+
+    .offer {
+      font-size: 15px;
+      font-weight: 700;
+      color: #bfbfbf;
+      span {
+        display: flex;
+        align-items: center;
+        &.active {
+          color: #000;
+        }
+        &.remove {
+          color: #FF0303;
+        }
+        .mat-icon {
+          width: 15px;
+          height: 15px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) { 
+  .college {
+    margin: 0 auto 21px;
+    min-height: 105px;
+  }
+  .card {
+    padding: 10px;
+    .top {
+      padding-bottom: 0;
+      .logo {
+        width: 85px;
+        height: 85px;
+        font-size: 14px;
+        margin: 0 25px 0 0;
+      }
+      .info {
+        width: calc(100% - 230px);
+      }
+      .name {
+        font-size: 21px;
+      }
+      .location {
+        font-size: 21px;
+      }
+      .div-conf {
+        .division {
+          height: 22px;
+          font-size: 17px;
+        }
+        .conference {
+          img {
+            max-height: 19px;
+          }
+        }
+      }
+      .offer {
+        font-size: 20px;
+        cursor: pointer;
+        span {
+          .mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+}

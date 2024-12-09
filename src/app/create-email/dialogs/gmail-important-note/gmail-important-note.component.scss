@@ -1,0 +1,47 @@
+.important-note {
+  border-radius: 8px;
+  border: 1px solid #ccff00;
+  background: #000000;
+  box-shadow: 0 3px 6px #00000029;
+  padding: 14.5px;
+  width: 80%;
+  margin: auto;
+
+  &-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #BFBFBF;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  &-description {
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  &-highlight {
+    color: #CCFF00;
+  }
+
+  &-button {
+    background: #000000;
+    border: 1px solid #FFFFFF;
+    border-radius: 999px;
+    color: #CCFF00;
+    font-weight: 700;
+    font-size: 18px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    margin-top: 16px;
+    width: 100%;
+  }
+}
+
+.mb-5 {
+  margin-bottom: 20px;
+}

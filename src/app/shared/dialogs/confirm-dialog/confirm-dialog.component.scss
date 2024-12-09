@@ -1,0 +1,146 @@
+.send-email-dialog {
+  max-width: 95vw;
+  width: 322px;
+  border: 1px solid #ccff00;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #161616;
+  .content {
+    header {
+      z-index: 1;
+      text-align: center;
+      margin-bottom: 15px;
+      img {
+        width: 100px;
+        margin-bottom: 10px;
+      }
+      .title {
+        font-family: "Rajdhani";
+        font-weight: 700;
+        font-size: 21px;
+        color: #fff;
+      }
+    }
+    hr {
+      margin-bottom: 15px;
+    }
+    main {
+      color: #fff;
+      font-family: "Rajdhani";
+      font-weight: 700;
+      font-size: 18px;
+      text-align: center;
+      text-transform: capitalize;
+      margin-top: -10px;
+      .highlight {
+        font-family: "Rajdhani";
+        font-weight: 700;
+      }
+      .html-content {
+        font-family: "Rajdhani";
+        font-weight: 700;
+        text-transform: capitalize;
+        text-align: center;
+        position: relative;
+        .loading {
+          margin-top: 10px;
+          width: 100%;
+          height: 70%;
+          display: flex;
+          justify-content: center;
+          position: relative;
+          top: 0px;
+          align-items: center;
+          z-index: 90;
+        }
+        .loading-in {
+          margin-top: -10px;
+          color: #fff;
+          font-size: 19px;
+        }
+
+        .notification {
+          margin-top: 10px;
+          color: #ccff00;
+          font-size: 16px;
+        }
+
+        .continue {
+          color: #2cbeff;
+          font-size: 14px;
+        }
+
+        .social-template {
+          .notification {
+            font-family: "Rajdhani";
+            font-weight: 700;
+            font-size: 21px;
+            color: #fff;
+            margin-top: -10px;
+          }
+          .socials {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0px;
+            .elm {
+              text-align: center;
+              text-transform: lowercase;
+              img {
+                width: 21px;
+                height: auto;
+              }
+            }
+          }
+          .gotit {
+            border: 1px solid #fff;
+            background-color: #000;
+            border-radius: 24px;
+            height: 36px;
+            width: 100%;
+            color: #ccff00;
+            font-family: "Rajdhani";
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 36px;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+    .info {
+      text-align: center;
+      font-size: 13px;
+      font-family: "Rajdhani";
+      font-weight: 600;
+      color: #bfbfbf;
+      margin: 10px 0;
+    }
+  }
+  .buttons {
+    margin-top: 13px;
+    width: 100%;
+    font-family: "Rajdhani";
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    div {
+      height: 36px;
+      border-radius: 24px;
+      border: 1px solid #fff;
+      display: flex;
+      background-color: #000;
+      justify-content: center;
+      line-height: 36px;
+      font-size: 21px;
+      cursor: pointer;
+    }
+  }
+}

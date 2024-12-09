@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+    class="sidenav desktop"
+    [activePage]="'referral'"
+    (home)="onHome($event)"
+    (profile)="onProfile($event)"
+    (settings)="onSettings($event)"
+    (editProfile)="onEditProfile($event)"
+    (addOffers)="onAddOffers($event)"
+    (addSport)="onAddSport($event)"
+    (referFriend)="onReferFriend($event)"
+    (contactUs)="onContactUs()"
+  ></app-sidenav>
+
+    <div class="my-referrals">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">My Referrals</div>
+      </header>
+
+      <div class="content">
+        <div class="table">
+          <div class="table-head">
+            <div>Discount</div>
+            <div>Discounted Year</div>
+            <div>Status</div>
+          </div>
+      
+          <div class="table-body">
+            <div *ngIf="referrals && referrals.length === 0" class="empty-message">
+              Any referrals submitted will go here!
+            </div>
+            <ng-container *ngIf="referrals && referrals.length">
+              <div
+                *ngFor="let referral of referrals"
+                class="referral {{ referral.status }}"
+              >
+                <div class="discount">{{ referral.discount }}</div>
+                <div class="end">{{ referral.discountEnd }}</div>
+                <div class="status {{ referral.status }}">{{ referral.status }}</div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      
+        <div class="bottom">
+          <div class="tooltip">
+            Referrals expire after the first year. Get people on the app now for $30
+            off yearly!
+          </div>
+          <div class="tooltip green" *ngIf="!canUpdate && !alreadyUsed">
+            Update plan will become active two weeks before the first-year $65 plan
+            ends. Can only be updated once.
+          </div>
+          <div class="tooltip green" *ngIf="canUpdate && !alreadyUsed">
+            Update plan is now active!
+          </div>
+      
+          <div class="tooltip green" *ngIf="alreadyUsed">Your Plan Updated</div>
+      
+          <button
+            [ngClass]="{ disabled: !canUpdate || alreadyUsed }"
+            type="button"
+            (click)="onUpdatePlan()"
+          >
+            Update Plan
+          </button>
+        </div>
+      
+        <div class="expired" *ngIf="!canRefer">
+          <div class="bg"></div>
+          <div class="message">
+            The opportunity for first-year referrals has passed.
+          </div>
+        </div>
+      </div>
+    
+
+    </div>
+  </div>
+</div>
+
+

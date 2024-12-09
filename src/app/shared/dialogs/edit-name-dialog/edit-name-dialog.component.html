@@ -1,0 +1,16 @@
+<div class="send-email-dialog">
+  <div class="content">
+    <header>
+      <img *ngIf="isShowLogo" src="./assets/images/logo/logo.png" />
+      <div class="title" [style]="{color: titleColor}">{{title}}</div>
+    </header>
+    <main>
+      <input [(ngModel)]="graphicName" />
+    </main>
+    <div class="info">{{info}}</div>
+  </div>
+  <div class="buttons">
+    <div class="review" [style]="{color: firstButtonColor, border: firstButtonBorder}" (click)="dialogRef.close(graphicName)">
+      {{firstButtonText}}</div>
+  </div>
+</div>

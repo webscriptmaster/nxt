@@ -1,0 +1,45 @@
+<div class="login-help">
+  <div class="content">
+    <div class="back-btn" (click)="onBack()">Back</div>
+
+    <img class="logo" src="./assets/images/logo/logo_600.png" />
+
+    <div class="card">
+      <h2 class="title">Login Help</h2>
+      <h3 class="sub-title">Password Reset</h3>
+
+      <div class="form-control">
+        <div class="label">Email</div>
+        <input
+          type="email"
+          [formControl]="emailControl"
+          [ngClass]="{ error: emailError }"
+        />
+      </div>
+
+      <div class="error-msg" *ngIf="emailError">
+        There is no user record corresponding to this identifier.
+      </div>
+
+      <div
+        class="send-btn"
+        (click)="onSendEmail()"
+        [ngClass]="{ disabled: emailControl.invalid }"
+      >
+        Send Password Reset
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 class="sub-title">Email Help</h3>
+
+      <h4>Not Sure what email to use?</h4>
+      <p>
+        Use the email you signed up with. You should then receive an email from NXT 1 to change your password.
+      </p>
+
+      <h4>Still having trouble?</h4>
+      <p>Shoot an email to support@nxt1sports.com and we can help out.</p>
+    </div>
+  </div>
+</div>

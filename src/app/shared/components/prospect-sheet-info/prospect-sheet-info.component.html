@@ -1,0 +1,333 @@
+<div [ngClass]="{ pdf: forPDF, view: view }">
+  <div class="general">
+    <div class="profile-img" *ngIf="!user.profileImg">
+      <img src="./assets/images/logo/lighting_bolt_new.png" />
+    </div>
+
+    <ng-container
+      *ngIf="!(user && user.completeAddSport && user.appSport === 'secondary')"
+    >
+      <div class="profile-img custom" *ngIf="user.profileImg">
+        <img [src]="user.profileImg" />
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+    >
+      <div class="profile-img custom" *ngIf="user.secondarySportProfileImg">
+        <img [src]="user.secondarySportProfileImg" />
+      </div>
+    </ng-container>
+
+    <div class="info">
+      <p class="name">{{ user.firstName }} {{ user.lastName }}</p>
+      <ng-container
+        *ngIf="
+          !(user && user.completeAddSport && user.appSport === 'secondary')
+        "
+      >
+        <p class="position">{{ user.primarySportPositions.join(", ") }}</p>
+      </ng-container>
+      <ng-container
+        *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+      >
+        <p class="position">{{ user.secondarySportPositions.join(", ") }}</p>
+      </ng-container>
+
+      <ng-container
+        *ngIf="
+          !(user && user.completeAddSport && user.appSport === 'secondary')
+        "
+      >
+        <p class="college">
+          {{ user.highSchool }}
+          {{ user.highSchoolSuffix ? user.highSchoolSuffix : "High School" }}
+        </p>
+      </ng-container>
+      <ng-container
+        *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+      >
+        <p class="college">
+          {{
+            user.secondaryHighSchool
+              ? user.secondaryHighSchool
+              : user.highSchool
+          }}
+          {{
+            user.secondaryHighSchoolSuffix
+              ? user.secondaryHighSchoolSuffix
+              : "High School"
+          }}
+        </p>
+      </ng-container>
+    </div>
+
+    <ng-container
+      *ngIf="!(user && user.completeAddSport && user.appSport === 'secondary')"
+    >
+      <div class="team-logo" *ngIf="user.teamLogoImg">
+        <img [src]="user.teamLogoImg" />
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+    >
+      <div class="team-logo" *ngIf="user.secondarySportTeamLogoImg">
+        <img [src]="user.secondarySportTeamLogoImg" />
+      </div>
+    </ng-container>
+
+    <div class="divider"  *ngIf="!forPDF && (youTubeLink || hudlLink)"></div>
+  </div>
+
+  <div class="highlights">
+    <div class="highlights-title" *ngIf="!forPDF && (youTubeLink || hudlLink)">Highlights</div>
+    <div class="highlights-content">
+      <iframe
+        *ngIf="youTubeLink && !forPDF"
+        [src]="youTubeLink"
+        width="220"
+        height="144"
+        frameborder="0"
+        allowfullscreen
+        class="mobile"
+      >
+      </iframe>
+      <iframe
+        *ngIf="youTubeLink && !forPDF"
+        [src]="youTubeLink"
+        width="354"
+        height="203"
+        frameborder="0"
+        allowfullscreen
+        class="desktop"
+      >
+      </iframe>
+      <iframe
+        *ngIf="hudlLink && !forPDF"
+        [src]="hudlLink"
+        width="220"
+        height="125"
+        frameborder="0"
+        allowfullscreen
+        class="mobile"
+      ></iframe>
+      <iframe
+        *ngIf="hudlLink && !forPDF"
+        [src]="hudlLink"
+        width="354"
+        height="203"
+        frameborder="0"
+        allowfullscreen
+        class="desktop"
+      ></iframe>
+
+      <ng-container
+        *ngIf="
+          !(user && user.completeAddSport && user.appSport === 'secondary')
+        "
+      >
+        <div class="info" [ngClass]="{'no-video': !(youTubeLink || hudlLink) || forPDF}">
+          <div class="info-cell">
+            <div class="info-cell__label">Height</div>
+            <div class="info-cell__value">
+              {{ user.primarySportAthleticInfo["height"] | formatHeight }}
+            </div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell__label">Weight</div>
+            <div class="info-cell__value">
+              {{ user.primarySportAthleticInfo["weight"] }} lbs
+            </div>
+          </div>
+          <div
+            class="info-cell"
+            [ngClass]="{
+              wide: !jerseyNumber
+            }"
+          >
+            <div class="info-cell__label">Class Of</div>
+            <div class="info-cell__value">{{ user.classOf }}</div>
+          </div>
+
+          <div class="info-cell" *ngIf="jerseyNumber">
+            <div class="info-cell__label">Jersey #</div>
+            <div class="info-cell__value">
+              {{ jerseyNumber }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+      >
+        <div class="info">
+          <div class="info-cell">
+            <div class="info-cell__label">Height</div>
+            <div class="info-cell__value">
+              {{ user.secondarySportAthleticInfo["height"] | formatHeight }}
+            </div>
+          </div>
+          <div class="info-cell">
+            <div class="info-cell__label">Weight</div>
+            <div class="info-cell__value">
+              {{ user.secondarySportAthleticInfo["weight"] }} lbs
+            </div>
+          </div>
+          <div
+            class="info-cell"
+            [ngClass]="{
+              wide: !jerseyNumber
+            }"
+          >
+            <div class="info-cell__label">Class Of</div>
+            <div class="info-cell__value">{{ user.classOf }}</div>
+          </div>
+          <div class="info-cell" *ngIf="jerseyNumber">
+            <div class="info-cell__label">Jersey #</div>
+            <div class="info-cell__value">
+              {{ jerseyNumber }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container
+    *ngIf="!(user && user.completeAddSport && user.appSport === 'secondary')"
+  >
+    <div class="info-block coach-info">
+      <div class="info-block__title">Coach Info</div>
+      <div class="info-block__row">
+        <div class="label">Head Coach:</div>
+        <div class="value bold">
+          {{ user.coachFirstName }} {{ user.coachLastName }}
+        </div>
+      </div>
+      <div class="info-block__row">
+        <div class="label">Phone Number:</div>
+        <a href="tel:{{ user.coachPhoneNumber }}" class="value blue">{{
+          user.coachPhoneNumber | formatPhone
+        }}</a>
+      </div>
+      <div class="info-block__row" *ngIf="user.coachEmail">
+        <div class="label">Email:</div>
+        <a href="mailto:{{ user.coachEmail }}" class="value blue">{{
+          user.coachEmail
+        }}</a>
+      </div>
+      <div class="divider"></div></div
+  ></ng-container>
+  <ng-container
+    *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+  >
+    <div class="info-block coach-info">
+      <div class="info-block__title">Coach Info</div>
+      <div class="info-block__row">
+        <div class="label">Head Coach:</div>
+        <div class="value bold">
+          {{ user.secondarySportCoachFirstName }}
+          {{ user.secondarySportCoachLastName }}
+        </div>
+      </div>
+      <div class="info-block__row">
+        <div class="label">Phone Number:</div>
+        <a
+          href="tel:{{ user.secondarySportCoachPhoneNumber }}"
+          class="value blue"
+        >
+          {{ user.secondarySportCoachPhoneNumber | formatPhone }}
+        </a>
+      </div>
+      <div class="info-block__row" *ngIf="user.secondarySportCoachEmail">
+        <div class="label">Email:</div>
+        <a href="mailto:{{ user.coachEmail }}" class="value blue">{{
+          user.secondarySportCoachEmail
+        }}</a>
+      </div>
+      <div class="divider"></div></div
+  ></ng-container>
+
+  <div class="info-block contact-info">
+    <div class="info-block__title">Contact Info</div>
+    <div class="info-block__row">
+      <div class="label">Email:</div>
+      <a href="mailto:{{ user.contactEmail }}" class="value blue">{{
+        user.contactEmail
+      }}</a>
+    </div>
+    <div class="info-block__row" *ngIf="user.twitter">
+      <div class="label">X:</div>
+      <div (click)="onTwitter(user.twitter)" class="value blue">
+        {{ user.twitter }}
+      </div>
+    </div>
+    <div class="info-block__row">
+      <div class="label">Phone Number:</div>
+      <a href="tel:{{ user.phoneNumber }}" class="value blue">{{
+        user.phoneNumber | formatPhone
+      }}</a>
+    </div>
+    <div class="info-block__row">
+      <div class="label">Address:</div>
+      <div class="value bold" wordSplitter>
+        {{ user.address }}, {{ user.city }}, {{ user.state }},
+        {{ user.zipCode }}
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
+  <div class="info-block academic-info">
+    <div class="info-block__title">Academic Info</div>
+    <div class="info-block__row multiple">
+      <div class="info-block__row" *ngFor="let item of mixCategoryData">
+        <div *ngIf="item.value" class="label">{{item.label}}:</div>
+        <div *ngIf="item.value" class="value bold">{{ item.value }}</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
+  <div class="info-block athletic-info">
+    <div class="info-block__title">Athletic Info</div>
+    <div class="info-block__row multiple">
+      <div class="info-block__row" *ngFor="let info of athleticInfo">
+        <div class="label">{{ info.label }}:</div>
+        <div class="value bold">{{ info.value }}</div>
+      </div>
+    </div>
+    <ng-container
+      *ngIf="!(user && user.completeAddSport && user.appSport === 'secondary')"
+    >
+      <div class="info-block__row">
+        <div class="label">Offers:</div>
+        <div class="value bold" wordSplitter>
+          {{ user.offers }}
+        </div>
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="user && user.completeAddSport && user.appSport === 'secondary'"
+    >
+      <div class="info-block__row">
+        <div class="label">Offers:</div>
+        <div class="value bold">
+          {{ user.secondarySportOffers }}
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="divider" *ngIf="stats.length > 0"></div>
+  </div>
+
+  <div class="info-block stats-info" *ngIf="stats.length > 0">
+    <div class="info-block__title">Stats</div>
+    <div class="info-block__row multiple">
+      <div class="info-block__row" *ngFor="let stat of stats">
+        <div class="label">{{ stat.label }}:</div>
+        <div class="value bold">{{ stat.value }}</div>
+      </div>
+    </div>
+  </div>
+</div>

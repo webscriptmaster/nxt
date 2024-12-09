@@ -1,0 +1,22 @@
+<div class="successful" [ngClass]="{ show: showSuccess }">
+  Emails Sent Successfully <img src="./assets/images/icons/check.png" />
+</div>
+
+<div class="error" [ngClass]="{ show: showError }">
+  <p *ngIf="successfullyCount">
+    {{ successfullyCount }} email{{ successfullyCount > 1 ? "s" : "" }} sent
+    successfully.
+  </p>
+  <p *ngIf="unsuccessfullyCount">
+    {{ unsuccessfullyCount }} email{{ unsuccessfullyCount > 1 ? "s" : "" }}
+    didn’t send.
+  </p>
+  <div class="actions">
+    <p class="ignore" (click)="onIgnore()">Ignore</p>
+    <p class="try" (click)="onTryAgain()">Try Again</p>
+  </div>
+</div>
+
+<div class="send-email" *ngIf="showCreateEmail">
+  <app-create-email (close)="onClose()" [isOverlay]="true"></app-create-email>
+</div>

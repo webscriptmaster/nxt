@@ -1,0 +1,19 @@
+<div class="undergraduate-students">
+  <div class="title">
+    {{ (undergradsNo ? undergradsNo : 0) | numberWithComa }} Undergraduate
+    Students
+  </div>
+  <div
+    class="bar"
+    [ngClass]="{
+      small: undergradsNo <= 5000,
+      medium: undergradsNo > 5000 && undergradsNo <= 15000,
+      large: undergradsNo > 15000
+    }"
+  ></div>
+  <div class="labels">
+    <span>Small</span>
+    <span>Medium</span>
+    <span>Large</span>
+  </div>
+</div>

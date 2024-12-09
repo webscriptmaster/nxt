@@ -1,0 +1,131 @@
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  right: 0;
+  opacity: 1;
+  transition: right ease-in 400ms, opacity ease-in 550ms;
+  &.removed {
+    position: relative;
+    right: -100vh;
+    opacity: 0;
+    .delete {
+      opacity: 0;
+    }
+  }
+}
+
+.delete {
+  width: 22px;
+  height: 28px;
+  margin-right: 13px;
+  position: relative;
+  bottom: 10px;
+  opacity: 1;
+  transition: opacity ease-in 550ms;
+}
+
+.card {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #707070;
+  height: 147px;
+  margin-bottom: 23px;
+  padding: 0 5px;
+  overflow: hidden;
+  transition: height ease-in 150ms;
+  &.removed {
+    height: 0;
+    margin-bottom: 0;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: visible;
+    width: 100%;
+    padding: 10px 0 5px;
+    border-bottom: 1px solid #bfbfbf;
+    .contact {
+      .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        border: 1px solid #bfbfbf;
+        font-size: 6px;
+        font-weight: 700;
+        margin: 0 5px 0 0;
+        overflow: hidden;
+        background-color: #fff;
+
+        img {
+          width: 80%;
+        }
+      }
+      height: 29px;
+      border-radius: 18px;
+      border: 1px solid #707070;
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #707070;
+      padding: 0 6px 0 2px;
+      margin: 0 5px 5px 0;
+      box-shadow: #00000029 0px 4px 6px;
+    }
+  }
+  .subject {
+    font-size: 14px;
+    color: #bfbfbf;
+    font-weight: 600;
+    line-height: 30px;
+    border-bottom: 1px solid #bfbfbf;
+    white-space: nowrap;
+    overflow: visible;
+  }
+  .template {
+    font-size: 13px !important;
+    color: #bfbfbf;
+    padding-top: 8px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .delete {
+    width: 33px;
+    height: 43px;
+    cursor: pointer;
+  }
+
+  .card {
+    cursor: pointer;
+    background-color: #fff;
+    height: 183px;
+    margin-bottom: 33px;
+    padding: 0 15px;
+    header {
+      padding: 15px 0 10px;
+    }
+    .contact {
+      .logo {
+        width: 31px;
+        height: 31px;
+      }
+      height: 34px;
+      border-radius: 24px;
+      font-size: 14px;
+    }
+    .subject {
+      font-size: 14px;
+    }
+    .template {
+      font-size: 14px !important;
+    }
+  }
+}

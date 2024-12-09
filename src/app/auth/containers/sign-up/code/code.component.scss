@@ -1,0 +1,214 @@
+:host {
+  display: block;
+  overflow-y: auto;
+  height: 100%;
+}
+.wrapper {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgb(53, 53, 53) 0,
+    rgb(32, 32, 32) 35%,
+    rgb(183, 183, 183) 100%
+  );
+}
+.container {
+  width: 320px;
+  min-height: 100%;
+  margin: auto;
+  // background: linear-gradient(180deg,
+  //         rgb(53, 53, 53) 0,
+  //         rgb(32, 32, 32) 35%,
+  //         rgb(183, 183, 183) 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 32px;
+
+  .code-field {
+    width: 100%;
+  }
+
+  .code-tooltip {
+    font-size: 16px;
+    padding: 8px 0 0 0;
+    color: #bfbfbf;
+    font-weight: 600;
+    text-align: left;
+    span {
+      color: #ccff00;
+      &.valid {
+        color: #bfbfbf;
+      }
+    }
+  }
+
+  .back {
+    &.desktop {
+      display: none;
+    }
+
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    left: 36px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .logo {
+    width: 283px;
+    height: 65px;
+    margin-bottom: 45px;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill::first-line,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  font-size: 16px !important;
+  font-family: "Rajdhani SemiBold" !important;
+  font-weight: 700 !important;
+}
+
+input {
+  height: 44px;
+  background-color: #000;
+  border: 1px solid #707070;
+  border-radius: 5px;
+  padding: 0 10px;
+  color: #fff;
+  font-family: "Rajdhani";
+          font-weight: 600;
+  font-size: 16px !important;
+  font-weight: 700;
+
+  input::placeholder {
+    font-family: "Rajdhani";
+          font-weight: 600;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.error {
+    border: 1px solid red;
+  }
+}
+
+.form-control {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    color: #fff;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+}
+
+button {
+  height: 44px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccff00;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Rajdhani";
+          font-weight: 700;
+  cursor: pointer;
+}
+
+.dialog {
+  width: 230px;
+  height: 60px;
+  background-color: #000;
+  border: 1px solid #ccff00;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      margin-left: 5px;
+    }
+  }
+  .description {
+    margin-top: 3px;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 14px;
+    font-family: "Rajdhani";
+          font-weight: 600;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    justify-content: center;
+    width: 434px;
+
+    .back {
+      &.mobile {
+        display: none;
+      }
+
+      &.desktop {
+        display: block;
+      }
+
+      top: 83px;
+      left: 145px;
+      color: #ccff00;
+      font-size: 21px;
+    }
+
+    .logo {
+      width: 350px;
+      height: 80px;
+      margin: 115px auto 81px;
+    }
+
+    .next-btn {
+      margin-bottom: 125px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    width: 300px;
+  }
+}

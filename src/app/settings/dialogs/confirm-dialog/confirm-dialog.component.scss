@@ -1,0 +1,79 @@
+.confirm-dialog {
+  width: 322px;
+  min-height: 180px;
+  .card {
+    background-color: #161616;
+    border-radius: 8px;
+    border: 1px solid #ccff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 10px 10px;
+    .message {
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    img {
+      // width: 69px;
+      width: 110px;
+      height: auto;
+      margin-bottom: 12px;
+    }
+  }
+  .buttons {
+    // margin-top: 5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .button {
+      width: 117px;
+      height: 35px;
+      border: 1px solid #fff;
+      border-radius: 24px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.yes {
+        background-color: #000000;
+        color: #ff0000;
+        margin-right: 30px;
+      }
+      .cancel {
+        background-color: #000000;
+        color: #fff;
+        margin-left: 30px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .confirm-dialog {
+    width: 423px;
+    .card {
+      padding: 24px;
+      .message {
+        font-size: 24px;
+      }
+      img {
+        width: 135px;
+      }
+    }
+    .buttons {
+      .button {
+        width: 202px;
+        height: 62px;
+        cursor: pointer;
+      }
+    }
+  }
+}

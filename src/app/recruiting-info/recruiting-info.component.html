@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (logout)="onLogout($event)"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="recruiting-info">
+      <header>
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <p class="title">Recruiting Information</p>
+      </header>
+
+      <div class="content" *ngIf="userSport && recruitingInfo">
+        <div class="info-block" *ngFor="let section of recruitingInfo">
+          <div class="info-block-title">{{ section.sectionName }}</div>
+          <ul class="menu">
+            <ng-container *ngFor="let item of section.links">
+              <li (click)="openLink(item.link)">
+                <img class="logo" [src]="item.iconUrl" />
+                <span>{{ item.title }}</span>
+                <img src="/assets/images/icons/go-to-grey.png" class="arrow mobile" />
+                <img src="/assets/images/icons/link.png" class="arrow desktop" />
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <app-main-footer *ngIf="user$ | async"></app-main-footer>
+    </div>
+  </div>
+</div>

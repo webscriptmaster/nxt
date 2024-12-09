@@ -1,0 +1,1068 @@
+.loading {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #70707080 !important;
+  backdrop-filter: blur(1px) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 30%;
+  }
+}
+
+.container {
+  background: #000000;
+  height: 100%;
+  min-height: 100%;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 45px minmax(0, 1fr);
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+}
+
+.prospect-sheet-btn {
+  display: flex;
+}
+
+header {
+  border-bottom: none;
+  // border-bottom: 1px solid #ccff00;
+  background-color: #000000f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3;
+
+  .close {
+    display: none;
+  }
+
+  .desktop-from {
+    display: none;
+  }
+}
+
+.toolbar {
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+
+  .remove-btn {
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: auto;
+  }
+
+  .remove {
+    width: 19px;
+    height: 4px;
+  }
+
+  .tools {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 255px;
+
+    img {
+      cursor: pointer;
+
+      &.template {
+        width: 19px;
+        height: 19px;
+      }
+
+      &.link {
+        width: 28px;
+        height: 18px;
+        position: relative;
+        top: 3px;
+      }
+
+      &.prospect-sheet {
+        width: 19px;
+        height: 21px;
+      }
+
+      &.attach {
+        width: 27px;
+        height: 14px;
+      }
+
+      &.send {
+        width: 25px;
+        height: 21px;
+      }
+    }
+
+    .finish {
+      font-family: "Rajdhani";
+      font-weight: 600;
+      font-size: 17px;
+      color: #ccff00;
+      cursor: pointer;
+    }
+  }
+
+  .prospect-sheet-menu {
+    display: none;
+  }
+}
+
+main {
+  padding: 0 0 30px;
+  overflow: auto;
+
+  .from {
+    display: flex;
+    padding: 5px 10px;
+    border-bottom: 1px solid #707070;
+    background-color: #efefef;
+    position: relative;
+    align-items: center;
+
+    .info {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #707070;
+      line-height: 33px;
+      margin-right: 10px;
+    }
+
+    .expand {}
+
+    .value {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      font-size: 15px;
+      font-weight: 700;
+      color: #000;
+
+      img {
+        width: 18px;
+        height: 14px;
+        margin-right: 3px;
+      }
+    }
+
+    .connect {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      font-size: 15px;
+      font-weight: 700;
+      color: #000;
+      background-color: #efefef;
+      border: 1px solid #707070;
+      border-radius: 15px;
+      padding: 3px 0 3px 7px;
+
+      img {
+        width: 18px;
+        height: 14px;
+        margin-right: 3px;
+      }
+    }
+  }
+
+  .to {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #707070;
+    margin: 0 10px;
+
+    .label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 33px;
+      margin-right: 10px;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      img {
+        display: none;
+        width: 35px;
+        height: auto;
+        cursor: pointer;
+      }
+    }
+
+    .value {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+
+      .contact {
+        background-color: #000000;
+        color: #ffffff !important;
+        border: 1px solid #ccff00 !important;
+
+        &.active {
+          background-color: #ccff00;
+          color: #000000 !important;
+          border: 1px solid #ffffff !important;
+          box-shadow: none;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          width: 27px;
+          height: 27px;
+          border-radius: 50%;
+          border: 1px solid #bfbfbf;
+          font-size: 6px;
+          font-weight: 700;
+          margin: 0 5px 0 0;
+          overflow: hidden;
+          background-color: #fff;
+
+          img {
+            width: 80%;
+          }
+        }
+
+        .mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          margin-left: 5px;
+          cursor: pointer;
+        }
+
+        cursor: default;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 33px;
+        border-radius: 18px;
+        border: 1px solid #ffffff;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: #000000;
+        font-family: "Rajdhani";
+        font-weight: 600;
+        padding: 0 6px 0 2px;
+        margin: 0 5px 5px 0;
+        box-shadow: #00000029 0px 4px 6px;
+        position: relative;
+
+        .context-menu {
+          position: absolute;
+          z-index: 1;
+          top: -1px;
+          left: -1px;
+          background-color: #fff;
+          border: 1px solid #bfbfbf;
+          box-shadow: #00000029 2px 4px 6px;
+          border-radius: 6px;
+          min-width: 290px;
+
+          .contact-info {
+            padding: 0 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 45px;
+            border-bottom: 1px solid #bfbfbf;
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          .copy,
+          .remove {
+            padding: 0 5px 0 11px;
+            height: 45px;
+            border-bottom: 1px solid #bfbfbf;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+              margin-right: 9px;
+              position: relative;
+              top: -1px;
+            }
+          }
+
+          .remove {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  .subject {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px 0;
+    border-bottom: 0.75px solid #707070;
+    text-transform: capitalize;
+    color: #bfbfbf;
+    margin: 0 10px;
+
+    input {
+      border: none;
+      background-color: #000000;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      font-family: "Rajdhani";
+      font-weight: 600;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .message {
+    padding: 10px 0;
+    margin: 0 8px;
+
+    a {
+      word-break: break-word;
+    }
+  }
+
+  .own_placeholder {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    font-family: "Rajdhani SemiBold" !important;
+    padding: 10px 0;
+    margin: 0 10px;
+  }
+
+  quill-editor {
+    width: 100%;
+    padding: 10px 0 0;
+  }
+
+  ::ng-deep .ql-editor {
+    min-height: 200px;
+  }
+
+  ::ng-deep.ql-container {
+    height: calc(100% - 42px);
+    overflow: auto;
+    border: none;
+
+    .ql-editor {
+      padding: 10px 0 0;
+      font-family: "Rajdhani";
+      font-weight: 600;
+      color: white;
+      font-size: 16px;
+
+      &:before {
+        top: 18px;
+        right: 15px;
+        font-size: 16px;
+        font-family: "Rajdhani";
+        font-weight: 600;
+        color: white;
+        font-style: normal;
+        left: 0;
+      }
+    }
+  }
+
+  .prospect-sheet {
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #efefef;
+    border: 1px solid #707070;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    margin: 0 10px;
+
+    img {
+      width: 18px;
+      height: 18px;
+      margin-left: 10px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    a {
+      color: #2cbeff;
+      text-decoration: none;
+    }
+  }
+
+  .userLink {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2cbeff;
+    word-wrap: break-word;
+    display: block;
+    width: 100%;
+    margin: 0 10px;
+    position: relative;
+  }
+
+  .attachment {
+    margin-top: 10px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+
+    &.error {
+      color: red;
+    }
+
+    img {
+      width: 25px;
+      margin-right: 10px;
+    }
+
+    .mat-icon {
+      cursor: pointer;
+      width: 15px;
+      height: 15px;
+      font-size: 15px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.addTemplateMenu {
+  position: fixed;
+  z-index: 99;
+  // bottom: -300px;
+  left: 0;
+  right: 0;
+  // height: 254px;
+  background-color: #000000;
+  transition: all ease-in 300ms;
+  border-top: 1px solid #ccff00;
+
+  .name {
+    text-transform: capitalize;
+  }
+
+  &.visible {
+    bottom: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 10px 10px 0;
+
+    li {
+      height: 55px;
+      border-bottom: 1px solid #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .check-icon {
+        width: 22px;
+      }
+    }
+  }
+
+  .cancel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff0303;
+    text-align: center;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
+
+.draftsMenu {
+  position: fixed;
+  z-index: 99;
+  bottom: -300px;
+  left: 0;
+  right: 0;
+  height: 228px;
+  border-top: 1px solid #ccff00;
+  background-color: #000000;
+  transition: all ease-in 300ms;
+
+  &.visible {
+    bottom: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 10px 10px 0;
+
+    li {
+      height: 55px;
+      border-bottom: 1px solid #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .check-icon {
+        width: 22px;
+      }
+    }
+  }
+
+  .delete {
+    color: #ff0303;
+  }
+
+  .cancel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
+
+.backdrop {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #707070;
+  opacity: 0;
+  transition: all ease-in 300ms;
+
+  &.desktop {
+    display: none;
+  }
+
+  &.visible {
+    z-index: 98;
+    opacity: 0.5;
+  }
+}
+
+.prospect-sheet-container {
+  position: fixed;
+  top: 100vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #fff;
+  z-index: 10;
+
+  transition: all ease-in 200ms;
+
+  &.show {
+    top: 0;
+  }
+
+  display: grid;
+  grid-template-rows: 45px minmax(0, 1fr);
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.5px solid #000000;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+
+    background-color: #efefef;
+    box-shadow: 0 1px 3px #0000004d;
+    position: relative;
+    z-index: 1;
+
+    .title {
+      font-family: "Rajdhani";
+      font-weight: 600;
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #000;
+      font-weight: 700;
+      position: relative;
+      top: 2px;
+    }
+
+    .icons {
+      position: absolute;
+      right: 14px;
+
+      .edit {
+        width: 21px;
+        position: relative;
+        top: 1px;
+      }
+
+      .share {
+        width: 18px;
+        margin-right: 23px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  .prospect-sheet-content {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+.mail-required-dialog {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #ccff00;
+  font-weight: 700;
+  width: 80%;
+  margin: auto;
+
+  &-description {
+    margin: 10px 0;
+  }
+
+  &-list {
+    margin-left: 24px;
+  }
+
+  &-list-item {
+    text-decoration: underline;
+  }
+
+  &-button {
+    height: 50px;
+    margin: auto;
+    padding: 0 24px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ccff00;
+    color: #000;
+    font-family: "Avenir Next";
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    width: 952px;
+    height: 591px;
+    min-height: unset;
+    max-height: 90%;
+    border: 1px solid #ccff00;
+    grid-template-rows: 51px minmax(0, 1fr);
+    transform: translate(110px, 0px);
+  }
+
+  header {
+    .circleX {
+      display: none;
+    }
+
+    .close {
+      display: block;
+      color: #fff;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+      margin-left: 10px;
+    }
+
+    .desktop-from {
+      display: block;
+
+      .value {
+        font-size: 14px;
+        color: #fff;
+        font-weight: 700;
+        margin-left: 15px;
+
+        img {
+          width: 18px;
+          height: 14px;
+          position: relative;
+          top: 2px;
+        }
+      }
+
+      .connect {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        font-size: 15px;
+        font-weight: 700;
+        color: #000;
+        background-color: #000;
+        color: #fff;
+        border: 1px solid #ccff00;
+        border-radius: 15px;
+        padding: 3px 7px 3px 7px;
+        margin-left: 15px;
+
+        img {
+          width: 18px;
+          height: 14px;
+          margin-right: 3px;
+        }
+
+        .mat-icon {
+          display: none;
+        }
+      }
+    }
+
+    .toolbar {
+      .remove-btn {
+        height: 30px;
+        width: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .prospect-sheet-btn {
+        position: relative;
+        display: block;
+
+        img {
+          position: relative;
+          top: 3px;
+        }
+
+        .prospect-sheet-menu {
+          display: block;
+          position: absolute;
+          right: 0;
+          top: 30px;
+          width: 276px;
+          // height: 128px;
+          border-radius: 3px;
+          border: 1px solid #bfbfbf;
+          background-color: #ffffffde;
+          box-shadow: #00000029 2px 4px 6px;
+          list-style: none;
+          backdrop-filter: blur(30px);
+          padding: 0 6px;
+
+          li {
+            cursor: pointer;
+            font-size: 19px;
+            text-transform: capitalize;
+            font-weight: 600;
+            height: 41px;
+            line-height: 41px;
+            border-bottom: 1px solid #bfbfbf;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            img {
+              width: 22px;
+            }
+
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    padding: 0 0 10px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(59px, auto) 43px minmax(0, 1fr) 45px auto;
+
+    .from {
+      display: none;
+    }
+
+    .to {
+      .label {
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+          display: none;
+          width: 35px;
+          height: auto;
+        }
+      }
+
+      .value {
+        .contact {
+          color: #fff;
+
+          .mat-icon {
+            font-size: 20px;
+            height: 20px;
+            width: 20px;
+          }
+
+          &.active {
+            color: #000;
+          }
+        }
+      }
+    }
+
+    .own_placeholder {
+      border-bottom: 1px solid #000;
+      margin-bottom: 10px;
+      padding: 10px 0 0;
+    }
+
+    quill-editor {
+      height: 100%;
+
+      ::ng-deep.ql-container {
+        height: calc(100% - 42px);
+        overflow: auto;
+        border: none;
+
+        .ql-editor {
+          padding: 10px 0 0;
+          font-family: "Rajdhani";
+          font-weight: 600;
+          color: white;
+          font-size: 16px;
+
+          &:before {
+            top: 18px;
+            right: 15px;
+            font-size: 16px;
+            font-family: "Rajdhani";
+            font-weight: 600;
+            color: white;
+            font-style: normal;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    .prospect-sheet {
+      width: fit-content;
+
+      a {
+        margin-left: 35px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .addTemplateMenu {
+    display: none;
+  }
+
+  .draftsMenu {
+    bottom: -100vh;
+    transition: unset;
+    transition: bottom ease-in 5ms, opacity ease-in 300ms;
+    border-radius: 3px;
+    opacity: 0;
+
+    ul {
+      padding: 0 10px;
+
+      li {
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+
+    .cancel {
+      font-size: 24px;
+      height: 50px;
+      cursor: pointer;
+    }
+
+    &.visible {
+      width: 360px;
+      height: unset;
+      opacity: 1;
+      bottom: 50%;
+      left: 50%;
+      transform: translateX(-180px) translateY(75px);
+    }
+  }
+
+  .backdrop {
+    &.desktop {
+      display: block;
+    }
+
+    &.mobile {
+      display: none;
+    }
+  }
+
+  .prospect-sheet-container {
+    background-color: #70707080;
+    opacity: 0;
+    transition: top ease-in 1ms;
+    grid-template-rows: minmax(0, 1fr);
+    padding: 22px 0;
+
+    header {
+      display: none;
+    }
+
+    &.show {
+      top: 0;
+      opacity: 1;
+    }
+
+    .prospect-sheet-content {
+      width: 640px;
+      background-color: #fff;
+      margin: 0 auto;
+
+      ::ng-deep .general {
+        .profile-img {
+          width: 112px;
+          height: 112px;
+        }
+
+        .info {
+          height: unset;
+
+          .name {
+            font-size: 25px;
+            margin-bottom: 8px;
+          }
+
+          .position {
+            font-size: 20px;
+            margin-bottom: 8px;
+          }
+
+          .college {
+            font-size: 20px;
+          }
+        }
+
+        .team-logo {
+          width: 78px;
+        }
+      }
+
+      ::ng-deep .highlights {
+        &-title {
+          font-size: 16px;
+        }
+
+        &-content {
+          .video {
+            height: 203px;
+            width: 354px;
+          }
+
+          .info {
+            grid-row-gap: 43px;
+
+            &-cell {
+              &__label {
+                font-size: 17px;
+              }
+
+              &__value {
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
+
+      ::ng-deep .info-block {
+        &__title {
+          font-size: 21px;
+        }
+
+        &__row {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

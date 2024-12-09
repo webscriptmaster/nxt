@@ -1,0 +1,105 @@
+form {
+  input {
+    height: 48px;
+    font-size: 16px;
+    background-color: #000;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 0 10px;
+    color: #fff;
+    font-weight: 700;
+    font-family: "Rajdhani";
+          font-weight: 600;
+    &:focus {
+      outline: none;
+    }
+    &.ng-invalid.ng-touched {
+      border: 1px solid red;
+    }
+    &.error {
+      border: 1px solid red;
+    }
+  }
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    position: relative;
+    label {
+      font-size: 17px;
+      font-weight: 700;
+      color: #bfbfbf;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+      .star {
+        font-size: 12px;
+        color: red;
+        align-self: flex-start;
+        margin-left: 3px;
+      }
+    }
+    .sufix {
+      position: absolute;
+      right: 12px;
+      bottom: 11px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #707070;
+    }
+  }
+  .height-input-container {
+    display: inline-block;
+    position: relative;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    display: flex;
+
+    input {
+      width: 64px;
+      text-align: center;
+    }
+    .symbol {
+      font-style: italic;
+      color: #bfbfbf;
+      font-weight: 700;
+      font-size: 30px;
+      margin: 5px;
+      position: relative;
+      top: -15px;
+    }
+  }
+
+  &.edit {
+    input {
+      background-color: #000;
+    }
+    .form-control {
+      label {
+        color: #bfbfbf;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 24px;
+    .form-control {
+      label {
+        font-size: 18px;
+      }
+    }
+  }
+}

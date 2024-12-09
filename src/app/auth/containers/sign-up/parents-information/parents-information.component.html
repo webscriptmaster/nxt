@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="parents-information">
+    
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Parent Information</p>
+      <p class="sub-title">Use this to autofill hundreds of questionnaires.</p>
+    </header>
+
+    <div class="content">
+      <form [formGroup]="parentForm" *ngIf="parentForm">
+        <div class="form-control">
+          <label>Parent 1 First Name</label>
+          <input type="text" formControlName="firstNameParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Last Name</label>
+          <input type="text" formControlName="lastNameParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Phone Number</label>
+          <input type="phone" formControlName="phoneNumberParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Email</label>
+          <input type="email" formControlName="emailParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 College</label>
+          <input type="text" formControlName="collegeParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 First Name</label>
+          <input type="text" formControlName="firstNameParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Last Name</label>
+          <input type="text" formControlName="lastNameParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Phone Number</label>
+          <input type="phone" formControlName="phoneNumberParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Email</label>
+          <input type="email" formControlName="emailParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 College</label>
+          <input type="text" formControlName="collegeParent2" />
+        </div>
+      </form>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="90"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

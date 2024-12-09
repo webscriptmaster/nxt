@@ -1,0 +1,185 @@
+<div class="contacts">
+  <div class="contact" *ngFor="let contact of contacts">
+    <div class="position">{{ contact.position }}</div>
+    <div class="name">{{ contact.firstName }} {{ contact.lastName }}</div>
+    <div class="button-row">
+      <div class="left">
+        <div
+          *ngIf="isShowAddEmailTemplate && !showConnectEmail"
+          class="email"
+          (menuOpened)="
+            contact.isSelected = true;
+            onToggleContact(
+              contact.email,
+              contact.firstName,
+              contact.lastName,
+              contact._id
+            );
+            handleMenuOpen(menu1)
+          "
+          (menuClosed)="
+            contact.isSelected = false;
+            onToggleContact(
+              contact.email,
+              contact.firstName,
+              contact.lastName,
+              contact._id
+            )
+          "
+          [ngClass]="{
+            selected: selectedContacts[contact._id] || contact.isSelected
+          }"
+          [matMenuTriggerFor]="menu1"
+        >
+          <img src="assets/images/icons/email.png" />
+          <span *ngIf="contact.email">{{ contact.email }}</span>
+          <span *ngIf="!contact.email">-</span>
+        </div>
+        <span *ngIf="!isShowAddEmailTemplate && !showConnectEmail">
+          <div
+            class="email"
+            [ngClass]="{ selected: selectedContacts[contact._id] }"
+            (click)="
+              onToggleContact(
+                contact.email,
+                contact.firstName,
+                contact.lastName,
+                contact._id
+              )
+            "
+          >
+            <img src="assets/images/icons/email.png" />
+            <span *ngIf="contact.email">{{ contact.email }}</span>
+            <span *ngIf="!contact.email">-</span>
+          </div>
+        </span>
+        <span *ngIf="!isShowAddEmailTemplate && showConnectEmail">
+          <div
+            class="email"
+            [ngClass]="{ selected: selectedContacts[contact._id] }"
+            (click)="connectEmailFlow()"
+          >
+            <img src="assets/images/icons/email.png" />
+            <span *ngIf="contact.email">{{ contact.email }}</span>
+            <span *ngIf="!contact.email">-</span>
+          </div>
+        </span>
+        <mat-menu
+          #menu1="matMenu"
+          [hasBackdrop]="true"
+          [backdropClass]="'bgTransparent'"
+          xPosition="before"
+          yPosition="above"
+        >
+          <button disabled mat-menu-item>Add To Email:</button>
+          <mat-divider></mat-divider>
+          <button
+            *ngFor="let template of listTemplate"
+            (click)="addEmailTemplate(contact, template)"
+            mat-menu-item
+          >
+            {{ template.name }}
+          </button>
+          <mat-divider></mat-divider>
+        </mat-menu>
+        <div class="phone">
+          <img src="assets/images/icons/phone.png" />
+          <a *ngIf="contact.phoneNumber" href="tel:{{ contact.phoneNumber }}">{{
+            contact.phoneNumber
+          }}</a>
+          <a *ngIf="!contact.phoneNumber">-</a>
+        </div>
+      </div>
+      <div class="right">
+        <div
+          *ngIf="
+            ObjectKeys(selectedContacts).length === 6 &&
+            !selectedContacts[contact._id] &&
+            contact.email
+          "
+          class="tooltip"
+        >
+          Six emails allowed
+        </div>
+        <div
+          class="add_email"
+          [ngClass]="{
+            selected: selectedContacts[contact._id] || contact.isSelected,
+            disabled:
+              ObjectKeys(selectedContacts).length === 6 &&
+              !selectedContacts[contact._id]
+          }"
+          *ngIf="contact.email"
+        >
+          <mat-menu
+            #menu="matMenu"
+            [hasBackdrop]="true"
+            [backdropClass]="'bgTransparent'"
+            yPosition="above"
+          >
+            <button disabled mat-menu-item>Add To Email:</button>
+            <mat-divider></mat-divider>
+            <button
+              *ngFor="let template of listTemplate"
+              (click)="addEmailTemplate(contact, template)"
+              mat-menu-item
+            >
+              {{ template.name }}
+            </button>
+            <mat-divider></mat-divider>
+          </mat-menu>
+          <span
+            *ngIf="isShowAddEmailTemplate && !showConnectEmail"
+            (menuOpened)="
+              contact.isSelected = true;
+              onToggleContact(
+                contact.email,
+                contact.firstName,
+                contact.lastName,
+                contact._id
+              );
+              handleMenuOpen(menu)
+            "
+            (menuClosed)="
+              contact.isSelected = false;
+              onToggleContact(
+                contact.email,
+                contact.firstName,
+                contact.lastName,
+                contact._id
+              )
+            "
+            [matMenuTriggerFor]="menu"
+            >{{
+              selectedContacts[contact._id] || contact.isSelected
+                ? "Added"
+                : "Add to Email"
+            }}
+            <img src="/assets/images/colleges-library/check.png" />
+          </span>
+          <span *ngIf="!isShowAddEmailTemplate && !showConnectEmail">
+            <span
+              class="add"
+              (click)="
+                onToggleContact(
+                  contact.email,
+                  contact.firstName,
+                  contact.lastName,
+                  contact._id
+                )
+              "
+              >{{ selectedContacts[contact._id] ? "Added" : "Add to Email" }}
+              <img src="/assets/images/colleges-library/check.png" />
+            </span>
+          </span>
+          <span *ngIf="!isShowAddEmailTemplate && showConnectEmail">
+            <span class="add" (click)="connectEmailFlow()"
+              >{{ selectedContacts[contact._id] ? "Added" : "Add to Email" }}
+              <img src="/assets/images/colleges-library/check.png" />
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

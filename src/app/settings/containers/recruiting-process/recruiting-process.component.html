@@ -1,0 +1,86 @@
+<div class="how-it-works">
+  <img
+    (click)="onBack()"
+    class="circleX mobile"
+    src="/assets/images/icons/circleX-black.png"
+    alt=""
+  />
+  <img
+  (click)="onBack()"
+  class="circleX desktop"
+  src="/assets/images/icons/circleX.png"
+  alt=""
+/>
+  <div class="top">
+    <ng-container *ngIf="currentSlide === 1">
+      <div class="slide_1">
+        <div class="title">How it works</div>
+        <img class="logo" src="./assets/images/logo/logo_shadows.png" />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentSlide === 2">
+      <div class="slide_2">
+        <div class="title">How it works</div>
+        <div class="count"><span>1.</span></div>
+        <div class="img">
+          <ng-lottie [options]="optionsSlide1"></ng-lottie>
+        </div>
+
+        <div class="description-title">Search Colleges</div>
+        <div class="description">
+          Filter through thousands of college coaches contact info,
+          questionnaires, camps, & academic information from every college
+          across the nation.
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentSlide === 3">
+      <div class="slide_3">
+        <div class="title">How it works</div>
+        <div class="count"><span>2.</span></div>
+        <div class="img">
+          <ng-lottie [options]="optionsSlide2"></ng-lottie>
+        </div>
+
+        <div class="description-title">Contact Coaches</div>
+        <div class="description">
+          Quickly send personalized emails, prospect sheet & highlights. Connect
+          with coaches on social media, access recruiting questionnaires, & sign
+          up for camps.
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentSlide === 4">
+      <div class="slide_4">
+        <div class="title">How it works</div>
+        <div class="count"><span>3.</span></div>
+        <div class="img">
+          <ng-lottie [options]="optionsSlide3"></ng-lottie>
+        </div>
+
+        <div class="description-title">Get An Offer</div>
+        <div class="description">
+          Your athletic performance has proven you can play. Use NXT 1 to
+          increase your exposure & opportunities of receiving an offer. Add your
+          offers on our app to inspire other athletes to fulfill their dream.
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="bottom">
+    <div class="dots">
+      <div
+        class="dot"
+        *ngFor="let dot of [1, 2, 3, 4]"
+        [ngClass]="{ active: currentSlide === dot }"
+        (click)="currentSlide = dot"
+      ></div>
+    </div>
+    <button (click)="onNext()">
+      <ng-container *ngIf="currentSlide === 1">Continue</ng-container>
+      <ng-container *ngIf="currentSlide === 2">Continue</ng-container>
+      <ng-container *ngIf="currentSlide === 3">Continue</ng-container>
+      <ng-container *ngIf="currentSlide === 4">Go Get It</ng-container>
+    </button>
+  </div>
+</div>

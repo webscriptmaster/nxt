@@ -1,0 +1,223 @@
+.contacts {
+  margin-top: 15px;
+}
+
+.info {
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+  img {
+    width: 100%;
+  }
+}
+.contact {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-direction: column;
+  .button-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .position {
+    font-size: 12px;
+    font-weight: 700;
+    color: #707070;
+    margin-bottom: 2px;
+    font-family: "Rajdhani";
+    font-weight: 600;
+  }
+  .name {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .email {
+    font-size: 14px;
+    color: #2cbeff;
+    font-family: "Rajdhani";
+    font-weight: 600;
+    text-decoration: underline;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    word-break: break-word;
+    img {
+      width: 16px;
+      margin-right: 3px;
+    }
+    &.selected {
+      color: #bfbfbf;
+    }
+  }
+  .phone {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Rajdhani";
+    font-weight: 600;
+    color: #000;
+    display: flex;
+    align-items: center;
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+    img {
+      width: 16px;
+      margin-right: 3px;
+    }
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    min-width: 105px;
+    flex-direction: column;
+    .tooltip {
+      font-size: 10px;
+      font-weight: 700;
+      color: red;
+      text-align: center;
+      margin: 0 7px 0 auto;
+      position: relative;
+      top: -15px;
+    }
+    .add_email {
+      position: relative;
+      top: -5px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #000;
+      font-weight: 700;
+      // padding: 5px;
+      border-radius: 20px;
+      border: 1px solid #000;
+      background-color: #efefef;
+      box-shadow: #00000029 0 4px 6px;
+      white-space: nowrap;
+      margin-left: 30px;
+      width: 105px;
+      .add {
+        height: 30px;
+        padding: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      span {
+        flex: 1;
+        text-align: center;
+      }
+      img {
+        margin-left: 5px;
+        background-color: #efefef;
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+      }
+      &.selected {
+        background-color: #000;
+        color: #fff;
+      }
+      &.disabled {
+        border-color: red;
+        top: -15px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .contacts {
+    margin-top: 5px;
+  }
+
+  .contact {
+    .position {
+      font-size: 14px;
+    }
+    .name {
+      font-size: 16px;
+    }
+    .email {
+      cursor: pointer;
+    }
+    .phone {
+      font-size: 13px;
+    }
+    .right {
+      min-width: 125px;
+      .add_email {
+        cursor: pointer;
+        width: 125px;
+        font-size: 14px;
+        img {
+          width: 18px;
+          height: 19px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-mdc-menu-panel {
+    background-color: #e7e6e6;
+    font-size: 17px;
+    bottom: -10px;
+    .mat-mdc-menu-content {
+      padding: 0px;
+      height: 215px;
+      width: max-content;
+      .mat-divider {
+        width: 90%;
+        position: relative;
+        left: 10px;
+      }
+      .mat-mdc-menu-item {
+        padding: 0 10px;
+        height: 42px;
+        min-height: unset;
+        .mdc-list-item__primary-text {
+          font-family: "Rajdhani" !important;
+          font-size: 16px;
+          text-transform: capitalize;
+          font-weight: 700;
+        }
+      }
+      .mat-mdc-menu-item[disabled] {
+        padding: 0;
+        height: 30px;
+        background: #000;
+        opacity: 1;
+        span {
+          color: #fff;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+  .mat-mdc-menu-trigger {
+    height: 30px;
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.email {
+      height: unset !important;
+      padding: 0px !important;
+    }
+  }
+
+  .bgTransparent {
+    background: transparent !important;
+    backdrop-filter: unset !important;
+  }
+}

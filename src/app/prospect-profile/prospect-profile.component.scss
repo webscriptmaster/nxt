@@ -1,0 +1,369 @@
+.container {
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(32, 32, 32, 1) 30%,
+      rgba(50, 50, 50, 1) 50%,
+      rgba(32, 32, 32, 1) 70%,
+      rgba(0, 0, 0, 1) 100%);
+  height: 100%;
+  min-height: 100%;
+}
+
+.main {
+  height: 100%;
+}
+
+.prospect-profile {
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr);
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ffffff;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+
+    .title {
+      font-family: "Rajdhani";
+      font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      top: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .desktop {
+      position: absolute;
+      right: 10px;
+      width: 24px;
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0 11px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .banner {
+      // Updated with banner
+      background: linear-gradient(45deg,
+          #ffef78,
+          #ccff00,
+          #78ffc4,
+          #78d3ff,
+          #787bff,
+          #ff0000,
+          #ff0000);
+      animation: gradient 15s ease infinite;
+      color: #000000;
+      padding: 10px;
+      font-size: 16px;
+      font-family: "Rajdhani";
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      border-radius: 0;
+      width: 100vw;
+      // margin-left: -11px;
+      position: relative;
+      left: calc(-50vw + 50%);
+    }
+
+    .tabs-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .tabs {
+        padding: 15px 10px;
+        display: flex;
+        color: #707070;
+        font-size: 15px;
+        font-weight: 700;
+        top: 0;
+        padding: 15px 0;
+        height: fit-content;
+        overflow-x: auto;
+
+        .tab {
+          white-space: nowrap;
+          margin-right: 26.5px;
+          cursor: pointer;
+          color: #bfbfbf;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          &-image-wrapper {
+            width: 65px;
+            height: 65px;
+            border: 1.5px solid #fff;
+            border-radius: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            background-color: #000000;
+
+            .image {
+              width: 25px;
+            }
+          }
+
+          &-name {
+            font-size: 14px;
+            color: #fff;
+            font-family: "Rajdhani";
+            font-weight: 700;
+          }
+
+          &.active {
+            color: #fff;
+
+            .tab-image-wrapper {
+              background-color: #707070;
+            }
+          }
+
+          .tab-subtitle {
+            font-size: 8px;
+          }
+
+          .mixtapes {
+            background-color: #000000;
+            filter: brightness(0.9);
+          }
+
+          .mixtapes:hover {
+            background: linear-gradient(45deg,
+                rgba(22, 49, 128, 0.9),
+                rgba(99, 7, 122, 0.9),
+                rgba(160, 22, 132, 0.9),
+                rgba(46, 64, 83, 0.9),
+                rgba(88, 30, 30, 0.9));
+            filter: brightness(1);
+            transform: scale(1.05);
+          }
+        }
+
+        .tab:hover:not(.active) .tab-image-wrapper {
+          background-color: #262626;
+          transform: scale(1.05);
+        }
+
+        .tab:hover:not(.active) .mixtapes {
+          transform: scale(1.05);
+          background: linear-gradient(45deg,
+              rgba(22, 49, 128, 0.9),
+              rgba(99, 7, 122, 0.9),
+              rgba(160, 22, 132, 0.9),
+              rgba(46, 64, 83, 0.9),
+              rgba(88, 30, 30, 0.9));
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 15px;
+
+      .credit {
+        .key {
+          color: #f5ff00;
+          font-size: 15px;
+          font-family: "Rajdhani";
+          font-weight: 700;
+          margin-right: 3px;
+        }
+
+        .total {
+          color: #fff;
+          font-family: "Rajdhani";
+          font-weight: 700;
+          font-size-adjust: 15px;
+        }
+      }
+
+      // .guide {
+      //   margin-left: 30px;
+      //   button {
+      //     width: 113px;
+      //     height: 35px;
+      //     border: 1px solid #fff;
+      //     border-radius: 8px;
+      //     color: #fff;
+      //     background-color: #707070;
+      //     text-align: center;
+      //     text-transform: capitalize;
+      //     font-size-adjust: 17px;
+      //   }
+      // }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    app-main-footer {
+      display: none;
+    }
+
+    app-sidenav {
+      &.mobile {
+        display: none;
+      }
+
+      &.desktop {
+        display: block;
+      }
+    }
+
+    overflow: hidden;
+    grid-template-rows: minmax(0, 1fr);
+    max-width: unset;
+
+    &:before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("/assets/images/home/HOME-BG-2.0.svg");
+      background-position: center center;
+      background-size: cover;
+    }
+
+    .main {
+      position: relative;
+      z-index: 1;
+      width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      grid-template-columns: 220px minmax(0, 1fr);
+      background-color: #171717;
+      border-right: 1px solid #ffffff;
+
+      .sidenav {
+        grid-row: 1/3;
+        grid-column: 1;
+      }
+    }
+
+    .prospect-profile {
+      position: relative;
+      max-width: unset;
+      width: 100%;
+      z-index: 5;
+      grid-column: 2;
+      display: block;
+      overflow: auto;
+      padding: 30px 30px 100px;
+
+      header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: none;
+
+        .title {
+          font-size: 28px;
+          text-align: left;
+          top: 2px;
+          left: 100px;
+        }
+
+        .back-arrow {
+          width: 41px;
+          height: 41px;
+          left: 64px;
+        }
+
+        .desktop {
+          right: 30px;
+        }
+      }
+
+      .content {
+        border: 1px solid #fff;
+
+        .tabs-wrapper {
+          flex-direction: row;
+        }
+
+        .prospect-profile {
+          .right {
+            display: flex;
+          }
+        }
+      }
+
+      .content {
+        margin-top: 30px;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #fff;
+        border-radius: 6px;
+        padding: 20px;
+        background-color: #7070703d;
+
+        .tabs-wrapper {
+          flex-direction: row;
+
+          .right {
+            display: flex;
+          }
+        }
+
+        .prospect-profile {
+          .right {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    .prospect-profile {
+      header {
+        .title {
+          left: 15px;
+        }
+      }
+
+      .banner {
+        width: 100vw;
+        left: calc(-50vw + 50%);
+      }
+    }
+  }
+}

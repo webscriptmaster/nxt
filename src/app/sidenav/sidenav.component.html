@@ -1,0 +1,225 @@
+<div class="sidenav" [ngClass]="{ active: sidenav.showSidenav$ | async }">
+  <div
+    class="backdrop-overlay"
+    [ngClass]="{ active: sidenav.showSidenav$ | async }"
+    (click)="sidenav.closeSidenav()"
+  ></div>
+
+  <nav [ngClass]="{ active: sidenav.showSidenav$ | async }" class="mobile">
+    <header>
+      <div class="profile" *ngIf="user$ | async">
+        <ng-container
+          *ngIf="
+            !(
+              (user$ | async)?.completeAddSport &&
+              (user$ | async)?.appSport &&
+              (user$ | async)?.appSport === 'secondary'
+            )
+          "
+        >
+          <img
+            (click)="sidenav.closeSidenav()"
+            class="image"
+            [src]="(user$ |async)?.['profileImg']"
+            *ngIf="(user$ |async)?.['profileImg']"
+          />
+          <img
+            (click)="sidenav.closeSidenav()"
+            class="default image"
+            *ngIf="!(user$ |async)?.['profileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+          <div class="name">
+            {{(user$ |async)?.['firstName']}} {{(user$ |async)?.['lastName']}}
+          </div>
+          <div class="positions">
+            {{ (user$ | async)?.primarySportPositions?.join(" / ") }}
+          </div>
+        </ng-container>
+        <ng-container
+          *ngIf="
+            (user$ | async)?.completeAddSport &&
+            (user$ | async)?.appSport === 'secondary'
+          "
+        >
+          <img
+            (click)="sidenav.closeSidenav()"
+            class="image"
+            [src]="(user$ |async)?.['secondarySportProfileImg']"
+            *ngIf="(user$ |async)?.['secondarySportProfileImg']"
+          />
+          <img
+            (click)="sidenav.closeSidenav()"
+            class="default image"
+            *ngIf="!(user$ |async)?.['secondarySportProfileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+          <div class="name">
+            {{(user$ |async)?.['firstName']}} {{(user$ |async)?.['lastName']}}
+          </div>
+          <div class="positions">
+            {{ (user$ | async)?.secondarySportPositions?.join(" / ") }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div
+        *ngIf="!(user$ |async)?.['completeAddSport'] && (user$ |async)?.['canAddSport']"
+        class="add-sport"
+        (click)="onSports()"
+      >
+        <div class="label">Sports</div>
+        <img src="./assets/images/sidebar/add-sport.png" />
+      </div>
+
+      <ng-container
+        *ngIf="
+          (user$ | async)?.completeAddSport &&
+          (user$ | async)?.appSport === 'primary'
+        "
+      >
+        <div class="toggle-sport">
+          <img
+            (click)="onSetAppSport('secondary')"
+            class="image"
+            [src]="(user$ |async)?.['secondarySportProfileImg']"
+            *ngIf="(user$ |async)?.['secondarySportProfileImg']"
+          />
+          <img
+            (click)="onSetAppSport('secondary')"
+            class="default image"
+            *ngIf="!(user$ |async)?.['secondarySportProfileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+        </div>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          (user$ | async)?.completeAddSport &&
+          (user$ | async)?.appSport === 'secondary'
+        "
+      >
+        <div class="toggle-sport">
+          <img
+            (click)="onSetAppSport('primary')"
+            class="image"
+            [src]="(user$ |async)?.['profileImg']"
+            *ngIf="(user$ |async)?.['profileImg']"
+          />
+          <img
+            (click)="onSetAppSport('primary')"
+            class="default image"
+            *ngIf="!(user$ |async)?.['profileImg']"
+            src="./assets/images/logo/lighting_bolt_new.png"
+          />
+        </div>
+      </ng-container>
+    </header>
+
+    <ul class="menu">
+      <li (click)="openLink('https://nxt1sports.com')">
+        <img src="./assets/images/sidebar/Prospect-Center.png" /><span
+          >Prospect Center</span
+        >
+      </li>
+      <li (click)="onRefer()">
+        <img src="./assets/images/icons/refer.png" /><span>Earn Credits</span>
+      </li>
+      <li (click)="onAddOffers()">
+        <img src="./assets/images/icons/offers.png" /><span>Offers</span>
+      </li>
+      <li (click)="onContactUs()">
+        <img src="./assets/images/icons/contact.png" /><span>Contact</span>
+      </li>
+      <li (click)="onSettings()">
+        <img src="./assets/images/icons/settings.png" /><span>Settings</span>
+      </li>
+      <li (click)="showFollowMenu = !showFollowMenu" class="follow">
+        <img src="./assets/images/sidebar/follow.png" /><span>Follow us</span>
+        <mat-icon *ngIf="!showFollowMenu">expand_more</mat-icon>
+        <mat-icon *ngIf="showFollowMenu">expand_less</mat-icon>
+      </li>
+      <ul class="follow-menu" *ngIf="showFollowMenu">
+        <li>
+          <a
+            href="twitter://user?screen_name=nxt1sports"
+            (click)="openLink('https://twitter.com/nxt1sports')"
+            target="_blank"
+          >
+            <img class="x-icon" src="./assets/images/sidebar/x-icon-dark.png" />
+          </a>
+        </li>
+        <li>
+          <a
+            href="fb://profile/100088261405525"
+            (click)="openLink('https://www.facebook.com/NXT1sports')"
+            target="_blank"
+          >
+            <img src="./assets/images/sidebar/facebook.png"
+          /></a>
+        </li>
+        <li>
+          <a
+            href="youtube://www.youtube.com/@nxt1sports"
+            (click)="openLink('https://www.youtube.com/@nxt1sports')"
+            target="_blank"
+          >
+            <img src="./assets/images/sidebar/youtube.png"
+          /></a>
+        </li>
+        <li>
+          <a
+            href="instagram://user?username=nxt1sports"
+            (click)="openLink('https://www.instagram.com/nxt1sports')"
+            target="_blank"
+          >
+            <img src="./assets/images/sidebar/instagram.png"
+          /></a>
+        </li>
+      </ul>
+    </ul>
+
+    <footer>
+      <div (click)="onPrivacy()">
+        <span>Privacy Policy</span
+        ><img src="./assets/images/sidebar/link.png" />
+      </div>
+      <div (click)="onTerms()">
+        <span>Terms of Service</span
+        ><img src="./assets/images/sidebar/link.png" />
+      </div>
+    </footer>
+  </nav>
+
+  <nav class="desktop">
+    <img class="logo" src="./assets/images/logo/logo_600.png" />
+    <ul class="menu">
+      <li (click)="onHome()" [ngClass]="{ active: activePage == 'home' }">
+        <img src="./assets/images/nav-bar/filled/home.png" /><span>Home</span>
+      </li>
+      <li (click)="onProfile()" [ngClass]="{ active: activePage == 'profile' }">
+        <img src="./assets/images/icons/profile.png" /><span>Edit Profile</span>
+      </li>
+      <li (click)="openLink('https://nxt1sports.com')">
+        <img src="./assets/images/sidebar/Prospect-Center.png" /><span
+          >Prospect Center</span
+        >
+      </li>
+      <li (click)="onRefer()" [ngClass]="{ active: activePage == 'referral' }">
+        <img src="./assets/images/icons/refer.png" /><span>Earn Credits</span>
+      </li>
+      <li
+        (click)="onContactUs()"
+        [ngClass]="{ active: activePage == 'contact' }"
+      >
+        <img src="./assets/images/icons/contact.png" /><span>Contact</span>
+      </li>
+      <li
+        (click)="onSettings()"
+        [ngClass]="{ active: activePage == 'settings' }"
+      >
+        <img src="./assets/images/icons/settings.png" /><span>Settings</span>
+      </li>
+    </ul>
+  </nav>
+</div>

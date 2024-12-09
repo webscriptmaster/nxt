@@ -1,0 +1,64 @@
+.send-email-dialog {
+  max-width: 95vw;
+  width: 322px;
+  border: 1px solid #ccff00;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #161616;
+  .content {
+    header {
+      z-index: 1;
+      text-align: center;
+      height: 23px;
+      margin-bottom: 15px;
+      img {
+        width: 100px;
+      }
+    }
+    main {
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      font-family: "Rajdhani";
+          font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+      text-transform: capitalize;
+      .highlight {
+        font-family: "Rajdhani";
+          font-weight: 700;
+      }
+    }
+    .info {
+      text-align: center;
+      font-size: 13px;
+      font-family: "Rajdhani";
+          font-weight: 600;
+      color: #bfbfbf;
+      margin: 10px 0;
+    }
+  }
+  .buttons {
+    margin-top: 13px;
+    width: 100%;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    div {
+      height: 36px;
+      border-radius: 24px;
+      border: 1px solid #fff;
+      display: flex;
+      background-color: #000;
+      justify-content: center;
+      line-height: 36px;
+      font-size: 21px;
+      cursor: pointer;
+    }
+  }
+}

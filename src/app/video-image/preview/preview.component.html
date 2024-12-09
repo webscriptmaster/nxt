@@ -1,0 +1,30 @@
+<div
+  *ngIf="preview.type && preview.url"
+  (click)="stopPropagation($event)"
+  class="video-overlay"
+>
+  <div class="video-modal">
+    <img
+      (click)="handleClick()"
+      *ngIf="preview.url && showCloseIcon$ | async"
+      src="assets/icons/close-media.png"
+      class="close-icon"
+      alt="Close"
+    />
+    <video
+      class="preview-video"
+      *ngIf="preview.type === 'video'"
+      width="100%"
+      [src]="preview.url"
+      height="auto"
+      autoplay
+      controls
+    ></video>
+    <img
+      class="preview-image"
+      *ngIf="preview.type === 'image'"
+      [src]="preview.url"
+      alt=""
+    />
+  </div>
+</div>

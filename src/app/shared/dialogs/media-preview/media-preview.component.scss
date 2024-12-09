@@ -1,0 +1,58 @@
+.video-overlay {
+  position: fixed;
+  top: 0;
+  z-index: 40;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-modal {
+  max-width: 600px;
+  max-height: 100vh;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.close-icon {
+  position: absolute;
+  width: 35px;
+  z-index: 30;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  display: none; /* Hide by default */
+}
+
+.close-icon.visible {
+  display: block;
+}
+
+video {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  pointer-events: all;
+}
+
+.preview-image {
+  height: auto;
+  max-width: 100%;
+  max-height: 90vh;
+}
+
+.preview-video {
+  max-width: 100%;
+  width: auto;
+  height: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="stats">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Add Your Stats</p>
+      <p class="sub-title">Highlight your performance.</p>
+    </header>
+
+    <div class="content" *ngIf="sport">
+      <app-shared-stats-component
+        [sport]="sport"
+        [userData]="userData"
+      ></app-shared-stats-component>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="80"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

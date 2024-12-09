@@ -1,0 +1,70 @@
+<div class="hear-about">
+  <div class="title">How Did You Hear About Us?</div>
+
+  <ul>
+    <li
+      (click)="onSelect('club')"
+      [ngClass]="{ selected: hearAbout === 'club' }"
+    >
+      <div class="select"></div>
+      <p>
+        Club
+        <input
+          [(ngModel)]="clubName"
+          type="text"
+          placeholder="Club Name.."
+        />
+      </p>
+    </li>
+    <li
+      (click)="onSelect('social')"
+      [ngClass]="{ selected: hearAbout === 'social' }"
+    >
+      <div class="select"></div>
+      <p>Social Media (Facebook, Twitter, etc.)</p>
+    </li>
+    <li
+      (click)="onSelect('search')"
+      [ngClass]="{ selected: hearAbout === 'search' }"
+    >
+      <div class="select"></div>
+      <p>Search Engine (Google, Yahoo, etc.)</p>
+    </li>
+    <li
+      (click)="onSelect('friend')"
+      [ngClass]="{ selected: hearAbout === 'friend' }"
+    >
+      <div class="select"></div>
+      <p>Through a friend</p>
+    </li>
+    <li
+      (click)="onSelect('advertisement')"
+      [ngClass]="{ selected: hearAbout === 'advertisement' }"
+    >
+      <div class="select"></div>
+      <p>Advertisement</p>
+    </li>
+    <li
+      (click)="onSelect('other')"
+      [ngClass]="{ selected: hearAbout === 'other' }"
+    >
+      <div class="select"></div>
+      <p>
+        Other
+        <input
+          [(ngModel)]="otherSpecify"
+          type="text"
+          placeholder="Please Specify.."
+        />
+      </p>
+    </li>
+  </ul>
+
+  <div class="last-row">
+    <span>Thank You!</span>
+  </div>
+
+  <button class="continue-btn" type="button" (click)="onSubmit()">
+    Submit
+  </button>
+</div>

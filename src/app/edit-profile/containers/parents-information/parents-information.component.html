@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="parents-information">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow-black.png"
+        alt=""
+      />
+      <p class="title">Parent Information</p>
+      <p class="sub-title">Use this to autofill hundreds of questionnaires.</p>
+    </header>
+
+    <div class="content">
+      <form [formGroup]="parentForm" *ngIf="parentForm">
+        <div class="form-control">
+          <label>Parent 1 First Name</label>
+          <input type="text" formControlName="firstNameParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Last Name</label>
+          <input type="text" formControlName="lastNameParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Phone Number</label>
+          <input type="phone" formControlName="phoneNumberParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 Email</label>
+          <input type="email" formControlName="emailParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 1 College</label>
+          <input type="text" formControlName="collegeParent1" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 First Name</label>
+          <input type="text" formControlName="firstNameParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Last Name</label>
+          <input type="text" formControlName="lastNameParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Phone Number</label>
+          <input type="phone" formControlName="phoneNumberParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 Email</label>
+          <input type="email" formControlName="emailParent2" />
+        </div>
+
+        <div class="form-control">
+          <label>Parent 2 College</label>
+          <input type="text" formControlName="collegeParent2" />
+        </div>
+      </form>
+    </div>
+
+    <div class="bottom">
+      <div class="save" (click)="onSave()">Save</div>
+
+      <div class="prospect-sheet" (click)="showProspectSheet = true">
+        View Prospect Sheet
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>
+
+<div class="prospect-sheet-container" [ngClass]="{ show: showProspectSheet }">
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+
+    <div class="icons">
+      <img
+        class="edit"
+        (click)="onEditProfile()"
+        src="/assets/images/colleges-library/pen.png"
+        alt=""
+      />
+    </div>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="userData"
+      [user]="userData"
+    ></app-prospect-sheet-info>
+  </div>
+</div>

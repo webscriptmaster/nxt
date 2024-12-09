@@ -1,0 +1,60 @@
+<div class="container emails">
+  <div class="content">
+    <ng-container *ngIf="showContainer && !!(user$ | async)?.activityTracking && questionnaires.length === 0">
+      <div class="no-data">Fill out questionnaires in the College Library to track them here.</div>
+    </ng-container>
+    <ng-container *ngIf="!(user$ | async)?.activityTracking">
+      <div>
+        <label>Turn On Activity Tracking</label>
+        <ui-switch [checked]="!!(user$ | async)?.activityTracking" (change)="onToggleTracking($event)"></ui-switch>
+        <div class="guide">
+          Activity tracking allows you to see your emails sent and follow-up, <span class="highlight">what coaches viewed
+            your email,</span> questionnaires
+          taken, and camps signed up for. ALL FOR FREE!
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!!(user$ | async)?.activityTracking">
+      <div *ngFor="let item of questionnaires" class="offer">
+        <div class="offer-side">
+          <img #logo class="image" [src]="item.logoUrl | collegeLogo" (error)="defaultLogo.style.display = 'block'; logo.style.display = 'none'" />
+          <img #defaultLogo style="display: none;" class="default image" src="./assets/images/logo/lighting_bolt_new.png" />
+          <img class="drop-down" src="./assets/images/icons/offer-drop-down.png " />
+        </div>
+        <div class="offer-body">
+          <div class="date">{{ item.date.toDate() | dateAgo }}</div>
+          <div class="message">
+            {{ item.collegeName }}
+            {{ item.message }}
+          </div>
+          <div class="bottom">
+            <div class="links">
+              <div class="twitter" *ngIf="item.twitter" (click)="onTwitter(item.twitter)">
+                <img class="x-icon" [src]="xIcon" />
+              </div>
+              <div class="division">
+                {{ item.division | collegeDivision }}
+              </div>
+              <div class="conference">
+                <span #confText style="display: none">
+                  {{item.conference }}</span>
+                <img #confImage [src]="item.conferenceLogo | conferenceLogo" (error)="
+                              confText.style.display = 'block';
+                              confImage.style.display = 'none'
+                            " />
+              </div>
+              <div class="team-logo">
+                <img (click)="onLandingPageUrl(item.sportLandingUrl)" #teamLogoImage [src]="currentSport.icon" (error)="
+                                              confText.style.display = 'block';
+                                              teamLogoImage.style.display = 'none'
+                                            " />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+  

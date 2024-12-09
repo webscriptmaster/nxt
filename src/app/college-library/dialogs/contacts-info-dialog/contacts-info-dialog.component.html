@@ -1,0 +1,38 @@
+<div class="info-dialog">
+  <div class="content">
+    <div class="logo">
+      <img src="./assets/images/logo/lighting_bolt_small.png" />
+    </div>
+    <header>{{settings.title}}</header>
+    <main>
+      <div class="video">
+        <video controls muted [src]="settings.video" [poster]="settings.thumbnail"></video>
+      </div>
+      <ul>
+        <li>
+          <span>1. Add up to 6 College coaches</span
+          ><img src="./assets/images/icons/circle_arrow.png" />
+        </li>
+        <li>
+          <span>2. Add email template or write your own</span
+          ><img src="./assets/images/icons/circle_arrow.png" />
+        </li>
+        <li>
+          <span>3. Personalize emails by clicking name</span
+          ><img src="./assets/images/icons/circle_arrow.png" />
+        </li>
+        <li>
+          <span>4. Review emails being sent individually</span
+          ><img src="./assets/images/icons/circle_arrow.png" />
+        </li>
+        <li>
+          <span>5. Send to all coaches at one time</span
+          ><img src="./assets/images/icons/circle_arrow.png" />
+        </li>
+      </ul>
+    </main>
+    <div class="buttons">
+      <div class="yes-btn" (click)="onClose()">GOT IT</div>
+    </div>
+  </div>
+</div>

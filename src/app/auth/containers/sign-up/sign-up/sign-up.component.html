@@ -1,0 +1,19 @@
+<div class="loading" *ngIf="loading$ | async">
+  <img src="/assets/images/icons/loading.svg" alt="" />
+</div>
+<div class="container" [ngStyle]="{ backgroundImage: backgroundImage }">
+  <a routerLink="auth/sign-in" class="back desktop">Login</a>
+  <a routerLink="auth/sign-in" class="back mobile">Back</a>
+  <img class="logo" src="./assets/images/logo/logo_600.png" />
+  <div class="form-wrapper">
+    <app-sign-up-form (signUp)="onCreateAccount($event)"></app-sign-up-form>
+    <!-- <app-external-sign-up class="external-sign-up"
+      [firebaseErrorMessage]="firebaseErrorMessage">
+    </app-external-sign-up> -->
+    <div class="team">
+      <span class="question">Joining With a Team or Organization?</span>
+      <a routerLink="/auth/code" class="start">start here.</a>
+    </div>
+  </div>
+  <!-- <p class="guide">To use the group email feature, sign up with one of these providers.</p> -->
+</div>

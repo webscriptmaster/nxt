@@ -1,0 +1,13 @@
+<div class="skip-dialog">
+    <div class="content">
+        <div class="logo"><img src="./assets/images/logo/lighting_bolt_small.png" /></div>
+        <header>Do you want to disconnect from your email provider?</header>
+
+        <p class="detail">We will no longer be able to send emails on your behalf</p>
+
+    </div>
+    <div class="buttons">
+        <div class="yes-btn" (click)="dialogRef.close(true)">Yes</div>
+        <div class="skip-btn" (click)="dialogRef.close(false)">No</div>
+    </div>
+</div>

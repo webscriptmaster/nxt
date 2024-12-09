@@ -1,0 +1,66 @@
+<div class="container">
+  <div>
+    <img class="logo" src="assets/images/logo/logo.png" alt="" />
+    <ng-container [ngSwitch]="step">
+      <div *ngSwitchCase="0">
+        <div class="how-work">
+          <p class="header">How college credits work ⬇️</p>
+          <p class="content">
+            - College credits apply to the college library and email automation.
+          </p>
+          <p class="content">
+            - College credits will go away if used on either of these features.
+          </p>
+          <p class="content">
+            - Reload credits or unlock a plan to get more unlocked colleges.
+          </p>
+        </div>
+      </div>
+      <div *ngSwitchCase="1">
+        <div class="features">
+          <p class="header">college library features</p>
+          <p class="content" *ngFor="let feature of features">
+            <img src="assets/images/purchase/star0.svg" />
+            {{ feature.text }}
+          </p>
+        </div>
+      </div>
+      <div *ngSwitchCase="2">
+        <div class="exposure">
+          <p class="header">MAXIMIZE EXPOSURE WITH EMAIL</p>
+          <p class="title">Google/Microsoft email providers:</p>
+          <p class="content">
+            Add up to 6 college coaches > Create email > Choose template >
+            Review email to each coach (auto-switches name) > Send email (email
+            sends individually to each coach.)
+          </p>
+          <p class="title mt-3">All other email providers:</p>
+          <p class="content">
+            Add coach to email > Choose a template (auto-adds name) > Review
+            email > Send
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="btn-wrapper">
+    <div class="go-to">
+      <button
+        class="previous"
+        (click)="step = step - 1"
+        [disabled]="step === 0"
+      >
+        <img src="assets/images/nxt1-center/icons/right-64x64.svg" alt="" />
+      </button>
+      <div class="step">{{ step + 1 }} / 3</div>
+      <button class="next" (click)="step = step + 1" [disabled]="step === 2">
+        <img src="assets/images/nxt1-center/icons/right-64x64.svg" alt="" />
+      </button>
+    </div>
+    <div>
+      <button class="submit" (click)="step !== 2 ? (step = step + 1) : close()">
+        {{ step !== 2 ? "next" : "get started" }}
+      </button>
+    </div>
+  </div>
+</div>

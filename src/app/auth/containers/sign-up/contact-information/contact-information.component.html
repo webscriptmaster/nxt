@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="contact-information">
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Contact Information</p>
+      <p class="sub-title">Choose how you want coaches to contact you.</p>
+    </header>
+
+    <div class="content">
+      <form [formGroup]="contactForm" *ngIf="contactForm">
+        <div class="form-control">
+          <label appAsterickSign>Email</label>
+          <input type="email" formControlName="contactEmail" />
+        </div>
+
+        <div class="form-control">
+          <label>Phone Number</label>
+          <input type="phone" formControlName="phoneNumber" />
+        </div>
+
+        <div class="form-control with-prefix">
+          <label> X @</label>
+          <span class="prefix">@</span>
+          <input type="text" formControlName="twitter" />
+        </div>
+
+        <div class="form-control with-prefix">
+          <label> Instagram @</label>
+          <span class="prefix">@</span>
+          <input type="text" formControlName="instagram" />
+        </div>
+
+        <div class="form-control">
+          <label>Hudl Account Link</label>
+          <input
+            placeholder="https://www.hudl.com/profile"
+            type="text"
+            formControlName="hudlAccountLink"
+          />
+        </div>
+
+        <div class="form-control">
+          <label>Youtube Account Link</label>
+          <input
+            placeholder="https://www.youtube.com/profile"
+            type="text"
+            formControlName="youtubeAccountLink"
+          />
+        </div>
+
+        <div class="form-control">
+          <label>247 Sports Account Link</label>
+          <input
+            placeholder="https://www.247sports.com/profile"
+            type="text"
+            formControlName="sportsAccountLink"
+          />
+        </div>
+
+        <div class="form-control">
+          <label>Home Address</label>
+          <input
+            type="text"
+            formControlName="address"
+            id="autocompleteAddress"
+          />
+        </div>
+
+        <div class="form-control">
+          <label>Home City</label>
+          <input type="text" formControlName="city" />
+        </div>
+
+        <div class="form-control">
+          <label>Home State</label>
+          <input type="text" formControlName="state" />
+        </div>
+
+        <div class="form-control">
+          <label>Home ZIP</label>
+          <input type="phone" formControlName="zipCode" />
+        </div>
+
+        <div class="form-control">
+          <label>Home Country</label>
+          <input type="text" formControlName="country" />
+        </div>
+      </form>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="40"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

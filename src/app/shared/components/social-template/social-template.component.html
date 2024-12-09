@@ -1,0 +1,25 @@
+<div class="social-template">
+  <!-- <div class="title">State Your Main Info in your social media bio</div> -->
+  <ng-container
+    *ngIf="!(user?.completeAddSport && user?.appSport === 'secondary')"
+  >
+    <div class="bio" #bio [innerHTML]="template">
+    </div>
+    <div class="divider"></div>
+
+    <div class="copy" (click)="onCopy(bio)">
+      {{ copied ? "Copied" : "Copy" }}
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="user?.completeAddSport && user?.appSport === 'secondary'"
+  >
+    <div class="bio" #bio [innerHTML]="template">
+    </div>
+    <div class="divider"></div>
+
+    <div class="copy" (click)="onCopy(bio)">
+      {{ copied ? "Copied" : "Copy" }}
+    </div>
+  </ng-container>
+</div>

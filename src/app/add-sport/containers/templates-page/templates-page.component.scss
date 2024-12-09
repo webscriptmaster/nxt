@@ -1,0 +1,197 @@
+:host {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgb(0, 0, 0) 0%,
+    rgb(32, 32, 32) 10%,
+    rgb(50, 50, 50) 70%,
+    rgb(32, 32, 32) 90%,
+    rgb(0, 0, 0) 100%
+  );
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgb(0, 0, 0) 0%,
+    rgb(32, 32, 32) 10%,
+    rgb(50, 50, 50) 70%,
+    rgb(32, 32, 32) 90%,
+    rgb(0, 0, 0) 100%
+  );
+  display: grid;
+  grid-template-rows: 43px minmax(0, 1fr) 180px;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.5px solid #ccff00;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #161616;
+    position: relative;
+
+    .title {
+      font-family: "Avenir Next";
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 700;
+      position: relative;
+      top: 2px;
+    }
+
+    .help-btn {
+      height: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      position: absolute;
+      bottom: 8px;
+      right: 15px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .content {
+    overflow: auto;
+    padding: 60px 10px 0;
+    .template-btn {
+      background-color: #fff;
+      height: 78px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      border: 1.5 px solid #000;
+      font-weight: 700;
+      font-family: "Avenir Next";
+      color: #000;
+      font-size: 16px;
+      padding: 0 25px 0 20px;
+      img {
+        width: 10px;
+      }
+    }
+  }
+
+  .bottom {
+    width: 100%;
+    padding: 0 10px 40px;
+    border-top: 1px solid #ccff00;
+
+    .progress-bar {
+      display: block;
+      margin: 30px auto;
+      width: 80%;
+    }
+
+    button {
+      &.desktop {
+        display: none;
+      }
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 8px;
+      height: 64px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+      background: #ccff00;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      cursor: pointer;
+    }
+  }
+}
+
+
+@media (min-width: 1280px) {
+  :host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: none;
+    max-width: unset;
+    min-height: unset;
+    width: 820px;
+    height: 620px;
+    border-radius: 6px;
+    background-color: #161616F0;
+    padding: 0 63px 27px;
+    border: 1px solid #ccff00;
+    header {
+      border-bottom: 1px solid #fff;
+      height: 54px;
+      margin-top: 10px;
+      margin-bottom: 72px;
+      .help-btn {
+        display: none;
+      }
+      .title {
+        font-size: 24px;
+      }
+      .back-arrow {
+        left: 0;
+        width: 43px;
+        height: 41px;
+      }
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 79px ;
+      grid-gap: 31px;
+      margin-bottom: auto;
+      padding: 0;
+      .template-btn {
+        height: 79px;
+        font-size: 17px;
+        padding: 0 13px;
+        cursor: pointer;
+      }
+    }
+    .bottom {
+      border-top: none;
+      padding: 0;
+      .progress-bar {
+        width: 356px;
+        margin: 15px auto 15px;
+      }
+      button {
+        &.mobile {
+          display: none;
+        }
+        &.desktop {
+          display: flex;
+        }
+        font-size: 34px;
+        height: 74px;
+        width: 594px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

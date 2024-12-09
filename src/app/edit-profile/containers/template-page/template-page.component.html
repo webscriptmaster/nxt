@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      [activePage]="'profile'"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile()"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="template">
+      <header class="{{ type }}">
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+
+        <p class="title" *ngIf="type == TEMPLATES.GENERAL">General Template</p>
+        <p class="title" *ngIf="type == TEMPLATES.PERSONAL">
+          Personal Template
+        </p>
+        <p class="title" *ngIf="type == TEMPLATES.OWN">My Email Template</p>
+
+        <p class="title twitter" *ngIf="type == TEMPLATES.SOCIAL">
+          Bio Template
+        </p>
+      </header>
+
+      <div class="content" [ngClass]="{social: type === TEMPLATES.SOCIAL}" *ngIf="userData">
+        <app-email-template
+          *ngIf="
+            type == TEMPLATES.GENERAL ||
+            type == TEMPLATES.PERSONAL ||
+            type == TEMPLATES.OWN
+          "
+          [type]="type"
+          [user]="userData"
+          (save)="onSave($event)"
+        ></app-email-template>
+
+        <app-social-template
+          *ngIf="type == TEMPLATES.SOCIAL"
+          [user]="userData"
+        ></app-social-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="saved-container"
+  *ngIf="saved$ | async"
+  (click)="saved$.next(false)"
+>
+  <div class="saved">
+    Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+  </div>
+</div>

@@ -1,0 +1,82 @@
+.info-dialog {
+  max-width: 95vw;
+  width: 320px;
+  height: 260px;
+  background-color: #161616;
+  border: 1px solid #ccff00;
+  padding: 18px;
+  border-radius: 9px;
+  .content {
+    width: 100%;
+    border-radius: 4px;
+    padding: 15px 5px 10px;
+    .logo {
+      height: 16px;
+      width: 69px;
+      // margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      img {
+        width: 130px;
+      }
+    }
+    .title {
+      margin: 10px 10px 0;
+      font-family: "Rajdhani";
+          font-weight: 700;
+      font-weight: 700;
+      font-size: 21px;
+      color: #fff;
+      text-align: center;
+      padding: 0 0 3px;
+      // border-bottom: 1px solid #000;
+    }
+    .sub-title {
+      font-size: 18px;
+      font-family: "Rajdhani";
+          font-weight: 500;
+      font-weight: 500;
+      text-align: center;
+      margin: 5px 0 0;
+      position: relative;
+      color: #ccff00;
+      .label {
+        color: #cfcfcf;
+        font-size: 13px;
+        font-family: "Rajdhani";
+          font-weight: 500;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        img {
+          width: 20px;
+          position: relative;
+          top: 6px;
+        }
+      }
+    }
+  }
+  .buttons {
+    margin-top: 5px;
+    width: 100%;
+    font-family: "Rajdhani";
+          font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    div {
+      width: 100%;
+      height: 40px;
+      background-color: #000;
+      border-radius: 24px;
+      border: 1px solid #fff;
+      color: #ccff00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+}

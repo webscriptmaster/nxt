@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="main">
+    <app-sidenav
+      class="sidenav desktop"
+      (home)="onHome($event)"
+      (profile)="onProfile($event)"
+      (settings)="onSettings($event)"
+      (editProfile)="onEditProfile($event)"
+      (addOffers)="onAddOffers($event)"
+      (addSport)="onAddSport($event)"
+      (referFriend)="onReferFriend($event)"
+      (contactUs)="onContactUs($event)"
+    ></app-sidenav>
+
+    <div class="drafts">
+      <header>
+        <img
+          (click)="onBack()"
+          class="circleX"
+          src="/assets/images/icons/circleX.png"
+          alt=""
+        />
+        <img
+          (click)="onBack()"
+          class="back-arrow"
+          src="/assets/images/icons/back-arrow.png"
+          alt=""
+        />
+        <div class="title">DRAFTS</div>
+        <div class="edit" (click)="onEditMode()">Edit</div>
+      </header>
+
+      <div class="content">
+        <app-drafts-template
+          *ngFor="let draft of drafts"
+          [draft]="draft"
+          [editMode]="editMode"
+          (selectDraft)="onSelectDraft($event)"
+        ></app-drafts-template>
+      </div>
+    </div>
+  </div>
+</div>

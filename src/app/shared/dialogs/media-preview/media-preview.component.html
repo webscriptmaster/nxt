@@ -1,0 +1,32 @@
+<div
+  (click)="stopPropagation($event)"
+  (click)="handleClick()"
+  class="video-overlay"
+>
+  <div class="video-modal">
+    <video
+      class="preview-video"
+      *ngIf="['video'].includes(preview?.type)"
+      width="100%"
+      [src]="preview?.url"
+      height="auto"
+      autoplay
+      controls
+      (loadedmetadata)="mediaLoaded()"
+    ></video>
+    <img
+      class="preview-image"
+      *ngIf="['image', 'graphic'].includes(preview?.type)"
+      [src]="preview?.previewImage ? preview?.previewImage : preview?.url"
+      alt=""
+      (load)="mediaLoaded()"
+    />
+    <img
+      (click)="handleClick()"
+      src="assets/icons/close-media.png"
+      class="close-icon"
+      [class.visible]="mediaReady"
+      alt="Close"
+    />
+  </div>
+</div>

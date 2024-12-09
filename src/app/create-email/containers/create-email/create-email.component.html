@@ -1,0 +1,376 @@
+<div class="container" *ngIf="selectedContacts && selectedContacts.length">
+  <div class="loading" *ngIf="loading$ | async">
+    <img src="/assets/images/icons/loading.svg" alt="" />
+  </div>
+  <!-- <div class="drafts" (click)="onDrafts()">
+      Drafts <span *ngIf="drafts && drafts.length">({{drafts.length}})</span>
+    </div> -->
+  <header>
+    <img
+      (click)="
+        !currentRouter.includes('automation') ? onBack() : closeCreateEmail()
+      "
+      class="circleX"
+      src="/assets/images/icons/circleX.png"
+      alt=""
+    />
+    <mat-icon
+      class="close"
+      (click)="
+        !currentRouter.includes('automation') ? onBack() : closeCreateEmail()
+      "
+      >close</mat-icon
+    >
+    <div class="desktop-from">
+      <ng-container *ngIf="(user$ | async)?.connectedEmail">
+        <div class="value">
+          <img src="/assets/images/create-email/email-green.png" />
+          {{ (user$ | async)?.connectedEmail }}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!(user$ | async)?.connectedEmail">
+        <div class="connect" (click)="connectEmailFlow()">
+          <img src="/assets/images/create-email/email-green.png" />
+          <span>Choose Provider</span>
+          <mat-icon>chevron_right</mat-icon>
+        </div>
+      </ng-container>
+    </div>
+    <div class="toolbar">
+      <div class="remove-btn">
+        <img
+          *ngIf="selectedContacts[activeContact]['selectedTemplate']"
+          (click)="onRemoveTemplate()"
+          class="remove"
+          src="/assets/images/create-email/remove.png"
+        />
+      </div>
+
+      <div class="tools">
+        <div class="prospect-sheet-btn inside">
+          <img
+            (click)="onAddTemplate()"
+            class="template inside"
+            [src]="
+              '/assets/images/create-email/' +
+              (showAddTemplateMenu ? 'template-green' : 'template') +
+              '.png'
+            "
+          />
+          <ul
+            class="prospect-sheet-menu inside"
+            *ngIf="showAddTemplateMenu"
+            (clickOutside)="showAddTemplateMenu = false"
+          >
+            <li
+              *ngFor="let template of listTemplate"
+              (click)="setMessageTemplate(template); onCancelTemplate()"
+            >
+              <span class="name">{{ template.name }}</span>
+              <!-- <img
+                class="check-icon"
+                src="/assets/images/create-email/check.png"
+              />  -->
+            </li>
+          </ul>
+        </div>
+
+        <ng-container
+          *ngIf="
+            user &&
+            ((user.appSport === 'secondary' &&
+              user.secondarySportAthleticInfo['highlight_link']) ||
+              (user.appSport !== 'secondary' &&
+                user.primarySportAthleticInfo['highlight_link']))
+          "
+        >
+          <img
+            (click)="onAddLink()"
+            class="link"
+            src="/assets/images/create-email/link.png"
+            *ngIf="!selectedContacts[activeContact]['link']"
+          />
+          <img
+            (click)="onAddLink()"
+            class="link"
+            src="/assets/images/create-email/link-active.png"
+            *ngIf="selectedContacts[activeContact]['link']"
+          />
+        </ng-container>
+
+        <img
+          (click)="onAddProspectSheet()"
+          class="prospect-sheet"
+          src="/assets/images/create-email/prospect-sheet.png"
+          *ngIf="!selectedContacts[activeContact]['prospectSheet']"
+        />
+
+        <img
+          (click)="onAddProspectSheet()"
+          class="prospect-sheet"
+          src="/assets/images/create-email/prospect-sheet-active.png"
+          *ngIf="selectedContacts[activeContact]['prospectSheet']"
+        />
+
+        <img
+          (click)="fileUpload.click()"
+          class="attach"
+          src="/assets/images/create-email/attach.png"
+        />
+        <img
+          *ngIf="!currentRouter.includes('automation')"
+          (click)="onSend()"
+          class="send"
+          src="/assets/images/create-email/send.png"
+        />
+        <span
+          *ngIf="currentRouter.includes('automation')"
+          (click)="finish()"
+          class="finish"
+          >Finish</span
+        >
+      </div>
+    </div>
+
+    <input
+      type="file"
+      style="display: none"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    />
+  </header>
+
+  <main>
+    <div class="from">
+      <div class="label">From</div>
+      <ng-container *ngIf="(user$ | async)?.connectedEmail">
+        <div class="value">
+          <img src="/assets/images/create-email/email.png" />
+          {{ (user$ | async)?.connectedEmail }}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!(user$ | async)?.connectedEmail">
+        <div class="connect" (click)="connectEmailFlow()">
+          <img src="/assets/images/create-email/email.png" />
+          <span>Choose Provider</span>
+          <mat-icon>chevron_right</mat-icon>
+        </div>
+      </ng-container>
+
+      <div class="info" (click)="openInfoDialog()">
+        <img src="/assets/images/icons/info.png" />
+      </div>
+    </div>
+    <div class="to">
+      <div class="label">
+        <span>To</span>
+        <img
+          (click)="expandToEmail()"
+          src="assets/images/icons/dropdown-email.svg"
+          alt=""
+          class="expand"
+        />
+      </div>
+      <div class="value" [class]="expand ? 'expand' : ''">
+        <div
+          longPress
+          class="contact inside"
+          *ngFor="let contact of selectedContacts; let i = index"
+          [ngClass]="{ active: i === activeContact }"
+          (click)="activeContact = i"
+          (mouseLongPress)="showContactContextMenu(contact.email)"
+        >
+          <div class="logo">
+            <img
+              #img
+              [src]="contact.college.logoUrl | collegeLogo"
+              (error)="text.style.display = 'block'; img.style.display = 'none'"
+            />
+            <span #text style="display: none">College logo</span>
+          </div>
+          <span>{{ contact.email }}</span>
+          <mat-icon class="material-icons-outlined" (click)="onRemoveContact(i)"
+            >cancel</mat-icon
+          >
+
+          <div
+            class="context-menu"
+            *ngIf="contactContextMenu === contact.email"
+            clickOutside
+            (clickOutside)="contactContextMenu = null"
+          >
+            <div class="contact-info">
+              <div class="logo">
+                <img
+                  #img
+                  [src]="contact.college.logoUrl | collegeLogo"
+                  (error)="
+                    text.style.display = 'block'; img.style.display = 'none'
+                  "
+                />
+                <span #text style="display: none">College logo</span>
+              </div>
+              <span>{{ contact.email }}</span>
+            </div>
+            <div class="copy" (click)="onCopyToClipboard(contact.email)">
+              <mat-icon>content_copy</mat-icon> Copy
+            </div>
+            <div class="remove" (click)="onRemoveContact(i)">
+              <mat-icon>delete</mat-icon> Remove
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subject">
+      <input
+        placeholder="Subject"
+        type="text"
+        [(ngModel)]="selectedContacts[activeContact]['subject']"
+        (ngModelChange)="
+          currentRouter.includes('automation') ? updateAllSubject() : ''
+        "
+      />
+    </div>
+    <div class="own_placeholder">
+      <quill-editor
+        [ngStyle]="{
+          height: !bodyPlaceholder.startsWith('Choose', 0) ? '100%' : '420px'
+        }"
+        [placeholder]="bodyPlaceholder"
+        [(ngModel)]="selectedContacts[activeContact]['template']"
+        (ngModelChange)="
+          currentRouter.includes('automation') ? updateAllTemplate() : ''
+        "
+      ></quill-editor>
+    </div>
+
+    <!-- <a
+      *ngIf="selectedContacts[activeContact]['link']"
+      class="userLink"
+      [href]="userLink"
+      >{{ userLink }}</a
+    > -->
+
+    <!-- <div
+      class="prospect-sheet"
+      *ngIf="selectedContacts[activeContact]['prospectSheet']"
+    >
+      <div>
+        <span
+          >{{ user?.firstName }} {{ user?.lastName }} - Prospect Sheet.pdf</span
+        >
+        <img src="/assets/images/icons/pdf.png" />
+      </div>
+      <a (click)="showProspectSheet = true"> View </a>
+    </div> -->
+
+    <!-- <div class="attachment" *ngIf="file">
+      <img
+        *ngIf="file"
+        class="attach"
+        src="/assets/images/create-email/attach.png"
+      />
+      <span>{{ file.name }}</span>
+      <mat-icon (click)="onRemoveFile()">close</mat-icon>
+    </div>
+
+    <div class="attachment error" *ngIf="fileError">
+      <img class="attach" src="/assets/images/create-email/attach.png" />
+      <span>File too big. Max size 5MB.</span>
+    </div> -->
+  </main>
+</div>
+
+<div class="addTemplateMenu" [ngClass]="{ visible: showAddTemplateMenu }">
+  <ul>
+    <li
+      *ngFor="let template of listTemplate"
+      (click)="setMessageTemplate(template); onCancelTemplate()"
+    >
+      <span class="name">{{ template.name }}</span>
+      <img class="check-icon" src="/assets/images/create-email/check.png" />
+    </li>
+  </ul>
+
+  <div class="cancel" (click)="onCancelTemplate()">Cancel</div>
+</div>
+
+<div class="draftsMenu" [ngClass]="{ visible: showDraftsMenu }">
+  <ul>
+    <li (click)="onSaveDrafts()">
+      <span>Save Drafts</span>
+    </li>
+    <li (click)="onDelete()">
+      <span class="delete">Delete</span>
+    </li>
+  </ul>
+
+  <div class="cancel" (click)="onCancelTemplate()">Cancel</div>
+</div>
+
+<div
+  class="backdrop mobile"
+  (click)="onCancelTemplate()"
+  [ngClass]="{ visible: showAddTemplateMenu || showDraftsMenu }"
+></div>
+<div
+  class="backdrop desktop"
+  (click)="onCancelTemplate()"
+  [ngClass]="{ visible: showDraftsMenu }"
+></div>
+
+<div
+  class="prospect-sheet-container"
+  [ngClass]="{ show: showProspectSheet }"
+  (click)="onCloseProspectSheet($event)"
+>
+  <header>
+    <img
+      (click)="showProspectSheet = false"
+      class="back-arrow"
+      src="/assets/images/icons/back-arrow-black.png"
+      alt=""
+    />
+
+    <p class="title">PROSPECT SHEET</p>
+  </header>
+
+  <div class="prospect-sheet-content">
+    <app-prospect-sheet-info
+      *ngIf="user"
+      [user]="user"
+      [forPDF]="true"
+      [view]="true"
+    ></app-prospect-sheet-info>
+  </div>
+</div>
+
+<div #pdfContainer style="position: absolute; left: -9999px"></div>
+
+<ng-template #mailRequiredFieldPopup>
+  <div class="mail-required-dialog">
+    <p class="mail-required-dialog-description">
+      You're trying to send a missing Subject or Template email to these
+      contacts:
+    </p>
+    <ul class="mail-required-dialog-list">
+      <li
+        class="mail-required-dialog-list-item"
+        *ngFor="let contact of selectedContactMissingMailField"
+      >
+        {{ contact.email }}
+      </li>
+    </ul>
+    <p class="mail-required-dialog-description">
+      Please review your emails again.
+    </p>
+
+    <button
+      class="mail-required-dialog-button"
+      (click)="handleCloseMailRequiredFieldPopup()"
+    >
+      Review
+    </button>
+  </div>
+</ng-template>

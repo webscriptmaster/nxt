@@ -1,0 +1,50 @@
+<div class="college" *ngIf="college" #card>
+  <div class="card" *ngIf="needToShow$ | async">
+    <div class="top">
+      <div class="logo">
+        <img
+          #img
+          [src]="college.logoUrl | collegeLogo"
+          (error)="text.style.display = 'block'; img.style.display = 'none'"
+        />
+        <span #text style="display: none">College logo</span>
+      </div>
+      <div class="info">
+        <div class="name">{{ college.name }}</div>
+        <div class="location">{{ college.city }}, {{ college.state }}</div>
+        <div class="div-conf">
+          <div class="division">
+            {{ college["sportInfo"][collegeSport].division | collegeDivision }}
+          </div>
+          <div class="conference">
+            <span #confText style="display: none">
+              {{ college["sportInfo"][collegeSport].conference }}</span
+            >
+            <img
+              #confImage
+              [src]="college['sportInfo'][collegeSport] | conferenceLogo"
+              (error)="
+                confText.style.display = 'block';
+                confImage.style.display = 'none'
+              "
+            />
+          </div>
+        </div>
+      </div>
+      <div class="offer">
+        <span
+          *ngIf="!existOffers[college.id] && !offers[college.id]"
+          (click)="onOffer(college.id)"
+          >Offered?</span
+        >
+        <span
+          *ngIf="offers[college.id] && !existOffers[college.id]"
+          class="active"
+          (click)="onOffer(college.id)"
+          >Offered<mat-icon>done</mat-icon></span
+        >
+        <span *ngIf="existOffers[college.id]" class="remove" (click)="onRemoveExist(college.id)">Remove</span>
+      </div>
+    </div>
+  </div>
+</div>

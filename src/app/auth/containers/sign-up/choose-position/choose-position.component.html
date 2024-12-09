@@ -1,0 +1,35 @@
+<div class="container">
+  <div
+    class="choose-position"
+    [ngClass]="{ withoutTooltip: positions.length < 3 }"
+  >
+    <header>
+      <img
+        (click)="onBack()"
+        class="back-arrow"
+        src="/assets/images/icons/back-arrow.png"
+        alt=""
+      />
+      <p class="title">Choose your position</p>
+      <p class="sub-title" *ngIf="positions.length > 2">(Choose up to 3)</p>
+    </header>
+
+    <div class="content">
+      <div class="positions">
+        <div
+          *ngFor="let position of positions"
+          class="position-item"
+          (click)="onSelectPosition(position)"
+          [ngClass]="{ selected: selectedPositions[position] }"
+        >
+          {{ position }}
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <app-progress-bar class="progress-bar" [progress]="30"></app-progress-bar>
+      <button type="button" (click)="onContinue()">Continue</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="socials">
+  <div class="contact">
+    <div class="position">General</div>
+    <div class="name">{{ collegeName }}</div>
+    <div class="button-row">
+      <div class="left">
+        <div class="email" *ngIf="twitter" (click)="openLink(twitter)">
+          <img src="assets/images/icons/x-icon.png" /><span>{{
+            twitter | twitterTag
+          }}</span>
+        </div>
+      </div>
+      <div class="right" *ngIf="twitter">
+        <div class="go-to" (click)="openLink(twitter)">Go to link</div>
+      </div>
+    </div>
+  </div>
+  <div class="contact" *ngFor="let contact of contacts">
+    <div class="position">{{ contact.position }}</div>
+    <div class="name">{{ contact.firstName }} {{ contact.lastName }}</div>
+    <div class="button-row">
+      <div class="left">
+        <div
+          class="email"
+          *ngIf="contact.twitter && contact.twitter != '-'"
+          (click)="openLink(contact.twitter)"
+        >
+          <img src="assets/images/icons/x-icon.png" /><span>{{
+            contact.twitter | twitterTag
+          }}</span>
+        </div>
+      </div>
+      <div class="right" *ngIf="contact.twitter && contact.twitter != '-'">
+        <div class="go-to" (click)="openLink(contact.twitter)">Go to link</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,403 @@
+<div class="container">
+  <div class="cards">
+    <ng-container *ngIf="activeTab2 === '0' && (user$ |async)?.['isRecruit']">
+      <div class="own-title">
+        <span>Live Profile</span>
+        <span
+          (click)="isSelecting ? saveAsNewProfile() : openSelecting()"
+          class="pin"
+          >{{
+            isSelecting ? "Save As New Profile" : "Switch Live Profile"
+          }}</span
+        >
+      </div>
+      <div class="scroll">
+        <div class="own-wrapper">
+          <div class="card image">
+            <span class="star" (click)="openEdit(liveProfile)">
+              <img src="assets/images/profile/star.svg" alt="" />
+            </span>
+            <span class="menu" (click)="openEdit(liveProfile)">
+              <img src="assets/images/prospect/icon/menu.svg" alt="" />
+            </span>
+            <div class="card-content">
+              <img
+                (click)="preview('image', liveProfile)"
+                [src]="liveProfile?.previewImage ?? liveProfile?.thumbnailUrl"
+                alt=""
+              />
+            </div>
+            <div class="left">{{ liveProfile?.name }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="highlight">NXT 1 Profile</div>
+      <div class="scroll">
+        <div class="own-wrapper">
+          <div class="card image" *ngFor="let item of profiles">
+            <span
+              *ngIf="isSelecting"
+              class="radio"
+              (click)="switchProfile(item, item.type)"
+              [class]="pinnedProfileList.includes(item.url) ? 'pinned' : ''"
+            >
+            </span>
+            <span class="menu" (click)="openEdit(item)">
+              <img src="assets/images/prospect/icon/menu.svg" alt="" />
+            </span>
+            <div class="card-content">
+              <img
+                [src]="item.previewImage"
+                loading="lazy"
+                *ngIf="item.previewImage"
+                (click)="preview('image', item)"
+                alt=""
+              />
+              <div class="image" *ngIf="!item.downloadURL">
+                NXT1 Image Container
+              </div>
+            </div>
+            <div class="left">{{ item.name }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTab2 === '1'">
+      <div class="own-title">
+        <span>Upload your own</span>
+        <span
+          *ngIf="(user$ |async)?.['isRecruit']"
+          (click)="isSelecting ? saveToProfile() : openSelecting()"
+          class="pin"
+          >{{ isSelecting ? "Save To Profile" : "Pin To Profile" }}</span
+        >
+      </div>
+      <div class="scroll">
+        <div class="own-wrapper">
+          <div class="card" *ngFor="let item of highlights; let i = index">
+            <span
+              *ngIf="isSelecting"
+              class="radio"
+              (click)="selectVideoToPin(item, item.type)"
+              [class]="pinVideoList.includes(item.url) ? 'pinned' : ''"
+            >
+              <span *ngIf="item.selectionOrder" class="selection-order">{{
+                item.selectionOrder
+              }}</span>
+            </span>
+            <span class="menu" (click)="openEdit(item)">
+              <img src="assets/images/prospect/icon/menu.svg" alt="" />
+            </span>
+            <div class="card-content">
+              <img
+                *ngIf="item.previewImage"
+                (click)="preview('video', item)"
+                [src]="item.previewImage"
+                alt=""
+              />
+              <iframe
+                *ngIf="item.type === 'video' && item.transformUrl"
+                [src]="item.transformUrl"
+                class="video"
+                #videoFrame
+                loading="true"
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="left">{{ item.name }}</div>
+          </div>
+          <label class="square">
+            <div
+              class="background-image"
+              [style]="{ 'background-image': thumbnail }"
+            ></div>
+            <span *ngIf="![0, 100].includes(progress)" class="progress"
+              >{{ progress }}%</span
+            >
+            <div class="img" *ngIf="loading$ | async">
+              <ng-lottie [options]="options"></ng-lottie>
+            </div>
+            <img
+              *ngIf="thumbnail === ''"
+              src="assets/icons/Plus-sign.png"
+              (click)="openUploadDialog('video')"
+              class=""
+              alt="Add Image"
+            />
+            <iframe
+              [src]="embedVideo.url"
+              class="video"
+              *ngIf="embedVideo.url"
+              #videoFrame
+              loading="true"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </label>
+        </div>
+      </div>
+
+      <div class="highlight">NXT 1 Mixtapes</div>
+    </ng-container>
+    <ng-container *ngIf="activeTab2 === '2'">
+      <div class="own-title">
+        <span>Upload your own</span>
+        <span
+          *ngIf="(user$ |async)?.['isRecruit']"
+          (click)="isSelecting ? saveToProfile() : openSelecting()"
+          class="pin"
+          >{{ isSelecting ? "Save To Profile" : "Pin To Profile" }}</span
+        >
+      </div>
+      <div class="scroll">
+        <div class="own-wrapper">
+          <div class="card image" *ngFor="let item of graphics">
+            <span
+              *ngIf="isSelecting"
+              class="radio"
+              (click)="selectImageToPin(item, item.type)"
+              [class]="pinImageList.includes(item.url) ? 'pinned' : ''"
+            >
+              <span *ngIf="item.selectionOrder" class="selection-order">{{
+                item.selectionOrder
+              }}</span>
+            </span>
+            <span class="menu" (click)="openEdit(item)">
+              <img src="assets/images/prospect/icon/menu.svg" alt="" />
+            </span>
+            <div class="card-content">
+              <img
+                (click)="preview('image', item)"
+                [src]="item.previewImage"
+                alt=""
+              />
+            </div>
+            <div class="left">{{ item.name }}</div>
+          </div>
+          <label class="square">
+            <div
+              class="background-image"
+              [style]="{ 'background-image': thumbnail }"
+            ></div>
+            <span *ngIf="![0, 100].includes(progress)" class="progress"
+              >{{ progress }}%</span
+            >
+            <div class="img" *ngIf="loading$ | async">
+              <ng-lottie [options]="options"></ng-lottie>
+            </div>
+            <img
+              *ngIf="thumbnail === ''"
+              src="assets/icons/Plus-sign.png"
+              (click)="openUploadDialog('image')"
+              class=""
+              alt="Add Image"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="highlight">NXT 1 Graphics</div>
+      <div class="scroll">
+        <div class="own-wrapper">
+          <div class="card image" *ngFor="let item of nxt1Graphics">
+            <span
+              *ngIf="isSelecting"
+              class="radio"
+              (click)="selectGraphicToPin(item, item.type)"
+              [class]="pinGraphicList.includes(item.url) ? 'pinned' : ''"
+            >
+              <span *ngIf="item.selectionOrder" class="selection-order">{{
+                item.selectionOrder
+              }}</span>
+            </span>
+            <span class="menu" (click)="openEdit(item)">
+              <img src="assets/images/prospect/icon/menu.svg" alt="" />
+            </span>
+            <div class="card-content">
+              <img
+                [src]="item.pngUrl"
+                loading="lazy"
+                *ngIf="item.pngUrl"
+                (click)="preview('image', item)"
+                alt=""
+              />
+              <div class="image" *ngIf="!item.url">NXT1 Image Container</div>
+            </div>
+            <div class="left">{{ item.name }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<app-preview
+  (click)="closeModal($event)"
+  *ngIf="currentObject"
+  [preview]="currentObject"
+></app-preview>
+
+<div class="backdrop" *ngIf="state">
+  <div
+    class="hidden-bar"
+    *ngIf="state"
+    [@slide]="state"
+    (click)="state = !state"
+  ></div>
+  <div class="edit" *ngIf="state" [@slide]="state">
+    <img
+      class="down"
+      src="assets/images/prospect/icon/down.svg"
+      (click)="state = !state"
+      alt=""
+    />
+    <div class="preview">
+      <img
+        *ngIf="['image', 'graphic', 'profile'].includes(edittingItem.type)"
+        [src]="
+          edittingItem.previewImage || edittingItem.pngUrl || edittingItem.url
+        "
+        alt=""
+      />
+      <video
+        class="preview-video"
+        *ngIf="edittingItem.type === 'video' && !edittingItem.transformUrl"
+        width="100%"
+        [src]="edittingItem.url"
+        height="auto"
+        controls
+      ></video>
+
+      <iframe
+        *ngIf="edittingItem.type === 'video' && edittingItem.transformUrl"
+        [src]="edittingItem.transformUrl"
+        class="video"
+        #videoFrame
+        loading="true"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="info">
+      <input
+        [placeholder]="'Name Your ' + edittingItem.type"
+        type="text"
+        [(ngModel)]="edittingItem.name"
+      />
+      <span class="save" (click)="saveName(edittingItem.type)">Save</span>
+    </div>
+    <div class="menus">
+      <div
+        class="item"
+        *ngIf="['graphic', 'profile'].includes(edittingItem.type)"
+      >
+        <img
+          class="delete pen"
+          (click)="goToEdit('media-pro/media')"
+          src="assets/images/prospect/Pen.png"
+          alt=""
+        />
+        <span (click)="goToEdit('media-pro/media')" class="delete-text"
+          >Edit</span
+        >
+      </div>
+      <div
+        class="item"
+        *ngIf="['graphic', 'profile'].includes(edittingItem.type)"
+        [ngClass]="{ disabled: edittingItem && edittingItem.isDownloading }"
+        (click)="socialShare()"
+      >
+        <img
+          class="delete share-icon"
+          src="assets/images/prospect/share-green.png"
+          alt=""
+        />
+        <span class="delete-text">Share</span>
+      </div>
+      <div
+        class="item download-button"
+        *ngIf="edittingItem.type === 'graphic'"
+        [ngClass]="{ disabled: edittingItem && edittingItem.isDownloading }"
+        (click)="downloadAsPng()"
+      >
+        <img
+          class="delete"
+          src="/assets/images/prospect/3x/DownloadButton3x.png"
+          alt=""
+        />
+        <span class="delete-text">Download</span>
+      </div>
+      <div class="item" *ngIf="['profile'].includes(edittingItem.type)">
+        <span class="copied" *ngIf="isCopy">Copied</span>
+        <img
+          class="delete link"
+          (click)="copyLink()"
+          src="assets/images/prospect/icon/copy.svg"
+          alt=""
+        />
+        <span (click)="copyLink()" class="delete-text">Link</span>
+      </div>
+      <div class="item" *ngIf="!isLiveProfile()">
+        <img
+          class="delete bucket"
+          (click)="deleteItem(edittingItem)"
+          src="assets/images/prospect/DeleteBucket.png"
+          alt=""
+        />
+        <span (click)="deleteItem(edittingItem)" class="delete-text"
+          >Delete</span
+        >
+      </div>
+    </div>
+
+    <div
+      class="saved-container"
+      *ngIf="saved$ | async"
+      (click)="saved$.next(false)"
+    >
+      <div class="saved">
+        Saved <img src="/assets/images/icons/circle_arrow.png" alt="" />
+      </div>
+    </div>
+
+    <div #shareTemplate style="display: none">
+      <div class="social-template">
+        <div class="notification">
+          Make Sure To Tag Or Collab With Us For Maximum Exposure!
+        </div>
+        <div class="socials">
+          <div class="elm">
+            <img src="./assets/images/icons/x-icon-dark.png" alt="" />
+            <div>&#64;nxt1sports</div>
+            <div>
+              &#64;nxt1{{ stripGenderFromSport(userData.primarySport) }}
+            </div>
+          </div>
+          <div class="elm">
+            <img src="./assets/images/activity/Instagram_logo.png" alt="" />
+            <div>&#64;nxt1sports</div>
+            <div>
+              &#64;nxt1{{ stripGenderFromSport(userData.primarySport) }}
+            </div>
+          </div>
+        </div>
+        <div class="gotit" id="continue">Got It</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input
+  #inputElementForVideo
+  class="input-element"
+  type="file"
+  (change)="add('video', $event)"
+  accept="video/*"
+/>
+<input
+  #inputElementForImage
+  class="input-element"
+  type="file"
+  (change)="add('image', $event)"
+  accept="image/*"
+/>
